@@ -48,31 +48,29 @@ interface Project {
 // Sample projects to show when API is unavailable
 const SAMPLE_PROJECTS: Project[] = [
   {
-    _id: 'codeforge-sample',
-    title: 'CodeForge - Collaborative Code Editor',
-    description: 'Build a real-time collaborative code editor with syntax highlighting, multi-cursor support, live preview, and integrated terminal.',
+    _id: 'voiceybill',
+    title: 'VoiceyBill',
+    description: 'VoiceyBill is an open source AI-powered finance tracker that lets people log income and expenses by voice, receipt scan, or manual entry.\nIt uses Gemini and UpliftAI to classify transactions, supports CSV imports and recurring entries, and keeps the experience fast for multilingual users.\nThe product is designed around a responsive, multi-theme UI with analytics and monthly reports.',
     organization: 'Dev Weekends',
     difficulty: 'advanced',
-    technologies: ['Next.js', 'NestJS', 'PostgreSQL', 'Supabase', 'Monaco Editor', 'Socket.io', 'Docker'],
+    technologies: ['MongoDB', 'Express.js', 'React', 'Node.js', 'TypeScript', 'Google Gemini AI', 'UpliftAI', 'Cloudinary', 'Redux Toolkit', 'RTK Query'],
     status: 'open',
     duration: '10-12 weeks',
-    imageUrl: '/images/dsoc/codeforge-preview.svg',
-    repositoryUrl: 'https://github.com/devweekends/codeforge',
-    wikiUrl: 'https://github.com/devweekends/codeforge/wiki'
+    imageUrl: '/images/dsoc/voiceybill.png',
+    repositoryUrl: 'https://github.com/voiceyBill/voiceyBill-web',
   },
   {
-    _id: 'timemaster-sample',
-    title: 'TimeMaster - Smart Productivity Suite',
-    description: 'Create an intelligent productivity application combining goal setting, time tracking, smart scheduling, and analytics.',
+    _id: 'pathment',
+    title: 'Pathment',
+    description: 'Pathment is a SaaS mentorship platform for organizations that want structured, mentor-guided employee training.\nIt connects mentees with real mentors, uses task-based workflows and progress tracking, and adds gamification to boost engagement and measurable outcomes.',
     organization: 'Dev Weekends',
-    difficulty: 'intermediate',
-    technologies: ['Next.js', 'NestJS', 'PostgreSQL', 'Supabase', 'Chart.js', 'React Query'],
+    difficulty: 'advanced',
+    technologies: ['Next.js', 'TypeScript', 'Node.js', 'Express', 'PostgreSQL', 'Sequelize', 'Socket.io', 'Tailwind CSS', 'Tiptap', 'Cloudinary'],
     status: 'open',
-    duration: '8-10 weeks',
-    imageUrl: '/images/dsoc/timemaster-preview.svg',
-    repositoryUrl: 'https://github.com/devweekends/timemaster',
-    wikiUrl: 'https://github.com/devweekends/timemaster/wiki'
-  }
+    duration: '10-12 weeks',
+    imageUrl: '/images/dsoc/pathment.png',
+    repositoryUrl: 'https://github.com/Sheryar-Ahmed/pathment.git',    
+  },
 ];
 
 // Sample stats to show when API is unavailable
@@ -120,37 +118,51 @@ export default function DSOCPage() {
   const timeline = [
     {
       phase: "Phase 1",
-      title: "Applications Open",
-      date: "March 1, 2026",
-      description: "Mentee applications begin. Browse projects, connect with mentors, and submit your proposals.",
+      title: "Contributions Start",
+      date: "May 15, 2026",
+      description: "Contributors begin onboarding, review project goals with mentors, and prepare their development environment.",
       status: "upcoming"
     },
     {
       phase: "Phase 2",
-      title: "Mentor Selection",
-      date: "March 15-31, 2026",
-      description: "Mentors review applications, conduct interviews, and select their mentees.",
+      title: "Applications Open",
+      date: "May 25, 2026",
+      description: "Mentee applications begin. Browse projects, connect with mentors, and submit your proposals.",
       status: "upcoming"
     },
     {
       phase: "Phase 3",
-      title: "Community Bonding",
-      date: "April 1-15, 2026",
-      description: "Selected mentees get to know their mentors, understand project requirements, and set up development environments.",
+      title: "Result Announced",
+      date: "May 31, 2026",
+      description: "Final selections are announced, shortlisted applicants are notified.",
+      status: "upcoming"
+    },
+    {
+      phase: "Phase 3",
+      title: "Coding Period Begins",
+      date: "June 1, 2026",
+      description: "The three-month coding period begins. Mentees start project work.",
       status: "upcoming"
     },
     {
       phase: "Phase 4",
-      title: "Coding Period",
-      date: "April 16 - July 31, 2026",
-      description: "The main coding period! Work on your project with regular mentor check-ins and milestone reviews.",
+      title: "June Milestone Review",
+      date: "June 30, 2026",
+      description: "At the end of the first month, mentors review progress, verify the milestone, and release the monthly stipend.",
       status: "upcoming"
     },
     {
       phase: "Phase 5",
-      title: "Final Evaluation",
-      date: "August 1-15, 2026",
-      description: "Final project submissions, code reviews, and mentor evaluations.",
+      title: "July Milestone Review",
+      date: "July 31, 2026",
+      description: "At the end of the second month, mentors review progress, verify the milestone, and release the monthly stipend.",
+      status: "upcoming"
+    },
+    {
+      phase: "Phase 6",
+      title: "August Milestone Review",
+      date: "August 31, 2026",
+      description: "At the end of the third month, mentors review progress, verify the final milestone, and release the last monthly stipend.",
       status: "upcoming"
     }
   ];
@@ -456,7 +468,7 @@ export default function DSOCPage() {
               PROGRAM TIMELINE
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Mark your calendars for DSOC 2025
+              Mark your calendars for DSOC 2026
             </p>
           </div>
           

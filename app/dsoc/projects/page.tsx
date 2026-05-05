@@ -47,19 +47,81 @@ interface Project {
 // Sample projects to show when API is unavailable
 const SAMPLE_PROJECTS: Project[] = [
   {
-    _id: 'codeforge-sample',
-    title: 'CodeForge - Collaborative Code Editor',
-    description: 'Build a real-time collaborative code editor with syntax highlighting, multi-cursor support, live preview, and integrated terminal. Learn to architect a complex full-stack application with modern best practices. Features include Monaco Editor integration, collaborative editing, code execution, and much more.',
+    _id: 'psxworth',
+    title: 'PsxWorth - Portfolio Tracking for PSX Investors',
+    description: 'PsxWorth helps PSX investors track portfolios clearly and simply. It serves 950+ real users and is designed to support better investment decisions with custom dashboards, themes, and future mutual fund support.',
     organization: 'Dev Weekends',
-    repositoryUrl: 'https://github.com/devweekends/codeforge',
-    websiteUrl: 'https://codeforge.devweekends.org',
+    repositoryUrl: 'https://github.com/Wajahat43/psxworth',
+    websiteUrl: 'https://psxworth.com',
     difficulty: 'advanced',
     duration: '10-12 weeks',
-    technologies: ['Next.js', 'NestJS', 'PostgreSQL', 'Supabase', 'Monaco Editor', 'Socket.io', 'Docker', 'Redis', 'TypeScript', 'Tailwind CSS'],
-    tags: ['full-stack', 'real-time', 'developer-tools', 'collaboration', 'SaaS'],
+    technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'Radix UI', 'Clerk', 'Drizzle ORM', 'PostgreSQL', 'TanStack Query', 'TanStack Table', 'PostHog', 'Upstash Redis', 'AI SDK', 'ApexCharts', 'Recharts', 'React Hook Form', 'Zod', 'NestJS'],
+    tags: ['full-stack', 'fintech', 'portfolio-tracking', 'dashboard', 'open-source'],
     status: 'open',
     maxMentees: 3,
     selectedMentees: [],
+    mentors: [
+      {
+        _id: 'mentor-psx-1',
+        name: 'Amina Raza',
+        picture: undefined,
+        company: 'FinTech',
+        jobTitle: 'Product Engineer'
+      },
+      {
+        _id: 'mentor-psx-2',
+        name: 'Bilal Ahmed',
+        picture: undefined,
+        company: 'Analytics Platform',
+        jobTitle: 'Full-Stack Engineer'
+      }
+    ],
+    applicationDeadline: '2026-05-25',
+    imageUrl: '/images/dsoc/psxworth.png',
+    wikiUrl: 'https://psxworth.com'
+  },
+  {
+    _id: 'voiceybill-sample',
+    title: 'VoiceyBill - AI-Powered Open Source Finance Tracker',
+    description: 'Log income and expenses by voice, receipt scan, or manual entry. AI classifies transactions, supports CSV import and recurring entries, and keeps the experience multilingual and fast.',
+    organization: 'Dev Weekends',
+    repositoryUrl: 'https://github.com/voiceyBill/voiceyBill-web',
+    websiteUrl: 'https://voiceybill.vercel.app',
+    difficulty: 'advanced',
+    duration: '10-12 weeks',
+    technologies: ['MongoDB', 'Express.js', 'React', 'Node.js', 'TypeScript', 'Google Gemini AI', 'UpliftAI', 'Cloudinary', 'Redux Toolkit', 'RTK Query'],
+    tags: ['full-stack', 'ai', 'finance', 'voice-input', 'open-source'],
+    status: 'open',
+    maxMentees: 3,
+    selectedMentees: [],
+    mentors: [
+      {
+        _id: 'mentor-voicey-1',
+        name: 'Maya Khan',
+        company: 'FinTech',
+        jobTitle: 'Senior Full-Stack Engineer'
+      },
+      {
+        _id: 'mentor-voicey-2',
+        name: 'Omar Ali',
+        company: 'AI Products',
+        jobTitle: 'Backend Engineer'
+      }
+    ],
+    applicationDeadline: '2026-05-25',
+    imageUrl: '/images/dsoc/voiceybill.png',
+  },
+ {
+    _id: 'pathment',
+    title: 'Pathment',
+    description: 'Pathment is a SaaS mentorship platform for organizations that want structured, mentor-guided employee training.\nIt connects mentees with real mentors, uses task-based workflows and progress tracking, and adds gamification to boost engagement and measurable outcomes.',
+    organization: 'Dev Weekends',
+    repositoryUrl: 'https://github.com/Sheryar-Ahmed/pathment.git',
+    websiteUrl: 'https://pathment.me/',
+    difficulty: 'advanced',
+    duration: '10-12 weeks',
+    technologies: ['Next.js', 'TypeScript', 'Node.js', 'Express', 'PostgreSQL', 'Sequelize', 'Socket.io', 'Tailwind CSS', 'Tiptap', 'Cloudinary'],
+    tags: ['full-stack', 'real-time', 'developer-tools', 'collaboration'],
     mentors: [
       {
         _id: 'mentor-1',
@@ -74,36 +136,12 @@ const SAMPLE_PROJECTS: Project[] = [
         jobTitle: 'Staff Engineer'
       }
     ],
-    applicationDeadline: '2026-03-31',
-    imageUrl: '/images/dsoc/codeforge-preview.svg',
-    wikiUrl: 'https://github.com/devweekends/codeforge/wiki'
-  },
-  {
-    _id: 'timemaster-sample',
-    title: 'TimeMaster - Smart Productivity Suite',
-    description: 'Create an intelligent productivity application combining goal setting, time tracking, smart scheduling, and analytics. Build features like Pomodoro timer, calendar integration, habit tracking, focus mode, and AI-powered productivity insights. Perfect for learning modern full-stack development with real-world applications.',
-    organization: 'Dev Weekends',
-    repositoryUrl: 'https://github.com/devweekends/timemaster',
-    websiteUrl: 'https://timemaster.devweekends.org',
-    difficulty: 'intermediate',
-    duration: '8-10 weeks',
-    technologies: ['Next.js', 'NestJS', 'PostgreSQL', 'Supabase', 'Prisma', 'Chart.js', 'React Query', 'Zustand', 'TypeScript', 'Tailwind CSS'],
-    tags: ['full-stack', 'productivity', 'time-management', 'analytics', 'SaaS'],
     status: 'open',
-    maxMentees: 4,
+    maxMentees: 3,
     selectedMentees: [],
-    mentors: [
-      {
-        _id: 'mentor-3',
-        name: 'David Park',
-        company: 'Linear',
-        jobTitle: 'Frontend Lead'
-      }
-    ],
-    applicationDeadline: '2026-03-31',
-    imageUrl: '/images/dsoc/timemaster-preview.svg',
-    wikiUrl: 'https://github.com/devweekends/timemaster/wiki'
-  }
+    applicationDeadline: '2026-05-25',
+    imageUrl: '/images/dsoc/pathment.png',
+  },
 ];
 
 export default function ProjectsPage() {

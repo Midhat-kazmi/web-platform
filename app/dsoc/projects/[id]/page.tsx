@@ -60,21 +60,153 @@ interface Project {
 
 // Sample projects for fallback when API is unavailable
 const SAMPLE_PROJECTS: Record<string, Project> = {
-  'codeforge-sample': {
-    _id: 'codeforge-sample',
-    title: 'CodeForge - Collaborative Code Editor',
-    description: 'Build a real-time collaborative code editor with syntax highlighting, multi-cursor support, live preview, and integrated terminal.',
-    longDescription: `CodeForge is an ambitious project to create a fully-featured collaborative code editor similar to VS Code Live Share or Replit. 
+  'psxworth': {
+    _id: 'psxworth',
+    title: 'PsxWorth',
+    description: 'PsxWorth is a portfolio tracking app for PSX investors. It serves 950+ real users and focuses on simple, clear portfolio tracking with custom dashboards and themes.',
+    longDescription: `PsxWorth is a portfolio tracking platform built for PSX investors who want a clearer view of their holdings, performance, and investment decisions. The product already serves 950+ real users, so the contribution work needs to respect an existing production audience while improving the experience.
 
-You'll learn to build complex real-time systems, work with Monaco Editor (the same editor that powers VS Code), implement operational transformation for conflict-free collaborative editing, and deploy containerized code execution environments.
+The project proposal centers on three additions: support for mutual funds, custom dashboards, and custom themes. The current stack uses Next.js, React, TypeScript, Tailwind CSS, shadcn/ui, Radix UI, Clerk, Drizzle ORM, PostgreSQL, TanStack Query, TanStack Table, PostHog, Upstash Redis, AI SDK, ApexCharts, Recharts, React Hook Form, and Zod. The backend is based on NestJS, though it is not open source yet.
 
-This project covers the full stack: from building a sleek React frontend with Next.js to architecting scalable backend services with NestJS, implementing WebSocket-based real-time collaboration, and setting up secure Docker-based code execution.`,
+The goal is to help investors in Pakistan make better decisions and keep portfolio tracking simple, clear, and useful. Project images and Loom video will be added later.`,
     organization: 'Dev Weekends',
-    repositoryUrl: 'https://github.com/devweekends/codeforge',
-    websiteUrl: 'https://codeforge.devweekends.org',
+    repositoryUrl: 'https://github.com/Wajahat43/psxworth',
+    websiteUrl: 'https://psxworth.com',
     difficulty: 'advanced',
     duration: '10-12 weeks',
-    technologies: ['Next.js', 'NestJS', 'PostgreSQL', 'Supabase', 'Monaco Editor', 'Socket.io', 'Docker', 'Redis', 'TypeScript', 'Tailwind CSS'],
+    technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'Radix UI', 'Clerk', 'Drizzle ORM', 'PostgreSQL', 'TanStack Query', 'TanStack Table', 'PostHog', 'Upstash Redis', 'AI SDK', 'ApexCharts', 'Recharts', 'React Hook Form', 'Zod'],
+    tags: ['fintech', 'portfolio-tracking', 'dashboard', 'open-source', 'psx'],
+    mentors: [
+      {
+        _id: 'mentor-psx-1',
+        name: 'Amina Raza',
+        email: 'amina@devweekends.org',
+        company: 'FinTech',
+        jobTitle: 'Product Engineer',
+        bio: 'Works on financial products and data-rich dashboards.',
+        linkedin: 'https://linkedin.com/in/amina-raza',
+        github: 'https://github.com/aminaraza'
+      },
+      {
+        _id: 'mentor-psx-2',
+        name: 'Bilal Ahmed',
+        email: 'bilal@devweekends.org',
+        company: 'Analytics Platform',
+        jobTitle: 'Full-Stack Engineer',
+        bio: 'Builds dashboards, table-heavy UIs, and product analytics tooling.',
+        linkedin: 'https://linkedin.com/in/bilalahmed',
+        github: 'https://github.com/bilalahmed'
+      }
+    ],
+    selectedMentees: [],
+    maxMentees: 3,
+    status: 'open',
+    applicationDeadline: '2026-05-25',
+    startDate: '2026-06-01',
+    endDate: '2026-08-31',
+    requirements: [
+      'JavaScript/TypeScript fundamentals',
+      'Experience with React and Next.js',
+      'Comfort with PostgreSQL and ORM-based data access',
+      'Ability to work with dashboards and analytics-heavy UIs',
+      'Ability to commit 10-15 hours per week'
+    ],
+    learningOutcomes: [
+      'Build dashboards for portfolio and performance tracking',
+      'Model financial data and reporting workflows in PostgreSQL',
+      'Implement clean, themeable interfaces with modern UI libraries',
+      'Work with analytics, tables, and chart-heavy product interfaces',
+      'Understand how to extend an existing product used by real users'
+    ],
+    milestones: [
+      { title: 'Data Model Review', description: 'Understand the current portfolio model and map the mutual fund extension plan', dueDate: '2026-06-15', completed: false },
+      { title: 'Custom Dashboard Layouts', description: 'Build configurable dashboard views for different investor needs', dueDate: '2026-06-30', completed: false },
+      { title: 'Theme System', description: 'Add custom themes and polish visual consistency across key screens', dueDate: '2026-07-15', completed: false },
+      { title: 'Mutual Funds Support', description: 'Extend portfolio tracking to include mutual fund data and display', dueDate: '2026-07-31', completed: false },
+      { title: 'Analytics & Release', description: 'Refine charts, reports, and UX details before final review', dueDate: '2026-08-31', completed: false }
+    ],
+    season: 'DSOC 2026'
+  },
+  'voiceybill': {
+    _id: 'voiceybill',
+    title: 'VoiceyBill',
+    description: 'VoiceyBill is an open source AI-powered finance tracker that lets people log income and expenses by voice, receipt scan, or manual entry.\nIt uses Gemini and UpliftAI to classify transactions, supports CSV imports and recurring entries, and keeps the experience fast for multilingual users.\nThe product is designed around a responsive, multi-theme UI with analytics and monthly reports.',
+    longDescription: `VoiceyBill is an open source, AI-powered personal finance platform designed for multilingual users who want to track money without fighting a form. It supports voice commands, receipt scanning, manual entry, CSV import, recurring transactions, analytics dashboards, and monthly email reports.
+
+The project is built on the MERN stack with TypeScript and integrates Google Gemini AI and UpliftAI to classify transactions from voice and image inputs. The codebase is split across a web frontend and a backend service, and DSOC contributors will extend it with expense splitting, budget planning, AI-powered financial insights, forecasting, and multi-currency support.
+
+Repository: https://github.com/voiceyBill/voiceyBill-web and https://github.com/voiceyBill/voiceyBill-server. Live demo: https://voiceybill.vercel.app.`,
+    organization: 'Dev Weekends',
+    repositoryUrl: 'https://github.com/voiceyBill/voiceyBill-web',
+    websiteUrl: 'https://voiceybill.vercel.app',
+    difficulty: 'advanced',
+    duration: '10-12 weeks',
+    technologies: ['MongoDB', 'Express.js', 'React', 'Node.js', 'TypeScript', 'Google Gemini AI', 'UpliftAI', 'Cloudinary', 'Redux Toolkit', 'RTK Query'],
+    tags: ['full-stack', 'ai', 'finance', 'voice-input', 'open-source'],
+    mentors: [
+      {
+        _id: 'mentor-1',
+        name: 'Alex Chen',
+        email: 'alex@devweekends.org',
+        company: 'GitHub',
+        jobTitle: 'Senior Software Engineer',
+        bio: 'Full-stack developer with 8+ years of experience building developer tools.',
+        linkedin: 'https://linkedin.com/in/alexchen',
+        github: 'https://github.com/alexchen'
+      },
+      {
+        _id: 'mentor-2',
+        name: 'Sarah Williams',
+        email: 'sarah@devweekends.org',
+        company: 'Vercel',
+        jobTitle: 'Staff Engineer',
+        bio: 'Passionate about building performant web applications and mentoring developers.',
+        linkedin: 'https://linkedin.com/in/sarahwilliams',
+        github: 'https://github.com/sarahwilliams'
+      }
+    ],
+    selectedMentees: [],
+    maxMentees: 3,
+    status: 'open',
+    applicationDeadline: '2026-05-25',
+    startDate: '2026-06-01',
+    endDate: '2026-08-31',
+    requirements: [
+      'JavaScript/TypeScript fundamentals',
+      'Experience with React or Node.js',
+      'Familiarity with MongoDB and REST APIs',
+      'Comfort with Git and GitHub',
+      'Ability to commit 10-15 hours per week'
+    ],
+    learningOutcomes: [
+      'Build a production-style MERN application with AI integrations',
+      'Implement voice and receipt-based transaction workflows',
+      'Model financial data in MongoDB and build aggregation queries',
+      'Create dashboards, reports, and notification flows',
+      'Add multi-currency and internationalization support'
+    ],
+    milestones: [
+      { title: 'Voice Logging Pipeline', description: 'Build microphone capture, transcription, and transaction classification flow', dueDate: '2026-06-15', completed: false },
+      { title: 'Receipt Scanning', description: 'Add image upload and Gemini-based receipt extraction', dueDate: '2026-06-30', completed: false },
+      { title: 'CSV Import & Recurring Transactions', description: 'Support bulk imports and automated scheduled entries', dueDate: '2026-07-15', completed: false },
+      { title: 'Analytics & Monthly Reports', description: 'Finish dashboards, charts, and email summaries', dueDate: '2026-07-31', completed: false },
+      { title: 'Budgeting & Multi-Currency', description: 'Deliver smart alerts, insights, splitting, and currency support', dueDate: '2026-08-31', completed: false }
+    ],
+    season: 'DSOC 2026'
+  },
+  'pathment': {
+    _id: 'pathment',
+    title: 'Pathment',
+    description: 'Pathment is a SaaS mentorship platform for organizations that want structured, mentor-guided employee training.\nIt connects mentees with real mentors, uses task-based workflows and progress tracking, and adds gamification to boost engagement and measurable outcomes.',
+    longDescription: `Pathment is a SaaS-based mentorship platform built for organizations and learning teams that want to run structured, mentor-guided programs. The platform centers on three roles — Admin, Mentor, and Mentee — and supports multi-level programs, mentor matching, task submission with feedback, gamification, and analytics to measure learning outcomes.
+
+  The codebase is a monorepo consisting of a public marketing site, a backend server (Node.js + Express + PostgreSQL with Sequelize), and a Next.js + TypeScript client interface. An AI layer (Groq/OpenAI) can generate personalized roadmaps and weekly task breakdowns, saving curriculum design time for admins. Real-time messaging is implemented with Socket.IO, and media is handled via Cloudinary. The project is contributor-friendly with many beginner-friendly issues: UI polish, accessibility, email templates, stricter API validation, test coverage, seed/demo data, and analytics improvements.`,
+    organization: 'Dev Weekends',
+    repositoryUrl: 'https://github.com/Sheryar-Ahmed/pathment.git',
+    websiteUrl: 'https://pathment.me/',
+    difficulty: 'advanced',
+    duration: '10-12 weeks',
+    technologies: ['Next.js', 'TypeScript', 'Node.js', 'Express', 'PostgreSQL', 'Sequelize', 'Socket.io', 'Tailwind CSS', 'Tiptap', 'Cloudinary'],
     tags: ['full-stack', 'real-time', 'developer-tools', 'collaboration'],
     mentors: [
       {
@@ -101,88 +233,32 @@ This project covers the full stack: from building a sleek React frontend with Ne
     selectedMentees: [],
     maxMentees: 3,
     status: 'open',
-    applicationDeadline: '2026-03-31',
-    startDate: '2026-04-15',
-    endDate: '2026-07-15',
+    applicationDeadline: '2026-05-25',
+    startDate: '2026-06-01',
+    endDate: '2026-08-31',
     requirements: [
-      'Strong JavaScript/TypeScript fundamentals',
+      'JavaScript/TypeScript fundamentals',
       'Experience with React or Next.js',
-      'Basic understanding of WebSockets',
-      'Familiarity with Git and GitHub',
-      'Ability to commit 15-20 hours per week'
-    ],
-    learningOutcomes: [
-      'Build production-ready real-time collaborative applications',
-      'Master advanced React patterns and state management',
-      'Implement secure code execution in containerized environments',
-      'Design and build scalable WebSocket-based systems',
-      'Work with Monaco Editor API for code editing features'
-    ],
-    milestones: [
-      { title: 'Project Setup', description: 'Set up development environment, understand codebase', dueDate: '2026-04-22', completed: false },
-      { title: 'Core Editor', description: 'Implement Monaco Editor with basic features', dueDate: '2026-05-06', completed: false },
-      { title: 'Real-time Collaboration', description: 'Add multi-cursor and collaborative editing', dueDate: '2026-05-27', completed: false },
-      { title: 'Code Execution', description: 'Implement Docker-based code runner', dueDate: '2026-06-17', completed: false },
-      { title: 'Polish & Deploy', description: 'Final testing, documentation, and deployment', dueDate: '2026-07-15', completed: false }
-    ],
-    season: 'DSOC 2026'
-  },
-  'timemaster-sample': {
-    _id: 'timemaster-sample',
-    title: 'TimeMaster - Smart Productivity Suite',
-    description: 'Create an intelligent productivity application combining goal setting, time tracking, smart scheduling, and analytics.',
-    longDescription: `TimeMaster is a comprehensive productivity suite that helps users manage their time effectively. 
-
-You'll build features like a Pomodoro timer, calendar integration, habit tracking, focus mode, and AI-powered productivity insights. The project uses modern full-stack technologies and provides hands-on experience with data visualization, user authentication, and notification systems.
-
-This is a great project for intermediate developers looking to level up their skills while building something genuinely useful.`,
-    organization: 'Dev Weekends',
-    repositoryUrl: 'https://github.com/devweekends/timemaster',
-    websiteUrl: 'https://timemaster.devweekends.org',
-    difficulty: 'intermediate',
-    duration: '8-10 weeks',
-    technologies: ['Next.js', 'NestJS', 'PostgreSQL', 'Supabase', 'Chart.js', 'React Query', 'Zustand', 'TypeScript', 'Tailwind CSS'],
-    tags: ['full-stack', 'productivity', 'time-management', 'analytics'],
-    mentors: [
-      {
-        _id: 'mentor-3',
-        name: 'David Park',
-        email: 'david@devweekends.org',
-        company: 'Linear',
-        jobTitle: 'Frontend Lead',
-        bio: 'Frontend specialist with a passion for great UX and clean code.',
-        linkedin: 'https://linkedin.com/in/davidpark',
-        github: 'https://github.com/davidpark'
-      }
-    ],
-    selectedMentees: [],
-    maxMentees: 4,
-    status: 'open',
-    applicationDeadline: '2026-03-31',
-    startDate: '2026-04-15',
-    endDate: '2026-06-30',
-    requirements: [
-      'JavaScript/TypeScript basics',
-      'Some experience with React',
-      'Understanding of REST APIs',
-      'Familiarity with databases',
+      'Familiarity with REST APIs and relational databases',
+      'Comfort with Git and GitHub',
       'Ability to commit 10-15 hours per week'
     ],
     learningOutcomes: [
-      'Build full-stack applications from scratch',
-      'Implement user authentication and authorization',
-      'Create beautiful data visualizations',
-      'Work with state management libraries',
-      'Deploy applications to production'
+      'Build full-stack web applications with Next.js and Express',
+      'Implement role-based flows (Admin/Mentor/Mentee) and task workflows',
+      'Integrate real-time messaging with Socket.IO',
+      'Work with relational databases (PostgreSQL + Sequelize)',
+      'Add AI-assisted roadmap generation and analytics dashboards'
     ],
     milestones: [
-      { title: 'Project Setup', description: 'Environment setup and basic project structure', dueDate: '2026-04-22', completed: false },
-      { title: 'Core Features', description: 'Timer, task management, and basic tracking', dueDate: '2026-05-13', completed: false },
-      { title: 'Analytics Dashboard', description: 'Implement charts and productivity insights', dueDate: '2026-06-03', completed: false },
-      { title: 'Polish & Deploy', description: 'Testing, documentation, and deployment', dueDate: '2026-06-30', completed: false }
+      { title: 'Project Setup & Onboarding', description: 'Get the monorepo running locally, seed demo data, and familiarise with architecture', dueDate: '2026-06-15', completed: false },
+      { title: 'Mentor Matching & Task Flow', description: 'Implement mentor assignment, task creation, and submission/feedback loop', dueDate: '2026-06-30', completed: false },
+      { title: 'AI Roadmap Integration', description: 'Add AI-generated roadmap/task suggestions for program levels', dueDate: '2026-07-15', completed: false },
+      { title: 'Real-time Messaging & Notifications', description: 'Enhance Socket.IO messaging and notification delivery', dueDate: '2026-07-31', completed: false },
+      { title: 'Analytics & Deploy', description: 'Complete admin analytics, polish UI, and deploy the marketing site', dueDate: '2026-08-31', completed: false }
     ],
     season: 'DSOC 2026'
-  }
+  },
 };
 
 export default function ProjectDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -574,14 +650,14 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
 
               {/* Discord Card */}
               <div className="neo-brutal-card p-6 bg-[var(--dsoc-purple)]">
-                <div className="text-white">
+                <div className="text-black">
                   <MessageCircle className="w-8 h-8 mb-3" />
                   <h3 className="font-bold text-lg mb-2">Have Questions?</h3>
                   <p className="text-sm opacity-90 mb-4">
                     Join our Discord to chat with mentors and other mentees
                   </p>
                   <a 
-                    href="https://discord.com/invite/32mYcRmy" 
+                    href="https://discord.com/invite/Cy7Rgkf4Up" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="neo-brutal-btn bg-white text-[var(--dsoc-purple)] w-full"
