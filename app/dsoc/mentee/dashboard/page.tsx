@@ -116,7 +116,7 @@ export default function MenteeDashboard() {
             </div>
             <div className="flex items-center gap-4">
               <a 
-                href="https://discord.com/invite/32mYcRmy" 
+                href="https://discord.com/invite/Cy7Rgkf4Up" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="neo-brutal-btn bg-white text-[var(--dsoc-dark)] py-2 px-4 text-sm"
@@ -273,7 +273,7 @@ export default function MenteeDashboard() {
                             View Details
                           </Link>
                           <a 
-                            href="https://discord.com/invite/32mYcRmy" 
+                            href="https://discord.com/invite/Cy7Rgkf4Up" 
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="neo-brutal-btn neo-brutal-btn-secondary py-2 px-4 text-sm"

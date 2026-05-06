@@ -193,7 +193,7 @@ export default function ApplyPage({ params }: { params: Promise<{ id: string }> 
                 Browse More Projects
               </Link>
               <a 
-                href="https://discord.com/invite/32mYcRmy" 
+                href="https://discord.com/invite/Cy7Rgkf4Up" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="neo-brutal-btn bg-[#5865F2] text-white w-full"

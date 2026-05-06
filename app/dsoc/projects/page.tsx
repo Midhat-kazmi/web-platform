@@ -63,30 +63,22 @@ const SAMPLE_PROJECTS: Project[] = [
     mentors: [
       {
         _id: 'mentor-psx-1',
-        name: 'Amina Raza',
+        name: 'Wajahat Ali',
         picture: undefined,
         company: 'FinTech',
         jobTitle: 'Product Engineer'
-      },
-      {
-        _id: 'mentor-psx-2',
-        name: 'Bilal Ahmed',
-        picture: undefined,
-        company: 'Analytics Platform',
-        jobTitle: 'Full-Stack Engineer'
       }
     ],
     applicationDeadline: '2026-05-25',
     imageUrl: '/images/dsoc/psxworth.png',
-    wikiUrl: 'https://psxworth.com'
   },
   {
-    _id: 'voiceybill-sample',
+    _id: 'voiceybill',
     title: 'VoiceyBill - AI-Powered Open Source Finance Tracker',
     description: 'Log income and expenses by voice, receipt scan, or manual entry. AI classifies transactions, supports CSV import and recurring entries, and keeps the experience multilingual and fast.',
     organization: 'Dev Weekends',
     repositoryUrl: 'https://github.com/voiceyBill/voiceyBill-web',
-    websiteUrl: 'https://voiceybill.vercel.app',
+    websiteUrl: 'https://www.voiceybill.com/',
     difficulty: 'advanced',
     duration: '10-12 weeks',
     technologies: ['MongoDB', 'Express.js', 'React', 'Node.js', 'TypeScript', 'Google Gemini AI', 'UpliftAI', 'Cloudinary', 'Redux Toolkit', 'RTK Query'],
@@ -97,15 +89,9 @@ const SAMPLE_PROJECTS: Project[] = [
     mentors: [
       {
         _id: 'mentor-voicey-1',
-        name: 'Maya Khan',
+        name: 'Ahad Ali',
         company: 'FinTech',
         jobTitle: 'Senior Full-Stack Engineer'
-      },
-      {
-        _id: 'mentor-voicey-2',
-        name: 'Omar Ali',
-        company: 'AI Products',
-        jobTitle: 'Backend Engineer'
       }
     ],
     applicationDeadline: '2026-05-25',
@@ -125,16 +111,10 @@ const SAMPLE_PROJECTS: Project[] = [
     mentors: [
       {
         _id: 'mentor-1',
-        name: 'Alex Chen',
+        name: 'Sheryar Ahmed',
         company: 'GitHub',
         jobTitle: 'Senior Software Engineer'
       },
-      {
-        _id: 'mentor-2',
-        name: 'Sarah Williams',
-        company: 'Vercel',
-        jobTitle: 'Staff Engineer'
-      }
     ],
     status: 'open',
     maxMentees: 3,
@@ -519,7 +499,7 @@ export default function ProjectsPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
-              href="https://discord.com/invite/32mYcRmy" 
+              href="https://discord.com/invite/Cy7Rgkf4Up" 
               target="_blank" 
               rel="noopener noreferrer"
               className="neo-brutal-btn neo-brutal-btn-primary"

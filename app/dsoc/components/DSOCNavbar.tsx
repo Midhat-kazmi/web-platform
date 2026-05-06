@@ -84,7 +84,7 @@ export default function DSOCNavbar() {
                     </div>
                   </Link>
                   <div className="border-t border-white/10 my-2" />
-                  <a href="https://discord.com/invite/32mYcRmy" target="_blank" rel="noopener noreferrer" className="dsoc-dropdown-item">
+                  <a href="https://discord.com/invite/Cy7Rgkf4Up" target="_blank" rel="noopener noreferrer" className="dsoc-dropdown-item">
                     <MessageCircle className="w-4 h-4" />
                     <div>
                       <div className="font-bold">Community</div>
@@ -99,7 +99,7 @@ export default function DSOCNavbar() {
               Projects
             </Link>
 
-            <a href="https://discord.com/invite/32mYcRmy" target="_blank" rel="noopener noreferrer" className="dsoc-nav-link">
+            <a href="https://discord.com/invite/Cy7Rgkf4Up" target="_blank" rel="noopener noreferrer" className="dsoc-nav-link">
               Community
             </a>
 
@@ -180,7 +180,7 @@ export default function DSOCNavbar() {
             <Link href="/dsoc/projects?difficulty=beginner" className="dsoc-mobile-link" onClick={() => setIsOpen(false)}>
               <Star className="w-5 h-5" /> Beginner Friendly
             </Link>
-            <a href="https://discord.com/invite/32mYcRmy" target="_blank" rel="noopener noreferrer" className="dsoc-mobile-link">
+            <a href="https://discord.com/invite/Cy7Rgkf4Up" target="_blank" rel="noopener noreferrer" className="dsoc-mobile-link">
               <MessageCircle className="w-5 h-5" /> Community
             </a>
             <div className="border-t border-[var(--dsoc-dark)]/10 my-3" />

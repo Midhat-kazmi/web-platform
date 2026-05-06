@@ -93,7 +93,7 @@ export default function MentorRegisterPage() {
               Back to DSOC
             </Link>
             <a 
-              href="https://discord.com/invite/32mYcRmy" 
+              href="https://discord.com/invite/Cy7Rgkf4Up" 
               target="_blank" 
               rel="noopener noreferrer"
               className="neo-brutal-btn neo-brutal-btn-secondary w-full"

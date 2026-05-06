@@ -306,7 +306,7 @@ export default function DSOCPage() {
                 Wiki & Docs
               </a>
               <a 
-                href="https://discord.com/invite/32mYcRmy" 
+                href="https://discord.com/invite/Cy7Rgkf4Up" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[var(--dsoc-secondary)] text-white px-4 py-2 font-bold border-3 border-[var(--dsoc-dark)] hover:bg-[var(--dsoc-secondary)]/90 transition-colors"
@@ -736,7 +736,7 @@ export default function DSOCPage() {
               Apply Now
             </Link>
             <a 
-              href="https://discord.com/invite/32mYcRmy" 
+              href="https://discord.com/invite/Cy7Rgkf4Up" 
               target="_blank" 
               rel="noopener noreferrer"
               className="neo-brutal-btn bg-white text-[var(--dsoc-dark)] text-lg"
@@ -773,7 +773,7 @@ export default function DSOCPage() {
               <Github className="w-4 h-4" /> GitHub
             </a>
             <a 
-              href="https://discord.com/invite/32mYcRmy" 
+              href="https://discord.com/invite/Cy7Rgkf4Up" 
               target="_blank" 
               rel="noopener noreferrer"
               className="font-bold hover:text-[var(--dsoc-primary)] transition-colors flex items-center gap-1"

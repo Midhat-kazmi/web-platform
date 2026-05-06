@@ -79,24 +79,15 @@ The goal is to help investors in Pakistan make better decisions and keep portfol
     mentors: [
       {
         _id: 'mentor-psx-1',
-        name: 'Amina Raza',
+        name: 'Wajahat Islam Gul',
         email: 'amina@devweekends.org',
-        company: 'FinTech',
-        jobTitle: 'Product Engineer',
-        bio: 'Works on financial products and data-rich dashboards.',
-        linkedin: 'https://linkedin.com/in/amina-raza',
-        github: 'https://github.com/aminaraza'
+        company: 'Nector Social',
+        jobTitle: 'Software Engineer',
+        
+        linkedin: 'https://www.linkedin.com/in/wajahatx1/',
+        github: 'https://github.com/Wajahat43'
       },
-      {
-        _id: 'mentor-psx-2',
-        name: 'Bilal Ahmed',
-        email: 'bilal@devweekends.org',
-        company: 'Analytics Platform',
-        jobTitle: 'Full-Stack Engineer',
-        bio: 'Builds dashboards, table-heavy UIs, and product analytics tooling.',
-        linkedin: 'https://linkedin.com/in/bilalahmed',
-        github: 'https://github.com/bilalahmed'
-      }
+      
     ],
     selectedMentees: [],
     maxMentees: 3,
@@ -133,12 +124,10 @@ The goal is to help investors in Pakistan make better decisions and keep portfol
     description: 'VoiceyBill is an open source AI-powered finance tracker that lets people log income and expenses by voice, receipt scan, or manual entry.\nIt uses Gemini and UpliftAI to classify transactions, supports CSV imports and recurring entries, and keeps the experience fast for multilingual users.\nThe product is designed around a responsive, multi-theme UI with analytics and monthly reports.',
     longDescription: `VoiceyBill is an open source, AI-powered personal finance platform designed for multilingual users who want to track money without fighting a form. It supports voice commands, receipt scanning, manual entry, CSV import, recurring transactions, analytics dashboards, and monthly email reports.
 
-The project is built on the MERN stack with TypeScript and integrates Google Gemini AI and UpliftAI to classify transactions from voice and image inputs. The codebase is split across a web frontend and a backend service, and DSOC contributors will extend it with expense splitting, budget planning, AI-powered financial insights, forecasting, and multi-currency support.
-
-Repository: https://github.com/voiceyBill/voiceyBill-web and https://github.com/voiceyBill/voiceyBill-server. Live demo: https://voiceybill.vercel.app.`,
+The project is built on the MERN stack with TypeScript and integrates Google Gemini AI and UpliftAI to classify transactions from voice and image inputs. The codebase is split across a web frontend and a backend service, and DSOC contributors will extend it with expense splitting, budget planning, AI-powered financial insights, forecasting, and multi-currency support.`,
     organization: 'Dev Weekends',
     repositoryUrl: 'https://github.com/voiceyBill/voiceyBill-web',
-    websiteUrl: 'https://voiceybill.vercel.app',
+    websiteUrl: 'https://www.voiceybill.com/',
     difficulty: 'advanced',
     duration: '10-12 weeks',
     technologies: ['MongoDB', 'Express.js', 'React', 'Node.js', 'TypeScript', 'Google Gemini AI', 'UpliftAI', 'Cloudinary', 'Redux Toolkit', 'RTK Query'],
@@ -146,23 +135,10 @@ Repository: https://github.com/voiceyBill/voiceyBill-web and https://github.com/
     mentors: [
       {
         _id: 'mentor-1',
-        name: 'Alex Chen',
-        email: 'alex@devweekends.org',
-        company: 'GitHub',
-        jobTitle: 'Senior Software Engineer',
-        bio: 'Full-stack developer with 8+ years of experience building developer tools.',
-        linkedin: 'https://linkedin.com/in/alexchen',
-        github: 'https://github.com/alexchen'
-      },
-      {
-        _id: 'mentor-2',
-        name: 'Sarah Williams',
-        email: 'sarah@devweekends.org',
-        company: 'Vercel',
-        jobTitle: 'Staff Engineer',
-        bio: 'Passionate about building performant web applications and mentoring developers.',
-        linkedin: 'https://linkedin.com/in/sarahwilliams',
-        github: 'https://github.com/sarahwilliams'
+        name: 'Ahad Ali',
+        email: 'alex@devweekends.org',  
+        linkedin: 'https://www.linkedin.com/in/ahadalireach/',
+        github: 'https://github.com/ahadalireach'
       }
     ],
     selectedMentees: [],
