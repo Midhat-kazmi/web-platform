@@ -2,6 +2,19 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { verifyToken, verifyMentorToken, verifyAmbassadorToken } from '@/lib/jwt';
 
+const discoveryLinkHeader = [
+  '</.well-known/api-catalog>; rel="api-catalog"',
+  '</openapi.json>; rel="service-desc"; type="application/openapi+json"',
+  '</api-docs>; rel="service-doc"; type="text/html"',
+  '</.well-known/agent-skills/index.json>; rel="describedby"; type="application/json"',
+  '</llms.txt>; rel="alternate"; type="text/plain"',
+].join(', ');
+
+function withDiscoveryHeaders(response: NextResponse): NextResponse {
+  response.headers.set('Link', discoveryLinkHeader);
+  return response;
+}
+
 export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
   const acceptHeader = request.headers.get('accept')?.toLowerCase() ?? '';
@@ -35,7 +48,9 @@ export async function middleware(request: NextRequest) {
 
   // Redirect root to our-story page
   if (path === '/') {
-    return NextResponse.redirect(new URL('/our-story', request.url));
+    return withDiscoveryHeaders(
+      NextResponse.redirect(new URL('/our-story', request.url)),
+    );
   }
 
   const token = request.cookies.get('admin-token')?.value;
@@ -158,6 +173,10 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL('/ambassador', request.url));
     }
     return NextResponse.next();
+  }
+
+  if (path === '/our-story') {
+    return withDiscoveryHeaders(NextResponse.next());
   }
 
   return NextResponse.next();
