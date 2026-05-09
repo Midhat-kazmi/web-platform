@@ -34,6 +34,7 @@
     "cloudinary": "^2.9.0",
     "clsx": "2.1.1",
     "dotenv": "16.5.0",
+    "gray-matter": "^4.0.3",
     "js-cookie": "3.0.5",
     "jsonwebtoken": "9.0.2",
     "lucide-react": "0.477.0",
@@ -45,6 +46,9 @@
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-force-graph-2d": "1.27.1",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "swiper": "^12.1.4",
     "tailwind-merge": "3.0.2",
     "tailwindcss-animate": "1.0.7"
   },

@@ -3,7 +3,23 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LogOut, Menu, X, LayoutDashboard, Users, Users2, CalendarDays, Network, Globe, BookOpen, Tag, Briefcase, Rocket, MessageSquareQuote } from 'lucide-react';
+import {
+  LogOut,
+  Menu,
+  X,
+  LayoutDashboard,
+  Users,
+  Users2,
+  CalendarDays,
+  Network,
+  Globe,
+  BookOpen,
+  Tag,
+  Briefcase,
+  Rocket,
+  MessageSquareQuote,
+  FileText // <-- added for Blog
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const menuItems = [
@@ -19,6 +35,9 @@ const menuItems = [
   { title: 'Resources', href: '/admin/dashboard/resources', icon: <BookOpen className="w-5 h-5" /> },
   { title: 'Projects', href: '/admin/dashboard/projects', icon: <Rocket className="w-5 h-5" /> },
   { title: 'Testimonials', href: '/admin/dashboard/testimonials', icon: <MessageSquareQuote className="w-5 h-5" /> },
+
+  //  New Blog Route
+  { title: 'News & Blog', href: '/blog', icon: <FileText className="w-5 h-5" /> },
 ];
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -41,7 +60,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       {/* Sidebar */}
       <aside
         className={`
-          fixed md:static z-40 top-16 md:top-0 left-0 h-[calc(100vh-4rem)] md:h-auto ${sidebarWidth}  border-r border-border flex flex-col transition-all duration-300
+          fixed md:static z-40 top-16 md:top-0 left-0 h-[calc(100vh-4rem)] md:h-auto ${sidebarWidth} border-r border-border flex flex-col transition-all duration-300
           ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
           md:translate-x-0
           shadow-lg md:shadow-none
@@ -60,6 +79,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           >
             {collapsed ? <Menu className="w-6 h-6" /> : <X className="w-6 h-6" />}
           </Button>
+
           {/* Mobile close button */}
           <Button
             variant="ghost"
@@ -71,6 +91,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <X className="w-6 h-6" />
           </Button>
         </div>
+
         {/* Nav */}
         <nav className="flex-1 py-4 px-1 space-y-1 overflow-y-auto">
           {menuItems.map((item) => (
@@ -92,6 +113,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             </Link>
           ))}
         </nav>
+
         {/* Logout at bottom */}
         <div className="p-4 border-t border-border">
           <Button
@@ -132,4 +154,4 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       </main>
     </div>
   );
-} 
+}

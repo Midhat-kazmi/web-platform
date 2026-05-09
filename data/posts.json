@@ -1,0 +1,10 @@
+[
+  {
+    "slug": "weekend-tech-grind-1",
+    "title": "Weekend Tech Grind 1",
+    "date": "2026-01-01",
+    "category": "Weekend Tech Grind",
+    "image": "/images/post1.jpg",
+    "description": "Recap of this weekend's development sprint and lessons learned."
+  }
+]
