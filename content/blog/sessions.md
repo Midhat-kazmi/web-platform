@@ -1,8 +1,10 @@
 ---
-title: "Live Engineering Sessions"
-date: "2026-01-20"
-category: "engineering sessions"
-image: "/images/live-engineering.jpg"
+title: "Live Engineering Session"
+date: "2026-04-30"
+category: ""
+featured: true
+order: 3
+image: "/images/post1.jpg"
 ---
 
 Live Engineering Sessions started as an experiment — coding in public, solving real problems, and building consistency through shared learning.
@@ -34,6 +36,8 @@ This rhythm helps maintain focus across long periods without burning out or losi
 Alongside coding sessions, we also run **public live study rooms on Discord**.
 
 These are open environments where people:
+
+![Weekend Tech Grind](/images/post2.jpg)
 
 - code together in real time
 - discuss problems as they work through them

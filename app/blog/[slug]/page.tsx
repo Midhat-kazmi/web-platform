@@ -1,21 +1,24 @@
-import fs from "fs"
-import path from "path"
-import matter from "gray-matter"
-import ReactMarkdown from "react-markdown"
-import Image from "next/image"
-import Link from "next/link"
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import Image from "next/image";
+import Link from "next/link";
 
 export default async function BlogPost({
   params,
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>;
 }) {
+  const { slug } = await params;
+
   const filePath = path.join(
     process.cwd(),
     "content",
     "blog",
-    `${params.slug}.md`
-  )
+    `${slug}.md`
+  );
 
   if (!fs.existsSync(filePath)) {
     return (
@@ -27,99 +30,128 @@ export default async function BlogPost({
           </Link>
         </div>
       </div>
-    )
+    );
   }
 
-  const fileContent = fs.readFileSync(filePath, "utf-8")
-  const { data, content } = matter(fileContent)
+  const fileContent = fs.readFileSync(filePath, "utf-8");
+  const { data, content } = matter(fileContent);
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-16">
-      <Link href="/blog" className="text-sm text-gray-500">
+      <Link href="/blog" className="text-sm text-gray-500 hover:text-black">
         ← Back
       </Link>
 
       {/* HEADER */}
-      <header className="mt-10 mb-10">
-        <p className="text-xs uppercase text-gray-500 mb-3">
+      <header className="mt-10 mb-14 max-w-3xl">
+        <p className="text-xs uppercase tracking-widest text-gray-400 mb-4">
           {data.category}
         </p>
 
-        <h1 className="text-5xl font-serif mb-4">
+        <h1 className="text-4xl md:text-5xl font-serif leading-tight mb-6">
           {data.title}
         </h1>
 
-        <p className="text-gray-500 text-sm">
-          {data.date}
-        </p>
+        <p className="text-gray-500 text-sm">{data.date}</p>
       </header>
 
       {/* COVER IMAGE */}
-      {data.image && (
-        <div className="relative w-full h-[400px] mb-12">
-          <Image
-            src={data.image}
-            alt={data.title}
-            fill
-            className="object-cover rounded-xl"
-          />
-        </div>
-      )}
-
-      {/* MARKDOWN RENDERER */}
-      <article className="mx-auto max-w-3xl px-4 py-6">
-        <ReactMarkdown
-          components={{
-            h1: ({ children }) => (
-              <h1 className="text-4xl font-bold mt-10 mb-6">
-                {children}
-              </h1>
-            ),
-
-            h2: ({ children }) => (
-              <h2 className="text-2xl font-semibold mt-10 mb-4">
-                {children}
-              </h2>
-            ),
-
-            h3: ({ children }) => (
-              <h3 className="text-xl font-semibold mt-6 mb-3">
-                {children}
-              </h3>
-            ),
-
-            p: ({ children }) => (
-              <p className="text-gray-700 leading-7 mb-5">
-                {children}
-              </p>
-            ),
-
-            ul: ({ children }) => (
-              <ul className="list-disc pl-6 space-y-2 mb-6 text-gray-700">
-                {children}
-              </ul>
-            ),
-
-            li: ({ children }) => <li>{children}</li>,
-
-            img: ({ src, alt }) => (
-              <img
-                src={src || ""}
-                alt={alt || ""}
-                className="my-10 w-full rounded-2xl shadow-lg border"
-              />
-            ),
-
-            blockquote: ({ children }) => (
-              <blockquote className="border-l-4 border-gray-300 pl-4 italic text-gray-600 my-6">
-                {children}
-              </blockquote>
-            ),
-          }}
+      {/* COVER IMAGE */}
+{data.image && (
+  <div className="relative w-full mb-16 overflow-hidden rounded-2xl bg-black">
+    <div className="relative aspect-[16/9] w-full">
+      <Image
+        src={data.image}
+        alt={data.title}
+        fill
+        priority
+        sizes="(max-width: 1024px) 100vw, 1200px"
+        className={`transition duration-700 hover:scale-105 ${
+          slug === "gsoc"
+            ? "object-contain"
+            : "object-cover object-center"
+        }`}
+      />
+    </div>
+  </div>
+)}
+      {/* MARKDOWN */}
+      <article className="mx-auto max-w-2xl">
+        <div
+          className="prose prose-lg prose-neutral max-w-none
+          prose-headings:font-serif
+          prose-h2:mt-12
+          prose-h3:mt-8
+          prose-p:text-gray-700 prose-p:leading-8
+          prose-img:rounded-xl prose-img:my-10"
         >
-          {content}
-        </ReactMarkdown>
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              /* ✅ Prevent <p> wrapping images */
+              p({ node, children }) {
+                const hasImg = node?.children?.some(
+                  (child: any) => child.tagName === "img"
+                );
+
+                if (hasImg) {
+                  return <div className="my-6">{children}</div>;
+                }
+
+                return (
+                  <p className="text-gray-700 leading-8 my-4">
+                    {children}
+                  </p>
+                );
+              },
+
+              /* ✅ Proper markdown images */
+              img({ src = "", alt = "" }) {
+                return (
+                  <span className="block my-10">
+                    <Image
+                      src={src}
+                      alt={alt}
+                      width={1200}
+                      height={600}
+                      className="rounded-xl object-cover w-full h-auto"
+                    />
+                  </span>
+                );
+              },
+
+              h1: ({ children }) => (
+                <h1 className="text-4xl font-serif mt-10 mb-6">
+                  {children}
+                </h1>
+              ),
+
+              h2: ({ children }) => (
+                <h2 className="text-2xl font-serif mt-10 mb-4">
+                  {children}
+                </h2>
+              ),
+
+              strong: ({ children }) => (
+                <strong className="font-semibold text-black">
+                  {children}
+                </strong>
+              ),
+
+              a: ({ href, children }) => (
+                <a
+                  href={href}
+                  className="underline text-black hover:opacity-70"
+                >
+                  {children}
+                </a>
+              ),
+            }}
+          >
+            {content}
+          </ReactMarkdown>
+        </div>
       </article>
     </div>
-  )
+  );
 }

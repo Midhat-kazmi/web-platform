@@ -1,8 +1,10 @@
 ---
-title: "ICPC Preparation | Engineering the Competitive Mindset"
-date: "2026-05-02"
-category: "Competitive Programming"
-image: "/images/icpc.jpg"
+title: "Competitive Programming | ICPC"
+date: "2026-04-30"
+category: ""
+featured: true
+order: 2
+image: "/images/post1.jpg"
 ---
 
 The ICPC journey is often misunderstood.
