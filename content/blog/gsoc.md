@@ -4,7 +4,8 @@ date: "2026-05-06"
 category: "news"
 featured: true
 order: 1
-image: "/images/gsoc.jpg"
+image: "/images/gsoc1.jpg"
+imageFit: "contain"
 description: "The acceptance emails came in over a few weeks. Apache Beam, NumFOCUS, EMBL-EBI, FLARE, BRL-CAD, FOSSASIA, and a handful of others. Here are the people behind them and the quiet road that led there."
 ---
 
@@ -36,7 +37,7 @@ What separated the 14 people below from 100 others who started at the same place
 
 ## Google Summer of Code 2026 (9 selections)
 
-![Muhammad Saqlain, Junaid Shaukat, and Kamran ul Haq, GSoC 2026](/images/gsoc.jpg)
+![Muhammad Saqlain, Junaid Shaukat, and Kamran ul Haq, GSoC 2026](/images/gsoc1.jpg)
 
 *Pictured above: Muhammad Saqlain (NumFOCUS), Muhammad Junaid Shaukat (Apache Software Foundation, Apache Beam), and Kamran ul Haq (FLARE).*
 
