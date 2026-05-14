@@ -3,11 +3,10 @@ import type { Metadata } from "next"
 import { Geist } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import Script from 'next/script'
 import { Analytics } from "@/components/analytics"
-import { SocialModal } from "@/components/social-modal"
+import { SiteHeader } from "@/components/site-header"
 
 const geist = Geist({ subsets: ["latin"] })
 
@@ -160,10 +159,9 @@ export default function RootLayout({
       <body className={geist.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <div className="flex min-h-screen flex-col">
-            <Navbar />
+            <SiteHeader />
             <main className="flex-1">
               <Analytics />
-              <SocialModal />
               {children}
             </main>
             <Footer />

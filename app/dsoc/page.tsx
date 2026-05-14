@@ -40,6 +40,7 @@ interface Project {
   technologies: string[];
   status: string;
   duration: string;
+  featuredImage?: string;
   imageUrl?: string;
   repositoryUrl?: string;
   wikiUrl?: string;
@@ -513,10 +514,10 @@ export default function DSOCPage() {
                 <Link key={project._id} href={`/dsoc/projects/${project._id}`}>
                   <div className="dsoc-project-card h-full group">
                     {/* Project Image */}
-                    {project.imageUrl && (
+                    {(project.featuredImage || project.imageUrl) && (
                       <div className="relative overflow-hidden border-b-4 border-[var(--dsoc-dark)]">
                         <img 
-                          src={project.imageUrl} 
+                          src={project.featuredImage || project.imageUrl} 
                           alt={project.title}
                           className="w-full h-52 object-cover transition-transform duration-300 group-hover:scale-105"
                         />

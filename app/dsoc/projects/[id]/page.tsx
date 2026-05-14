@@ -1,7 +1,8 @@
 'use client';
 
 import Link from "next/link";
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
 import { 
   ArrowLeft,
   Clock, 
@@ -238,10 +239,10 @@ The project is built on the MERN stack with TypeScript and integrates Google Gem
   'goalslot': {
     _id: 'goalslot',
     title: 'GoalSlot',
-    description: "GoalSlot connects your goals to your calendar and tracks every hour you work on them. Finally know if you're actually making progress.",
-    longDescription: `GoalSlot helps users tie their goals directly to calendar events and measure the time spent working on them. Contributors will work on syncing calendar events, building time-tracking UX, improving analytics, and making the onboarding experience delightful. Project images and demo videos are available in the provided Drive links.
+    description: "GoalSlot connects goals to your calendar and tracks every hour you work on them.",
+    longDescription: `GoalSlot is a productivity-focused project that helps users connect goals to scheduled work and measure actual time spent. Contributors will refine calendar syncing, time tracking, analytics, and onboarding flows while keeping the experience simple and useful.
 
-Contributions range from frontend Next.js improvements to backend NestJS API work, integrations, and analytics features. This is a real-user product with an existing live site, so contributors should be cautious when touching production integrations and focus on well-scoped, testable changes.`,
+The project is designed to be practical and contributor-friendly, with a focus on clear workflows, useful reporting, and a polished interface. It is a strong fit for mentees who want to work on scheduling, productivity UX, and data-driven product features.`,
     organization: 'Dev Weekends',
     repositoryUrl: 'https://github.com/ZeeshanAdilButt/goal-slot-web',
     websiteUrl: 'https://www.goalslot.io/',
@@ -251,7 +252,7 @@ Contributions range from frontend Next.js improvements to backend NestJS API wor
     tags: ['productivity', 'calendar', 'time-tracking', 'open-source'],
     mentors: [
       {
-        _id: 'mentor-psx-1',
+        _id: 'mentor-goalslot-1',
         name: 'Wajahat Islam Gul',
         email: 'amina@devweekends.org',
         company: 'Nector Social',
@@ -273,8 +274,8 @@ Contributions range from frontend Next.js improvements to backend NestJS API wor
       'Ability to commit 8-12 hours per week'
     ],
     learningOutcomes: [
-      'Implement reliable calendar syncing and time-tracking features',
-      'Build end-to-end features across Next.js frontend and NestJS backend',
+      'Implement calendar syncing and time-tracking features',
+      'Build end-to-end features across Next.js and NestJS',
       'Design analytics and reporting for goal progress'
     ],
     milestones: [
@@ -287,25 +288,31 @@ Contributions range from frontend Next.js improvements to backend NestJS API wor
 };
 
 export default function ProjectDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const resolvedParams = use(params);
+  const routeParams = useParams<{ id: string }>();
+  const projectId = routeParams?.id;
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
     fetchProject();
-  }, [resolvedParams.id]);
+  }, [projectId]);
 
   const fetchProject = async () => {
+    if (!projectId) {
+      setLoading(true);
+      return;
+    }
+
     // Check for sample project first
-    if (SAMPLE_PROJECTS[resolvedParams.id]) {
-      setProject(SAMPLE_PROJECTS[resolvedParams.id]);
+    if (SAMPLE_PROJECTS[projectId]) {
+      setProject(SAMPLE_PROJECTS[projectId]);
       setLoading(false);
       return;
     }
     
     try {
-      const res = await fetch(`/api/dsoc/projects/${resolvedParams.id}`);
+      const res = await fetch(`/api/dsoc/projects/${projectId}`);
       const data = await res.json();
       
       if (data.success) {

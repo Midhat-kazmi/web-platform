@@ -41,6 +41,35 @@ interface Application {
   project: { _id: string; title: string };
 }
 
+interface Mentor {
+  _id: string;
+  name: string;
+  email: string;
+  company?: string;
+  jobTitle?: string;
+  picture?: string;
+  expertise?: string[];
+  isActive: boolean;
+  isVerified: boolean;
+  createdAt?: string;
+}
+
+interface Mentee {
+  _id: string;
+  name: string;
+  email: string;
+  university?: string;
+  degree?: string;
+  picture?: string;
+  skills?: string[];
+  mentor?: { _id: string; name: string; company?: string; jobTitle?: string; picture?: string } | string;
+  projects?: Array<string | { _id: string }>;
+  applications?: Array<string | { _id: string }>;
+  isActive: boolean;
+  isVerified: boolean;
+  createdAt?: string;
+}
+
 interface Stats {
   projects: { total: number; open: number; inProgress: number; completed: number };
   mentors: number;
@@ -52,6 +81,8 @@ export default function AdminDSOCPage() {
   const [activeTab, setActiveTab] = useState('overview');
   const [projects, setProjects] = useState<Project[]>([]);
   const [applications, setApplications] = useState<Application[]>([]);
+  const [mentors, setMentors] = useState<Mentor[]>([]);
+  const [mentees, setMentees] = useState<Mentee[]>([]);
   const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
@@ -62,21 +93,27 @@ export default function AdminDSOCPage() {
 
   const fetchData = async () => {
     try {
-      const [statsRes, projectsRes, appsRes] = await Promise.all([
+      const [statsRes, projectsRes, appsRes, mentorsRes, menteesRes] = await Promise.all([
         fetch('/api/dsoc/stats'),
         fetch('/api/dsoc/projects?limit=100'),
-        fetch('/api/dsoc/applications')
+        fetch('/api/dsoc/applications'),
+        fetch('/api/dsoc/mentors'),
+        fetch('/api/dsoc/mentees')
       ]);
 
-      const [statsData, projectsData, appsData] = await Promise.all([
+      const [statsData, projectsData, appsData, mentorsData, menteesData] = await Promise.all([
         statsRes.json(),
         projectsRes.json(),
-        appsRes.json()
+        appsRes.json(),
+        mentorsRes.json(),
+        menteesRes.json()
       ]);
 
       if (statsData.success) setStats(statsData.data);
       if (projectsData.success) setProjects(projectsData.data);
       if (appsData.success) setApplications(appsData.data);
+      if (mentorsData.success) setMentors(mentorsData.data || []);
+      if (menteesData.success) setMentees(menteesData.data || []);
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
@@ -398,23 +435,183 @@ export default function AdminDSOCPage() {
 
         {/* Mentors Tab */}
         {activeTab === 'mentors' && (
-          <div className="neo-brutal-card p-12 text-center">
-            <Users className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
-            <h3 className="text-xl font-bold mb-2">Mentor Management</h3>
-            <p className="text-muted-foreground">
-              Coming soon - manage mentor profiles, verification, and project assignments.
-            </p>
+          <div className="space-y-6">
+            <div className="neo-brutal-card p-6 flex items-center justify-between gap-4 flex-wrap">
+              <div>
+                <h3 className="text-xl font-bold mb-1">Mentor Management</h3>
+                <p className="text-muted-foreground">
+                  Review mentor profiles, see verification state, and open the public mentor page.
+                </p>
+              </div>
+              <div className="flex items-center gap-3 text-sm font-bold uppercase tracking-wider">
+                <span className="neo-brutal-badge bg-[var(--dsoc-secondary)] text-white">
+                  Total {mentors.length}
+                </span>
+                <span className="neo-brutal-badge bg-[var(--dsoc-success)] text-white">
+                  Active {mentors.filter((mentor) => mentor.isActive).length}
+                </span>
+              </div>
+            </div>
+
+            {mentors.length === 0 ? (
+              <div className="neo-brutal-card p-12 text-center">
+                <Users className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
+                <h3 className="text-xl font-bold mb-2">No mentors found</h3>
+                <p className="text-muted-foreground">
+                  Create a mentor from the DSOC mentor registration page or seed one in the database.
+                </p>
+              </div>
+            ) : (
+              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                {mentors.map((mentor) => (
+                  <div key={mentor._id} className="neo-brutal-card p-5 flex flex-col gap-4">
+                    <div className="flex items-start gap-4">
+                      <div className="w-14 h-14 rounded-full overflow-hidden border-4 border-[var(--dsoc-dark)] bg-[var(--dsoc-dark)] text-white flex items-center justify-center font-black shrink-0">
+                        {mentor.picture ? (
+                          <img src={mentor.picture} alt={mentor.name} className="w-full h-full object-cover" />
+                        ) : (
+                          mentor.name
+                            .split(' ')
+                            .map((part) => part[0])
+                            .join('')
+                            .slice(0, 2)
+                        )}
+                      </div>
+
+                      <div className="min-w-0 flex-1">
+                        <h4 className="font-bold text-lg leading-tight">{mentor.name}</h4>
+                        <p className="text-sm text-muted-foreground truncate">{mentor.email}</p>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          {mentor.jobTitle || 'Mentor'}{mentor.company ? ` · ${mentor.company}` : ''}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2 text-xs font-bold uppercase tracking-wider">
+                      <span className={`neo-brutal-badge ${mentor.isActive ? 'bg-[var(--dsoc-success)] text-white' : 'bg-gray-300 text-black'}`}>
+                        {mentor.isActive ? 'Active' : 'Inactive'}
+                      </span>
+                      <span className={`neo-brutal-badge ${mentor.isVerified ? 'bg-[var(--dsoc-primary)] text-white' : 'bg-[var(--dsoc-pink)] text-white'}`}>
+                        {mentor.isVerified ? 'Verified' : 'Pending Review'}
+                      </span>
+                    </div>
+
+                    {mentor.expertise && mentor.expertise.length > 0 && (
+                      <div className="flex flex-wrap gap-2">
+                        {mentor.expertise.slice(0, 4).map((skill) => (
+                          <span key={skill} className="px-2 py-1 text-xs font-bold border-2 border-[var(--dsoc-dark)] bg-background">
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+
+                    <Link
+                      href="/mentor"
+                      className="neo-brutal-btn neo-brutal-btn-secondary w-full justify-center"
+                    >
+                      View Mentor Portal
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         )}
 
         {/* Mentees Tab */}
         {activeTab === 'mentees' && (
-          <div className="neo-brutal-card p-12 text-center">
-            <Users className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
-            <h3 className="text-xl font-bold mb-2">Mentee Management</h3>
-            <p className="text-muted-foreground">
-              Coming soon - manage mentee profiles and project participation.
-            </p>
+          <div className="space-y-6">
+            <div className="neo-brutal-card p-6 flex items-center justify-between gap-4 flex-wrap">
+              <div>
+                <h3 className="text-xl font-bold mb-1">Mentee Management</h3>
+                <p className="text-muted-foreground">
+                  Review mentee profiles, verify status, and see their mentor/project connections.
+                </p>
+              </div>
+              <div className="flex items-center gap-3 text-sm font-bold uppercase tracking-wider">
+                <span className="neo-brutal-badge bg-[var(--dsoc-secondary)] text-white">
+                  Total {mentees.length}
+                </span>
+                <span className="neo-brutal-badge bg-[var(--dsoc-success)] text-white">
+                  Active {mentees.filter((mentee) => mentee.isActive).length}
+                </span>
+              </div>
+            </div>
+
+            {mentees.length === 0 ? (
+              <div className="neo-brutal-card p-12 text-center">
+                <Users className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
+                <h3 className="text-xl font-bold mb-2">No mentees found</h3>
+                <p className="text-muted-foreground">
+                  Create a mentee from the DSOC mentee registration page or seed one in the database.
+                </p>
+              </div>
+            ) : (
+              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                {mentees.map((mentee) => {
+                  const mentorName = typeof mentee.mentor === 'object' ? mentee.mentor.name : null;
+
+                  return (
+                    <div key={mentee._id} className="neo-brutal-card p-5 flex flex-col gap-4">
+                      <div className="flex items-start gap-4">
+                        <div className="w-14 h-14 rounded-full overflow-hidden border-4 border-[var(--dsoc-dark)] bg-[var(--dsoc-dark)] text-white flex items-center justify-center font-black shrink-0">
+                          {mentee.picture ? (
+                            <img src={mentee.picture} alt={mentee.name} className="w-full h-full object-cover" />
+                          ) : (
+                            mentee.name
+                              .split(' ')
+                              .map((part) => part[0])
+                              .join('')
+                              .slice(0, 2)
+                          )}
+                        </div>
+
+                        <div className="min-w-0 flex-1">
+                          <h4 className="font-bold text-lg leading-tight">{mentee.name}</h4>
+                          <p className="text-sm text-muted-foreground truncate">{mentee.email}</p>
+                          <p className="text-sm text-muted-foreground mt-1">
+                            {mentee.degree || 'Mentee'}{mentee.university ? ` · ${mentee.university}` : ''}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-wrap gap-2 text-xs font-bold uppercase tracking-wider">
+                        <span className={`neo-brutal-badge ${mentee.isActive ? 'bg-[var(--dsoc-success)] text-white' : 'bg-gray-300 text-black'}`}>
+                          {mentee.isActive ? 'Active' : 'Inactive'}
+                        </span>
+                        <span className={`neo-brutal-badge ${mentee.isVerified ? 'bg-[var(--dsoc-primary)] text-white' : 'bg-[var(--dsoc-pink)] text-white'}`}>
+                          {mentee.isVerified ? 'Verified' : 'Pending Review'}
+                        </span>
+                      </div>
+
+                      <div className="text-sm text-muted-foreground space-y-1">
+                        <p><span className="font-bold text-foreground">Mentor:</span> {mentorName || 'Unassigned'}</p>
+                        <p><span className="font-bold text-foreground">Projects:</span> {mentee.projects?.length || 0}</p>
+                        <p><span className="font-bold text-foreground">Applications:</span> {mentee.applications?.length || 0}</p>
+                      </div>
+
+                      {mentee.skills && mentee.skills.length > 0 && (
+                        <div className="flex flex-wrap gap-2">
+                          {mentee.skills.slice(0, 4).map((skill) => (
+                            <span key={skill} className="px-2 py-1 text-xs font-bold border-2 border-[var(--dsoc-dark)] bg-background">
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+
+                      <Link
+                        href="/dsoc/register/mentee"
+                        className="neo-brutal-btn neo-brutal-btn-secondary w-full justify-center"
+                      >
+                        View Mentee Portal
+                      </Link>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
         )}
       </main>

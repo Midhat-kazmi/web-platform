@@ -15,6 +15,7 @@ import {
   LogIn,
   Home
 } from "lucide-react";
+import { HeadlineBar } from "@/components/headline-bar";
 import "../styles.css";
 
 export default function DSOCNavbar() {
@@ -38,9 +39,11 @@ export default function DSOCNavbar() {
   }, []);
 
   return (
-    <nav className="dsoc-navbar fixed top-0 left-0 right-0 z-50">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+    <>
+      <HeadlineBar />
+      <nav className="dsoc-navbar fixed top-10 left-0 right-0 z-40">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <a href="/dsoc" className="flex items-center gap-2 no-underline">
             <div className="w-10 h-10 bg-[var(--dsoc-primary)] border-3 border-[var(--dsoc-dark)] flex items-center justify-center shadow-[3px_3px_0_var(--dsoc-dark)]">
@@ -166,36 +169,37 @@ export default function DSOCNavbar() {
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
-        </div>
-
-        {/* Mobile Menu */}
-        {isOpen && (
-          <div className="md:hidden dsoc-mobile-menu">
-            <a href="/our-story" className="dsoc-mobile-link" onClick={() => setIsOpen(false)}>
-              <Home className="w-5 h-5" /> Dev Weekends
-            </a>
-            <Link href="/dsoc/projects" className="dsoc-mobile-link" onClick={() => setIsOpen(false)}>
-              <Code2 className="w-5 h-5" /> Projects
-            </Link>
-            <Link href="/dsoc/projects?difficulty=beginner" className="dsoc-mobile-link" onClick={() => setIsOpen(false)}>
-              <Star className="w-5 h-5" /> Beginner Friendly
-            </Link>
-            <a href="https://discord.com/invite/Cy7Rgkf4Up" target="_blank" rel="noopener noreferrer" className="dsoc-mobile-link">
-              <MessageCircle className="w-5 h-5" /> Community
-            </a>
-            <div className="border-t border-[var(--dsoc-dark)]/10 my-3" />
-            <Link href="/dsoc/register/mentee" className="dsoc-mobile-link" onClick={() => setIsOpen(false)}>
-              <Rocket className="w-5 h-5" /> Apply as Mentee
-            </Link>
-            <Link href="/dsoc/register/mentor" className="dsoc-mobile-link" onClick={() => setIsOpen(false)}>
-              <Users className="w-5 h-5" /> Become a Mentor
-            </Link>
-            <Link href="/dsoc/login" className="dsoc-mobile-link" onClick={() => setIsOpen(false)}>
-              <LogIn className="w-5 h-5" /> Login
-            </Link>
           </div>
-        )}
-      </div>
-    </nav>
+
+          {/* Mobile Menu */}
+          {isOpen && (
+            <div className="md:hidden dsoc-mobile-menu">
+              <a href="/our-story" className="dsoc-mobile-link" onClick={() => setIsOpen(false)}>
+                <Home className="w-5 h-5" /> Dev Weekends
+              </a>
+              <Link href="/dsoc/projects" className="dsoc-mobile-link" onClick={() => setIsOpen(false)}>
+                <Code2 className="w-5 h-5" /> Projects
+              </Link>
+              <Link href="/dsoc/projects?difficulty=beginner" className="dsoc-mobile-link" onClick={() => setIsOpen(false)}>
+                <Star className="w-5 h-5" /> Beginner Friendly
+              </Link>
+              <a href="https://discord.com/invite/Cy7Rgkf4Up" target="_blank" rel="noopener noreferrer" className="dsoc-mobile-link">
+                <MessageCircle className="w-5 h-5" /> Community
+              </a>
+              <div className="border-t border-[var(--dsoc-dark)]/10 my-3" />
+              <Link href="/dsoc/register/mentee" className="dsoc-mobile-link" onClick={() => setIsOpen(false)}>
+                <Rocket className="w-5 h-5" /> Apply as Mentee
+              </Link>
+              <Link href="/dsoc/register/mentor" className="dsoc-mobile-link" onClick={() => setIsOpen(false)}>
+                <Users className="w-5 h-5" /> Become a Mentor
+              </Link>
+              <Link href="/dsoc/login" className="dsoc-mobile-link" onClick={() => setIsOpen(false)}>
+                <LogIn className="w-5 h-5" /> Login
+              </Link>
+            </div>
+          )}
+        </div>
+      </nav>
+    </>
   );
 }

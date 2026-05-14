@@ -78,7 +78,7 @@ export default function MentorshipPage() {
   }, [hasAnimatedStats, hasAnimatedTimeline])
 
   const animateStats = () => {
-    const targets = [30, 12, 300, 4]
+    const targets = [30, 12, 300, 3]
     const duration = 2000
     const steps = 60
     const increment = duration / steps
@@ -121,7 +121,7 @@ export default function MentorshipPage() {
       title: "Foundation Track",
       subtitle: "Complete Beginner Journey",
       description: "Perfect for absolute beginners starting their coding journey with comprehensive support",
-      duration: "4 months",
+      duration: "3 months",
       intensity: "Beginner Friendly",
       liveSessions: "20 Live Sessions",
       mentorshipHours: "24 Hours 1:1 Mentorship",
@@ -143,7 +143,7 @@ export default function MentorshipPage() {
       title: "Professional Track",
       subtitle: "Industry-Ready Development",
       description: "For engineers with basic knowledge aiming for professional excellence",
-      duration: "4 months",
+      duration: "3 months",
       intensity: "Moderate Pace",
       liveSessions: "20 Live Sessions",
       dsaSessions: "30 DSA Sessions",
@@ -163,7 +163,7 @@ export default function MentorshipPage() {
 
   const timelineData = [
     {
-      month: "Month 1-2",
+      month: "Month 1",
       title: "Foundation & Core Skills",
       description: "Master programming fundamentals, DSA basics, and web development essentials through intensive DSA grind sessions and engineering workshops. Build your first portfolio projects with expert mentor guidance.",
       milestone: "Complete Core Foundations & First Projects",
@@ -177,7 +177,7 @@ export default function MentorshipPage() {
       ]
     },
     {
-      month: "Month 3",
+      month: "Month 2",
       title: "Advanced DSA & System Design",
       description: "Deep dive into complex algorithms, advanced data structures, and system design patterns. Work on real-world projects, contribute to open source, and prepare for technical interviews.",
       milestone: "Advanced Problem Solving & System Design",
@@ -192,7 +192,7 @@ export default function MentorshipPage() {
       ]
     },
     {
-      month: "Month 4",
+      month: "Month 3",
       title: "Industry Readiness & Job Preparation",
       description: "Master advanced system design, work on capstone projects, prepare for interviews with mock sessions, optimize your portfolio, and get ready for job applications with career guidance.",
       milestone: "Industry Ready & Job Placement",
@@ -376,7 +376,7 @@ export default function MentorshipPage() {
               <X className="w-5 h-5" />
             </Button>
             <CardHeader>
-              <CardTitle>4-Month Mentorship Program</CardTitle>
+              <CardTitle>3-Month Mentorship Program</CardTitle>
               <CardDescription>
                 <span className="font-semibold text-green-600">100% Free - No hidden costs!</span>
               </CardDescription>
@@ -417,7 +417,7 @@ export default function MentorshipPage() {
                 className="mb-6 sm:mb-8 border-primary text-primary px-3 sm:px-4 py-1 sm:py-2 rounded-full font-medium text-xs sm:text-sm"
               >
                 <Star className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                2025 Cohort - 4-Month Mentorship Program
+                2026 Cohort - 3-Month Mentorship Program
               </Badge>
 
               <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 sm:mb-8 leading-[1.1] sm:leading-[0.9] tracking-tight">
@@ -425,12 +425,12 @@ export default function MentorshipPage() {
                 <br />
                 <span className="relative inline-block mt-2 sm:mt-0">
                   <span className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground px-3 sm:px-4 md:px-6 py-2 sm:py-3 inline-block transform -rotate-1 rounded-lg text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
-                    Mentorship 2025-26
+                    Mentorship 2026
                   </span>
                 </span>
               </h1>
               <p className="text-sm sm:text-xl lg:text-2xl text-muted-foreground mb-6 sm:mb-8 max-w-4xl mx-auto leading-relaxed px-4">
-                <strong>4-month comprehensive mentorship program with live sessions</strong>
+                <strong>3-month comprehensive mentorship program with live sessions</strong>
                 <br className="hidden sm:block" />
                 Get personal mentorship, attend live coding sessions, and become job-ready with our industry-focused curriculum.
               </p>
@@ -590,7 +590,7 @@ export default function MentorshipPage() {
                 Program Timeline
               </Badge>
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 tracking-tight">
-                Your 4-Month Transformation
+                Your 3-Month Transformation
               </h2>
               <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
                 A structured journey from beginner to industry-ready engineer with continuous mentorship
@@ -723,7 +723,7 @@ export default function MentorshipPage() {
                 What Makes Us Different
               </h2>
               <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-                Our comprehensive 4-month program combines intensive DSA training, hands-on engineering projects, and expert
+                Our comprehensive 3-month program combines intensive DSA training, hands-on engineering projects, and expert
                 mentorship to make you industry-ready.
               </p>
             </div>
@@ -978,7 +978,7 @@ export default function MentorshipPage() {
               Ready to Get Industry-Ready?
             </h2>
             <p className="text-lg sm:text-xl lg:text-2xl text-primary-foreground/70 mb-12 sm:mb-16 max-w-4xl mx-auto leading-relaxed">
-              Join our comprehensive 4-month mentorship program and crack big companies. Limited seats available -
+              Join our comprehensive 3-month mentorship program and crack big companies. Limited seats available -
               applications reviewed on rolling basis.
             </p>
 
@@ -988,7 +988,7 @@ export default function MentorshipPage() {
                 onClick={handleApplyClick}
                 className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 px-10 sm:px-16 py-4 sm:py-5 rounded-lg text-lg sm:text-xl font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
               >
-                Apply for Mentorship 2025-26
+                Apply for Fellowship 2026
                 <ArrowRight className="ml-3 h-5 w-5 sm:h-6 sm:w-6 group-hover:translate-x-1 transition-transform" />
               </Button>
             </div>
@@ -1008,7 +1008,7 @@ export default function MentorshipPage() {
                 {
                   icon: <Rocket className="h-8 w-8 sm:h-10 sm:w-10" />,
                   title: "Start Learning",
-                  description: "Begin your 4-month transformation",
+                  description: "Begin your 3-month transformation",
                 },
               ].map((step, index) => (
                 <div key={index} className="text-center group">

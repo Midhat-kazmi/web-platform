@@ -1,8 +1,9 @@
 'use client';
 
 import Link from "next/link";
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { 
   ArrowLeft,
   Save,
@@ -23,8 +24,9 @@ interface MentorOption {
   expertise?: string[];
 }
 
-export default function EditProjectPage({ params }: { params: Promise<{ id: string }> }) {
-  const resolvedParams = use(params);
+export default function EditProjectPage() {
+  const routeParams = useParams<{ id: string }>();
+  const projectId = routeParams?.id;
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [mentorLoading, setMentorLoading] = useState(true);
@@ -63,7 +65,7 @@ export default function EditProjectPage({ params }: { params: Promise<{ id: stri
   useEffect(() => {
     fetchProject();
     fetchMentors();
-  }, [resolvedParams.id]);
+  }, [projectId]);
 
   const fetchMentors = async () => {
     try {
@@ -84,8 +86,13 @@ export default function EditProjectPage({ params }: { params: Promise<{ id: stri
   };
 
   const fetchProject = async () => {
+    if (!projectId) {
+      setLoading(true);
+      return;
+    }
+
     try {
-      const res = await fetch(`/api/dsoc/projects/${resolvedParams.id}`);
+      const res = await fetch(`/api/dsoc/projects/${projectId}`);
       const data = await res.json();
 
       if (data.success) {
@@ -204,7 +211,7 @@ export default function EditProjectPage({ params }: { params: Promise<{ id: stri
         featuredImage = await uploadImageToCloudinary(imageFile);
       }
 
-      const res = await fetch(`/api/dsoc/projects/${resolvedParams.id}`, {
+      const res = await fetch(`/api/dsoc/projects/${projectId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -2,17 +2,22 @@ import { NextResponse } from 'next/server';
 import connectDB from '@/lib/db';
 import { DSOCMentor } from '@/models/DSOCMentor';
 
-// GET active, verified mentors for project assignment
-export async function GET() {
+// GET DSOC mentors. Admin screens need the full roster, while callers can opt
+// into the assignment-safe subset with ?verifiedOnly=true.
+export async function GET(request: Request) {
   try {
     await connectDB();
 
-    const mentors = await DSOCMentor.find({
-      isActive: true,
-      isVerified: true,
-    })
-      .select('_id name company jobTitle picture expertise')
-      .sort({ name: 1 })
+    const { searchParams } = new URL(request.url);
+    const verifiedOnly = searchParams.get('verifiedOnly') === 'true';
+
+    const query = verifiedOnly
+      ? { isActive: true, isVerified: true }
+      : {};
+
+    const mentors = await DSOCMentor.find(query)
+      .select('_id name email company jobTitle picture expertise isActive isVerified createdAt updatedAt')
+      .sort({ createdAt: -1 })
       .lean();
 
     return NextResponse.json({

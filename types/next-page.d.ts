@@ -7,3 +7,5 @@ declare module "next" {
     searchParams?: Record<string, any>;
   }
 } 
+
+declare module '*.css';

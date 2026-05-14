@@ -27,7 +27,6 @@ import {
   Server,
   Layers,
   Calendar,
-  X,
 } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 
@@ -41,7 +40,6 @@ export default function FellowshipPage() {
   const timelineRef = useRef<HTMLDivElement>(null)
   const [hasAnimatedStats, setHasAnimatedStats] = useState(false)
   const [hasAnimatedTimeline, setHasAnimatedTimeline] = useState(false)
-  const [showModal, setShowModal] = useState(true)
 
   useEffect(() => {
     setIsVisible(true)
@@ -305,77 +303,7 @@ export default function FellowshipPage() {
 
   return (
     <>
-      {showModal && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
-        >
-          {/* Overlay for blur and dim, closes modal on click */}
-          <div
-            className="absolute inset-0 bg-black/60 backdrop-blur-md transition-all duration-500"
-            onClick={() => setShowModal(false)}
-          />
-          <Card className="max-w-lg w-full relative z-10 animate-modalIn bg-white border-2 border-gray-200 shadow-2xl">
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              onClick={() => setShowModal(false)} 
-              className="absolute top-4 right-4 hover:bg-gray-100 rounded-full"
-            >
-              <X className="w-5 h-5 text-gray-600" />
-            </Button>
-            <CardHeader className="pb-4 pt-8 px-8">
-              <CardTitle className="text-2xl font-bold text-gray-900 text-center mb-2">
-                Fellowship 2025 Completed
-              </CardTitle>
-              <CardDescription className="text-center">
-                <span className="text-lg font-medium text-gray-700">
-                  Thank you for your interest. Applications for 2026 will open next year.
-                </span>
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="px-8 pb-8">
-              <div className="space-y-4">
-                <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                  <h3 className="font-semibold text-gray-900 mb-3">Program Status</h3>
-                  <ul className="space-y-2 text-gray-700">
-                    <li className="flex items-start">
-                      <div className="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                      Fellowship 2025 has been successfully completed
-                    </li>
-                    <li className="flex items-start">
-                      <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                      Comprehensive impact report is now available
-                    </li>
-                    <li className="flex items-start">
-                      <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                      Applications for Fellowship 2026 will open next year
-                    </li>
-                    <li className="flex items-start">
-                      <div className="w-2 h-2 bg-orange-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                      Stay connected for future announcements
-                    </li>
-                  </ul>
-                </div>
-                
-                <div className="pt-2">
-                  <a 
-                    href="https://v0-fellowship-impact-data.vercel.app/" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="block w-full bg-black text-white text-center py-3 px-6 rounded-lg font-semibold hover:bg-gray-800 transition-all duration-300 hover:shadow-lg group"
-                  >
-                    <span className="flex items-center justify-center gap-2">
-                      View Fellowship 2025 Report
-                      <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                    </span>
-                  </a>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      )}
-      <div className={`min-h-screen bg-background text-foreground overflow-x-hidden transition-all duration-300 ${showModal ? 'blur-sm brightness-75 pointer-events-none select-none' : ''}`}>
+      <div className="min-h-screen bg-background text-foreground overflow-x-hidden transition-all duration-300">
         {/* Hero Section */}
         <section className="relative py-8 sm:py-12 md:py-16 lg:py-20 xl:py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-muted/30 via-background to-muted/30"></div>
@@ -399,32 +327,32 @@ export default function FellowshipPage() {
                 className="mb-6 sm:mb-8 border-primary text-primary px-3 sm:px-4 py-1 sm:py-2 rounded-full font-medium text-xs sm:text-sm"
               >
                 <Star className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                Fellowship 2025 - Program Completed
+                Fellowship 2026 - Applications Open
               </Badge>
 
               <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 sm:mb-8 leading-[1.1] sm:leading-[0.9] tracking-tight">
                 Dev Weekends
                 <br />
                 <span className="relative inline-block mt-2 sm:mt-0">
-                  <span className="bg-gray-600 text-white px-3 sm:px-4 md:px-6 py-2 sm:py-3 inline-block transform -rotate-1 rounded-lg text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
-                    Fellowship 2025 Closed
+                  <span className="bg-black text-white px-3 sm:px-4 md:px-6 py-2 sm:py-3 inline-block transform -rotate-1 rounded-lg text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
+                    Fellowship 2026 Started
                   </span>
                 </span>
               </h1>
 
               <p className="text-sm sm:text-xl lg:text-2xl text-muted-foreground mb-6 sm:mb-8 max-w-4xl mx-auto leading-relaxed px-4">
-                <strong>Fellowship 2025 has been completed successfully!</strong>
+                <strong>Fellowship 2026 is now live!</strong>
                 <br className="hidden sm:block" />
-                Thank you to all participants. Check out our impact report and stay tuned for 2026 applications.
+                Applications are open. Join now and start your 3-month transformation journey.
               </p>
 
               <div className="flex flex-row flex-wrap sm:flex-row gap-3 sm:gap-6 justify-center items-center mb-8 sm:mb-16 px-4">
                 <Button
                   size="lg"
-                  onClick={() => window.open('https://v0-fellowship-impact-data.vercel.app/', '_blank')}
+                  onClick={handleApplyClick}
                   className="flex-1 sm:flex-none bg-black text-white hover:bg-gray-800 px-4 sm:px-12 py-2.5 sm:py-5 rounded-lg text-sm sm:text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 min-w-[140px] sm:w-auto"
                 >
-                  View 2025 Report
+                  Apply for 2026 Fellowship
                   <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
                 <Button
@@ -433,7 +361,7 @@ export default function FellowshipPage() {
                   onClick={() => window.open('/mentorship', '_self')}
                   className="flex-1 sm:flex-none border-2 border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-white px-4 sm:px-12 py-2.5 sm:py-5 rounded-lg text-sm sm:text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 min-w-[140px] sm:w-auto"
                 >
-                  2025-26 Mentorship Program
+                  2026 Mentorship Program
                 </Button>
               </div>
 
@@ -950,7 +878,7 @@ export default function FellowshipPage() {
                 onClick={handleApplyClick}
                 className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 px-10 sm:px-16 py-4 sm:py-5 rounded-lg text-lg sm:text-xl font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
               >
-                Apply for Fellowship 2025
+                Apply for Fellowship 2026
                 <ArrowRight className="ml-3 h-5 w-5 sm:h-6 sm:w-6 group-hover:translate-x-1 transition-transform" />
               </Button>
             </div>
