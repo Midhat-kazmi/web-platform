@@ -440,7 +440,7 @@ export default function ProjectsPage() {
                             </span>
                           ))}
                           {project.technologies.length > 5 && (
-                            <span className="neo-brutal-badge bg-gray-200 dark:bg-gray-700 text-xs">
+                            <span className="neo-brutal-badge bg-[var(--dsoc-secondary)] text-white text-xs">
                               +{project.technologies.length - 5}
                             </span>
                           )}
@@ -526,7 +526,7 @@ export default function ProjectsPage() {
       {/* CTA */}
       <section className="py-16 bg-[var(--dsoc-light)] dark:bg-[var(--dsoc-dark)] border-t-4 border-[var(--dsoc-dark)] dark:border-[var(--dsoc-light)]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-black mb-4">Don&apos;t see what you&apos;re looking for?</h2>
+          <h2 className="text-3xl font-black mb-4 text-black">Don&apos;t see what you&apos;re looking for?</h2>
           <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
             We&apos;re always adding new projects. Join our Discord to get notified when new projects are added, 
             or become a mentor and propose your own project!

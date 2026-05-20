@@ -164,6 +164,7 @@
   background: rgba(255, 248, 240, 0.95);
   backdrop-filter: blur(10px);
   border-bottom: 3px solid var(--dsoc-dark);
+  z-index: 60;
 }
 
 .dsoc-nav-link {
@@ -207,6 +208,38 @@
 .dsoc-dropdown-item:hover {
   background: var(--dsoc-primary);
   color: white;
+}
+
+/* DSOC Discord Card */
+.dsoc-discord-card {
+  background: var(--dsoc-light);
+  color: var(--dsoc-dark);
+}
+
+.dark .dsoc-discord-card {
+  background: var(--dsoc-light);
+  color: var(--dsoc-dark);
+}
+
+.dsoc-discord-btn {
+  border: 3px solid var(--dsoc-dark);
+  box-shadow: 3px 3px 0px var(--dsoc-dark);
+}
+
+.dark .dsoc-discord-btn {
+  border-color: var(--dsoc-dark);
+  box-shadow: 3px 3px 0px var(--dsoc-dark);
+}
+
+/* DSOC Tags */
+.dsoc-tag-badge {
+  border: 3px solid var(--dsoc-dark);
+  box-shadow: 3px 3px 0px var(--dsoc-dark);
+}
+
+.dark .dsoc-tag-badge {
+  border-color: var(--dsoc-dark);
+  box-shadow: 3px 3px 0px var(--dsoc-dark);
 }
 
 .dsoc-mobile-menu {
@@ -390,6 +423,14 @@
   border-color: var(--dsoc-light);
 }
 
+.dsoc-stat-label {
+  color: var(--dsoc-dark);
+}
+
+.dark .dsoc-stat-label {
+  color: var(--dsoc-light);
+}
+
 /* DSOC Timeline */
 .dsoc-timeline {
   position: relative;
@@ -517,6 +558,11 @@
 .dsoc-float-shape:nth-child(2) { animation-delay: 1s; }
 .dsoc-float-shape:nth-child(3) { animation-delay: 2s; }
 .dsoc-float-shape:nth-child(4) { animation-delay: 3s; }
+
+/* DSOC "What Is" Title */
+.dark .dsoc-what-title {
+  color: var(--dsoc-light);
+}
 
 /* DSOC Section Titles */
 .dsoc-section-title {

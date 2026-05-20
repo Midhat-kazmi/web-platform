@@ -261,9 +261,9 @@ export default function DSOCPage() {
                 on real-world projects.
               </p>
               <p 
-                className="text-lg sm:text-xl mt-3 font-bold text-[var(--dsoc-dark)]/90"
+                className="text-xl sm:text-2xl font-black text-[var(--dsoc-dark)]"
                 style={{
-                  textShadow: '1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff'
+                  textShadow: '1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 2px 2px 0 rgba(0,0,0,0.1)'
                 }}
               >
                 Learn, build, and grow with the community. 🚀
@@ -335,7 +335,7 @@ export default function DSOCPage() {
               <div className="text-4xl sm:text-5xl font-black text-[var(--dsoc-primary)]">
                 {stats?.projects.total || '20+'}
               </div>
-              <div className="text-sm font-bold uppercase tracking-wider mt-2 text-[var(--dsoc-dark)] dark:text-white">
+              <div className="dsoc-stat-label text-sm font-bold uppercase tracking-wider mt-2">
                 Projects
               </div>
             </div>
@@ -343,7 +343,7 @@ export default function DSOCPage() {
               <div className="text-4xl sm:text-5xl font-black text-[var(--dsoc-secondary)]">
                 {stats?.mentors || '15+'}
               </div>
-              <div className="text-sm font-bold uppercase tracking-wider mt-2 text-[var(--dsoc-dark)] dark:text-white">
+              <div className="dsoc-stat-label text-sm font-bold uppercase tracking-wider mt-2">
                 Mentors
               </div>
             </div>
@@ -351,7 +351,7 @@ export default function DSOCPage() {
               <div className="text-4xl sm:text-5xl font-black text-[var(--dsoc-purple)]">
                 {stats?.mentees || '50+'}
               </div>
-              <div className="text-sm font-bold uppercase tracking-wider mt-2 text-[var(--dsoc-dark)] dark:text-white">
+              <div className="dsoc-stat-label text-sm font-bold uppercase tracking-wider mt-2">
                 Mentees
               </div>
             </div>
@@ -359,7 +359,7 @@ export default function DSOCPage() {
               <div className="text-4xl sm:text-5xl font-black text-[var(--dsoc-success)]">
                 {stats?.technologies || '30+'}
               </div>
-              <div className="text-sm font-bold uppercase tracking-wider mt-2 text-[var(--dsoc-dark)] dark:text-white">
+              <div className="dsoc-stat-label text-sm font-bold uppercase tracking-wider mt-2">
                 Technologies
               </div>
             </div>
@@ -372,7 +372,7 @@ export default function DSOCPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="dsoc-section-title text-4xl sm:text-5xl font-black mb-6 text-[var(--dsoc-dark)] dark:text-white">
+              <h2 className="dsoc-section-title dsoc-what-title text-4xl sm:text-5xl font-black mb-6 text-[var(--dsoc-dark)]">
                 WHAT IS DSOC?
               </h2>
               <div className="space-y-4 text-lg">

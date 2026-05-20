@@ -637,7 +637,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
             {/* Right Column - Sidebar */}
             <div className="space-y-6">
               {/* Apply Card */}
-              <div className="neo-brutal-card p-6 sticky top-24">
+              <div className="neo-brutal-card p-6 sticky top-24 z-10">
                 <h2 className="text-xl font-black mb-4">Apply to This Project</h2>
                 
                 <div className="space-y-4 mb-6">
@@ -711,8 +711,8 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
               </div>
 
               {/* Discord Card */}
-              <div className="neo-brutal-card p-6 bg-[var(--dsoc-purple)]">
-                <div className="text-black">
+              <div className="neo-brutal-card p-6 dsoc-discord-card">
+                <div className="text-[var(--dsoc-dark)] dark:text-[var(--dsoc-light)]">
                   <MessageCircle className="w-8 h-8 mb-3" />
                   <h3 className="font-bold text-lg mb-2">Have Questions?</h3>
                   <p className="text-sm opacity-90 mb-4">
@@ -722,7 +722,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
                     href="https://discord.com/invite/Cy7Rgkf4Up" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="neo-brutal-btn bg-white text-[var(--dsoc-purple)] w-full"
+                    className="neo-brutal-btn bg-white text-[var(--dsoc-purple)] w-full dsoc-discord-btn"
                   >
                     Join Discord
                   </a>
@@ -735,7 +735,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
                   <h3 className="font-bold mb-3">Tags</h3>
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map((tag, i) => (
-                      <span key={i} className="neo-brutal-badge bg-gray-200 dark:bg-gray-700 text-xs">
+                      <span key={i} className="neo-brutal-badge dsoc-tag-badge bg-[var(--dsoc-light)] text-[var(--dsoc-dark)] text-xs">
                         #{tag}
                       </span>
                     ))}
