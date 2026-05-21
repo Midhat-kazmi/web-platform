@@ -3,6 +3,7 @@ import mongoose, { Schema, Document } from 'mongoose';
 export interface IDSOCApplication extends Document {
   project: mongoose.Types.ObjectId;
   mentee: mongoose.Types.ObjectId;
+  discordUsername: string;
   proposal: string;
   coverLetter?: string;
   relevantExperience: string;
@@ -32,6 +33,11 @@ const DSOCApplicationSchema = new Schema<IDSOCApplication>(
       type: Schema.Types.ObjectId,
       ref: 'DSOCMentee',
       required: [true, 'Mentee is required'],
+    },
+    discordUsername: {
+      type: String,
+      required: [true, 'Discord username is required'],
+      trim: true,
     },
     proposal: {
       type: String,
