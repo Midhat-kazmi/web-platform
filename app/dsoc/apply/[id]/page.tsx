@@ -34,6 +34,8 @@ interface Project {
 }
 
 type ApplicationFormValues = {
+  discordUsername: string;
+  discordJoined: boolean;
   whyThisProject: string;
   motivation: string;
   relevantExperience: string;
@@ -67,6 +69,7 @@ export default function ApplyPage({ params }: { params: Promise<{ id: string }> 
   const [success, setSuccess] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [isMentee, setIsMentee] = useState<boolean | null>(null);
+  const [showDiscordPrompt, setShowDiscordPrompt] = useState(true);
   const {
     register,
     handleSubmit,
@@ -75,6 +78,8 @@ export default function ApplyPage({ params }: { params: Promise<{ id: string }> 
     watch,
   } = useForm<ApplicationFormValues>({
     defaultValues: {
+      discordUsername: '',
+      discordJoined: false,
       whyThisProject: '',
       motivation: '',
       relevantExperience: '',
@@ -95,9 +100,10 @@ export default function ApplyPage({ params }: { params: Promise<{ id: string }> 
   });
 
   const availabilityValue = watch('availability');
+  const discordJoinedValue = watch('discordJoined');
 
   const stepFields: Record<number, (keyof ApplicationFormValues)[]> = {
-    1: ['whyThisProject', 'motivation'],
+    1: ['discordUsername', 'discordJoined', 'whyThisProject', 'motivation'],
     2: ['relevantExperience', 'technicalSkills', 'githubProfile', 'portfolioLinks'],
     3: ['proposal', 'timeline', 'expectedLearnings'],
     4: ['availability', 'timezone'],
@@ -233,13 +239,19 @@ export default function ApplyPage({ params }: { params: Promise<{ id: string }> 
     });
   };
 
+  const isStepAccessible = (stepId: number) => {
+    return stepId <= currentStep;
+  };
+
   if (loading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="min-h-screen bg-background">
         <DSOCNavbar />
-        <div className="text-center">
-          <div className="inline-block w-12 h-12 border-4 border-[var(--dsoc-primary)] border-t-transparent animate-spin" />
-          <p className="mt-4 text-muted-foreground">Loading application...</p>
+        <div className="pt-24 pb-12 flex items-center justify-center">
+          <div className="text-center">
+            <div className="inline-block w-12 h-12 border-4 border-[var(--dsoc-primary)] border-t-transparent animate-spin" />
+            <p className="mt-4 text-muted-foreground">Loading application...</p>
+          </div>
         </div>
       </div>
     );
@@ -314,6 +326,34 @@ export default function ApplyPage({ params }: { params: Promise<{ id: string }> 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[var(--dsoc-light)] via-white to-[var(--dsoc-accent)]/20">
       <DSOCNavbar />
+
+      {showDiscordPrompt && !discordJoinedValue && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
+          <div className="neo-brutal-card p-6 max-w-md w-full">
+            <h2 className="text-xl font-black mb-2">Join Discord First</h2>
+            <p className="text-sm text-muted-foreground mb-4">
+              Joining Discord is mandatory before applying. Please join the DSOC Discord and the project channel.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <a
+                href="https://discord.com/invite/Cy7Rgkf4Up"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="neo-brutal-btn neo-brutal-btn-primary w-full"
+              >
+                Join Discord
+              </a>
+              <button
+                type="button"
+                onClick={() => setShowDiscordPrompt(false)}
+                className="neo-brutal-btn neo-brutal-btn-secondary w-full"
+              >
+                I Joined
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       
       <div className="pt-24 pb-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -411,14 +451,19 @@ export default function ApplyPage({ params }: { params: Promise<{ id: string }> 
                   <div key={step.id} className="flex items-center flex-1">
                     <button
                       type="button"
-                      onClick={() => setCurrentStep(step.id)}
+                      onClick={() => {
+                        if (isStepAccessible(step.id)) {
+                          setCurrentStep(step.id);
+                        }
+                      }}
+                      disabled={!isStepAccessible(step.id)}
                       className={`flex items-center gap-3 p-3 rounded-lg transition-all w-full ${
                         currentStep === step.id 
                           ? 'bg-[var(--dsoc-primary)] text-white' 
                           : currentStep > step.id
                           ? 'bg-[var(--dsoc-success)] text-white'
                           : 'bg-gray-100 text-gray-500'
-                      }`}
+                      } ${!isStepAccessible(step.id) ? 'cursor-not-allowed opacity-60' : ''}`}
                     >
                       <div className={`w-10 h-10 flex items-center justify-center border-2 ${
                         currentStep >= step.id ? 'border-white' : 'border-gray-300'
@@ -477,6 +522,48 @@ export default function ApplyPage({ params }: { params: Promise<{ id: string }> 
                       <p className="text-muted-foreground mt-1">
                         Tell us about yourself and why you&apos;re interested
                       </p>
+                    </div>
+
+                    <div>
+                      <label className="block font-bold text-sm mb-2">
+                        Discord Username *
+                      </label>
+                      <p className="text-sm text-muted-foreground mb-3">
+                        Use your Discord username (e.g., username or username#1234).
+                      </p>
+                      <input
+                        type="text"
+                        {...register('discordUsername', { required: 'This field is required.' })}
+                        className="neo-brutal-input"
+                        placeholder="yourname or yourname#1234"
+                      />
+                      {errors.discordUsername?.message && (
+                        <p className="mt-2 text-sm font-bold text-[var(--dsoc-pink)]">
+                          {errors.discordUsername.message}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="flex items-start gap-3">
+                      <input
+                        type="checkbox"
+                        id="discordJoined"
+                        {...register('discordJoined', { required: 'Please confirm you have joined Discord.' })}
+                        className="mt-1 h-4 w-4"
+                      />
+                      <div>
+                        <label htmlFor="discordJoined" className="block font-bold text-sm">
+                          I have joined the DSOC Discord and the project channel *
+                        </label>
+                        <p className="text-sm text-muted-foreground">
+                          This is required before you can apply.
+                        </p>
+                        {errors.discordJoined?.message && (
+                          <p className="mt-2 text-sm font-bold text-[var(--dsoc-pink)]">
+                            {errors.discordJoined.message}
+                          </p>
+                        )}
+                      </div>
                     </div>
 
                     <div>
