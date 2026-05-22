@@ -155,11 +155,10 @@ export function SubmitTestimonialModal() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="email">Email *</Label>
+              <Label htmlFor="email">Email (Optional)</Label>
               <Input
                 id="email"
                 type="email"
-                required
                 value={formData.email}
                 onChange={(e) => setFormData({...formData, email: e.target.value})}
               />
@@ -203,6 +202,19 @@ export function SubmitTestimonialModal() {
             </div>
 
             <div className="space-y-2">
+              <Label htmlFor="cta">Message to Readers *</Label>
+              <Input
+                id="cta"
+                type="text"
+                placeholder="Join Dev Weekends to level up your skills"
+                required
+                value={formData.cta}
+                onChange={(e) => setFormData({...formData, cta: e.target.value})}
+              />
+              <p className="text-xs text-muted-foreground">Short call-to-action or closing thought.</p>
+            </div>
+
+            <div className="space-y-2">
               <Label htmlFor="videoUrl">Video URL (Optional)</Label>
               <Input
                 id="videoUrl"
@@ -212,18 +224,6 @@ export function SubmitTestimonialModal() {
                 onChange={(e) => setFormData({...formData, videoUrl: e.target.value})}
               />
               <p className="text-xs text-muted-foreground">Link to a YouTube video or similar.</p>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="cta">CTA / Message to Readers (Optional)</Label>
-              <Input
-                id="cta"
-                type="text"
-                placeholder="Join Dev Weekends to level up your skills"
-                value={formData.cta}
-                onChange={(e) => setFormData({...formData, cta: e.target.value})}
-              />
-              <p className="text-xs text-muted-foreground">Short call-to-action or closing thought.</p>
             </div>
 
             <DialogFooter>

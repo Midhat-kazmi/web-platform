@@ -28,7 +28,6 @@ const TestimonialSchema = new Schema<ITestimonial>(
     },
     email: {
       type: String,
-      required: [true, 'Email is required'], // For internal contact/verification
       trim: true,
     },
     content: {
