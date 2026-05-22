@@ -5,8 +5,9 @@ export interface ITestimonial extends Document {
   role: string;
   email: string;
   content: string;
+  cta?: string;
   videoUrl?: string;
-  imageUrl: string;
+  imageUrl?: string;
   type: 'text' | 'video';
   isApproved: boolean;
   createdAt: Date;
@@ -35,13 +36,17 @@ const TestimonialSchema = new Schema<ITestimonial>(
       required: [true, 'Testimonial content is required'],
       trim: true,
     },
+    cta: {
+      type: String,
+      trim: true,
+    },
     videoUrl: {
       type: String,
       trim: true,
     },
     imageUrl: {
       type: String,
-      required: [true, 'Image/Avatar is required'],
+      default: '/avatar.svg',
     },
     type: {
       type: String,

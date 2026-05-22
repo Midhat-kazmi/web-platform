@@ -12,8 +12,9 @@ interface Testimonial {
   name: string;
   role: string;
   content: string;
+  cta?: string;
   videoUrl?: string;
-  imageUrl: string;
+  imageUrl?: string;
   type: 'text' | 'video';
 }
 
@@ -28,9 +29,10 @@ export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   };
 
   const videoId = testimonial.videoUrl ? getYoutubeId(testimonial.videoUrl) : null;
+  const avatarUrl = testimonial.imageUrl || '/avatar.svg';
   const thumbnailUrl = videoId 
     ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` 
-    : testimonial.imageUrl;
+    : avatarUrl;
 
   if (testimonial.type === 'video' && testimonial.videoUrl) {
     return (
@@ -54,7 +56,7 @@ export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
             <CardHeader className="p-4 pb-2 space-y-1">
               <div className="flex items-center gap-3">
                 <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 border">
-                  <Image src={testimonial.imageUrl} alt={testimonial.name} fill className="object-cover" />
+                  <Image src={avatarUrl} alt={testimonial.name} fill className="object-cover" />
                 </div>
                 <div>
                   <h3 className="font-semibold leading-tight">{testimonial.name}</h3>
@@ -99,6 +101,11 @@ export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
                 </div>
               </div>
               <p className="text-sm text-muted-foreground italic">"{testimonial.content}"</p>
+              {testimonial.cta && (
+                <p className="mt-3 text-sm font-semibold text-foreground">
+                  {testimonial.cta}
+                </p>
+              )}
           </div>
         </DialogContent>
       </Dialog>
@@ -115,7 +122,7 @@ export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
         <div className="flex items-center gap-3 mt-auto pt-4 border-t">
           <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 border">
             <Image
-              src={testimonial.imageUrl}
+              src={avatarUrl}
               alt={testimonial.name}
               fill
               className="object-cover"
@@ -126,6 +133,11 @@ export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
             <p className="text-xs text-muted-foreground">{testimonial.role}</p>
           </div>
         </div>
+        {testimonial.cta && (
+          <p className="text-sm font-semibold text-foreground">
+            {testimonial.cta}
+          </p>
+        )}
       </CardContent>
     </Card>
   );

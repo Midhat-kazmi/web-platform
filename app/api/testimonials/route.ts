@@ -24,7 +24,7 @@ export async function POST(request: Request) {
     const data = await request.json();
 
     // Basic validation
-    if (!data.name || !data.role || !data.email || !data.content || !data.imageUrl) {
+    if (!data.name || !data.role || !data.email || !data.content) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
@@ -33,6 +33,7 @@ export async function POST(request: Request) {
 
     const testimonial = await Testimonial.create({
       ...data,
+      imageUrl: data.imageUrl || '/avatar.svg',
       isApproved: false, // Explicitly false for public submissions
       type: data.videoUrl ? 'video' : 'text'
     });

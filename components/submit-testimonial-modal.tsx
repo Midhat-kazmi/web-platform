@@ -22,7 +22,8 @@ export function SubmitTestimonialModal() {
     role: '',
     email: '',
     content: '',
-    videoUrl: ''
+    videoUrl: '',
+    cta: ''
   })
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,8 +58,6 @@ export function SubmitTestimonialModal() {
         if (!uploadRes.ok) throw new Error('Image upload failed')
         const uploadData = await uploadRes.json()
         imageUrl = uploadData.url
-      } else {
-        throw new Error('Image is required')
       }
 
       // Submit testimonial data
@@ -84,7 +83,8 @@ export function SubmitTestimonialModal() {
             role: '',
             email: '',
             content: '',
-            videoUrl: ''
+            videoUrl: '',
+            cta: ''
         })
         setImageFile(null)
         setImagePreview(null)
@@ -166,7 +166,7 @@ export function SubmitTestimonialModal() {
             </div>
 
             <div className="space-y-2">
-              <Label>Your Photo *</Label>
+              <Label>Your Photo (Optional)</Label>
               <div className="flex items-center gap-4">
                 <Input
                   type="file"
@@ -174,7 +174,6 @@ export function SubmitTestimonialModal() {
                   onChange={handleImageChange}
                   className="hidden"
                   id="testimonial-image-upload"
-                  required
                 />
                 <Label
                   htmlFor="testimonial-image-upload"
@@ -213,6 +212,18 @@ export function SubmitTestimonialModal() {
                 onChange={(e) => setFormData({...formData, videoUrl: e.target.value})}
               />
               <p className="text-xs text-muted-foreground">Link to a YouTube video or similar.</p>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="cta">CTA / Message to Readers (Optional)</Label>
+              <Input
+                id="cta"
+                type="text"
+                placeholder="Join Dev Weekends to level up your skills"
+                value={formData.cta}
+                onChange={(e) => setFormData({...formData, cta: e.target.value})}
+              />
+              <p className="text-xs text-muted-foreground">Short call-to-action or closing thought.</p>
             </div>
 
             <DialogFooter>
