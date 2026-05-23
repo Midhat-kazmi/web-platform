@@ -3,7 +3,6 @@
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { PlayCircle, Quote } from 'lucide-react';
-import Image from 'next/image';
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { useState } from 'react';
 
@@ -11,6 +10,7 @@ interface Testimonial {
   _id: string;
   name: string;
   role: string;
+  before?: string;
   content: string;
   cta?: string;
   videoUrl?: string;
@@ -29,10 +29,9 @@ export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   };
 
   const videoId = testimonial.videoUrl ? getYoutubeId(testimonial.videoUrl) : null;
-  const avatarUrl = testimonial.imageUrl || '/avatar.svg';
   const thumbnailUrl = videoId 
     ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` 
-    : avatarUrl;
+    : '/avatar.svg';
 
   if (testimonial.type === 'video' && testimonial.videoUrl) {
     return (
@@ -40,11 +39,10 @@ export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
         <DialogTrigger asChild>
           <Card className="group cursor-pointer hover:shadow-lg transition-all duration-300 overflow-hidden h-full flex flex-col border-muted/60">
             <div className="relative aspect-video w-full overflow-hidden bg-black">
-              <Image
+              <img
                 src={thumbnailUrl}
                 alt={testimonial.name}
-                fill
-                className="object-cover opacity-80 group-hover:opacity-60 transition-opacity"
+                className="h-full w-full object-cover opacity-80 transition-opacity group-hover:opacity-60"
               />
               <div className="absolute inset-0 flex items-center justify-center">
                 <PlayCircle className="w-12 h-12 text-white opacity-80 group-hover:scale-110 transition-transform duration-300" />
@@ -54,14 +52,12 @@ export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
               </Badge>
             </div>
             <CardHeader className="p-4 pb-2 space-y-1">
-              <div className="flex items-center gap-3">
-                <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 border">
-                  <Image src={avatarUrl} alt={testimonial.name} fill className="object-cover" />
-                </div>
-                <div>
-                  <h3 className="font-semibold leading-tight">{testimonial.name}</h3>
-                  <p className="text-xs text-muted-foreground">{testimonial.role}</p>
-                </div>
+              <div>
+                <h3 className="font-semibold leading-tight">{testimonial.name}</h3>
+                <p className="text-xs text-muted-foreground">{testimonial.role}</p>
+                {testimonial.before && (
+                  <p className="text-xs text-muted-foreground">Before: {testimonial.before}</p>
+                )}
               </div>
             </CardHeader>
             <CardContent className="p-4 pt-2">
@@ -91,21 +87,19 @@ export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
             )}
           </div>
           <div className="p-4 bg-background">
-             <div className="flex items-center gap-3 mb-2">
-                <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 border">
-                  <Image src={testimonial.imageUrl} alt={testimonial.name} fill className="object-cover" />
-                </div>
-                <div>
-                  <h3 className="font-semibold">{testimonial.name}</h3>
-                  <p className="text-xs text-muted-foreground">{testimonial.role}</p>
-                </div>
-              </div>
-              <p className="text-sm text-muted-foreground italic">"{testimonial.content}"</p>
-              {testimonial.cta && (
-                <p className="mt-3 text-sm font-semibold text-foreground">
-                  {testimonial.cta}
-                </p>
+            <div className="mb-2">
+              <h3 className="font-semibold">{testimonial.name}</h3>
+              <p className="text-xs text-muted-foreground">{testimonial.role}</p>
+              {testimonial.before && (
+                <p className="text-xs text-muted-foreground">Before: {testimonial.before}</p>
               )}
+            </div>
+            <p className="text-sm text-muted-foreground italic">"{testimonial.content}"</p>
+            {testimonial.cta && (
+              <p className="mt-3 text-sm font-semibold text-foreground">
+                {testimonial.cta}
+              </p>
+            )}
           </div>
         </DialogContent>
       </Dialog>
@@ -119,19 +113,12 @@ export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
         <p className="text-muted-foreground italic leading-relaxed flex-1">
           "{testimonial.content}"
         </p>
-        <div className="flex items-center gap-3 mt-auto pt-4 border-t">
-          <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 border">
-            <Image
-              src={avatarUrl}
-              alt={testimonial.name}
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div>
-            <h3 className="font-semibold text-sm">{testimonial.name}</h3>
-            <p className="text-xs text-muted-foreground">{testimonial.role}</p>
-          </div>
+        <div className="mt-auto pt-4 border-t">
+          <h3 className="font-semibold text-sm">{testimonial.name}</h3>
+          <p className="text-xs text-muted-foreground">{testimonial.role}</p>
+          {testimonial.before && (
+            <p className="text-xs text-muted-foreground">Before: {testimonial.before}</p>
+          )}
         </div>
         {testimonial.cta && (
           <p className="text-sm font-semibold text-foreground">

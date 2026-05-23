@@ -24,7 +24,7 @@ export async function POST(request: Request) {
     const data = await request.json();
 
     // Basic validation
-    if (!data.name || !data.role || !data.content || !data.cta) {
+      if (!data.name || !data.role || !data.content || !data.linkedin || !data.cta) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }

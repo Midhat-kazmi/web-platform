@@ -3,9 +3,11 @@ import mongoose, { Schema, Document } from 'mongoose';
 export interface ITestimonial extends Document {
   name: string;
   role: string;
-  email: string;
+  email?: string;
+  linkedin: string;
+  before?: string;
   content: string;
-  cta?: string;
+  cta: string;
   videoUrl?: string;
   imageUrl?: string;
   type: 'text' | 'video';
@@ -26,6 +28,15 @@ const TestimonialSchema = new Schema<ITestimonial>(
       required: [true, 'Role is required'], // e.g., Mentee, Fellow, Mentor
       trim: true,
     },
+    linkedin: {
+      type: String,
+      required: [true, 'LinkedIn is required'],
+      trim: true,
+    },
+    before: {
+      type: String,
+      trim: true,
+    },
     email: {
       type: String,
       trim: true,
@@ -37,6 +48,7 @@ const TestimonialSchema = new Schema<ITestimonial>(
     },
     cta: {
       type: String,
+      required: [true, 'CTA is required'],
       trim: true,
     },
     videoUrl: {

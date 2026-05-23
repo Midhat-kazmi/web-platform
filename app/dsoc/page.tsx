@@ -133,34 +133,41 @@ export default function DSOCPage() {
     },
     {
       phase: "Phase 3",
+      title: "Applications Deadline",
+      date: "May 28, 2026",
+      description: "Final day to submit mentee applications. Ensure your proposal is complete before the deadline.",
+      status: "upcoming"
+    },
+    {
+      phase: "Phase 4",
       title: "Result Announced",
       date: "May 31, 2026",
       description: "Final selections are announced, shortlisted applicants are notified.",
       status: "upcoming"
     },
     {
-      phase: "Phase 3",
+      phase: "Phase 5",
       title: "Coding Period Begins",
       date: "June 1, 2026",
       description: "The three-month coding period begins. Mentees start project work.",
       status: "upcoming"
     },
     {
-      phase: "Phase 4",
+      phase: "Phase 6",
       title: "June Milestone Review",
       date: "June 30, 2026",
       description: "At the end of the first month, mentors review progress, verify the milestone, and release the monthly stipend.",
       status: "upcoming"
     },
     {
-      phase: "Phase 5",
+      phase: "Phase 7",
       title: "July Milestone Review",
       date: "July 31, 2026",
       description: "At the end of the second month, mentors review progress, verify the milestone, and release the monthly stipend.",
       status: "upcoming"
     },
     {
-      phase: "Phase 6",
+      phase: "Phase 8",
       title: "August Milestone Review",
       date: "August 31, 2026",
       description: "At the end of the third month, mentors review progress, verify the final milestone, and release the last monthly stipend.",

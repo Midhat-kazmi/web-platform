@@ -6,60 +6,28 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Loader2, Upload, CheckCircle2 } from "lucide-react"
-import Image from "next/image"
+import { Loader2, CheckCircle2 } from "lucide-react"
 
 export function SubmitTestimonialModal() {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
-  const [imageFile, setImageFile] = useState<File | null>(null)
-  const [imagePreview, setImagePreview] = useState<string | null>(null)
-  
   const [formData, setFormData] = useState({
     name: '',
     role: '',
     email: '',
+    linkedin: '',
+    before: '',
     content: '',
     videoUrl: '',
     cta: ''
   })
-
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      setImageFile(file)
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setImagePreview(reader.result as string)
-      }
-      reader.readAsDataURL(file)
-    }
-  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
 
     try {
-      let imageUrl = ''
-
-      // Upload image first if exists
-      if (imageFile) {
-        const formData = new FormData()
-        formData.append('file', imageFile)
-        
-        const uploadRes = await fetch('/api/upload', {
-          method: 'POST',
-          body: formData
-        })
-        
-        if (!uploadRes.ok) throw new Error('Image upload failed')
-        const uploadData = await uploadRes.json()
-        imageUrl = uploadData.url
-      }
-
       // Submit testimonial data
       const res = await fetch('/api/testimonials', {
         method: 'POST',
@@ -67,8 +35,7 @@ export function SubmitTestimonialModal() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          ...formData,
-          imageUrl
+          ...formData
         })
       })
 
@@ -82,12 +49,12 @@ export function SubmitTestimonialModal() {
             name: '',
             role: '',
             email: '',
+            linkedin: '',
+            before: '',
             content: '',
             videoUrl: '',
             cta: ''
         })
-        setImageFile(null)
-        setImagePreview(null)
       }, 2000)
 
     } catch (error) {
@@ -134,23 +101,14 @@ export function SubmitTestimonialModal() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="role">Role *</Label>
-                <Select 
-                  value={formData.role} 
-                  onValueChange={(value) => setFormData({...formData, role: value})}
+                <Label htmlFor="role">Current Role / Outcome *</Label>
+                <Input
+                  id="role"
                   required
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select Role" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Mentee">Mentee</SelectItem>
-                    <SelectItem value="Fellow">Fellow</SelectItem>
-                    <SelectItem value="Mentor">Mentor</SelectItem>
-                    <SelectItem value="Ambassador">Ambassador</SelectItem>
-                    <SelectItem value="Community Member">Community Member</SelectItem>
-                  </SelectContent>
-                </Select>
+                  placeholder="MERN stack developer"
+                  value={formData.role}
+                  onChange={(e) => setFormData({...formData, role: e.target.value})}
+                />
               </div>
             </div>
 
@@ -165,28 +123,15 @@ export function SubmitTestimonialModal() {
             </div>
 
             <div className="space-y-2">
-              <Label>Your Photo (Optional)</Label>
-              <div className="flex items-center gap-4">
-                <Input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                  className="hidden"
-                  id="testimonial-image-upload"
-                />
-                <Label
-                  htmlFor="testimonial-image-upload"
-                  className="flex items-center gap-2 px-4 py-2 border rounded-md cursor-pointer hover:bg-accent"
-                >
-                  <Upload className="w-4 h-4" />
-                  Upload Photo
-                </Label>
-                {imagePreview && (
-                  <div className="relative w-12 h-12 rounded-full overflow-hidden border">
-                    <Image src={imagePreview} alt="Preview" fill className="object-cover" />
-                  </div>
-                )}
-              </div>
+              <Label htmlFor="linkedin">LinkedIn *</Label>
+              <Input
+                id="linkedin"
+                type="url"
+                required
+                placeholder="https://linkedin.com/in/username"
+                value={formData.linkedin}
+                onChange={(e) => setFormData({...formData, linkedin: e.target.value})}
+              />
             </div>
 
             <div className="space-y-2">
