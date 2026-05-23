@@ -87,7 +87,7 @@ What separated the 14 people below from 100 others who started at the same place
 
 ## The other 4 programs (5 selections)
 
-![Memona Amir, Muhammad Rebaal, and Alisha Fatima, open-source acceptances 2026](/images/gsoc5.jpg)
+![Memona Amir, Muhammad Rebaal, and Alisha Fatima, open-source acceptances 2026](/images/gsoc7.jpg)
 
 *Pictured above: Memona Amir (Social Summer of Code), Muhammad Rebaal (European Summer of Code at PyTorch Forecasting), and Alisha Fatima (GirlScript Summer of Code).*
 
@@ -103,7 +103,7 @@ What separated the 14 people below from 100 others who started at the same place
 
 Alisha is contributing through GSSoC 2026, India's flagship women-in-OSS program. The 2026 edition adds a new Open Source track and a separate AI Agents track running through the summer.
 
-![Yash Israni, mentor at LFX Mentorship 2026](/images/gsoc7.jpg)
+![Yash Israni, mentor at LFX Mentorship 2026](/images/gsoc5.jpg)
 
 *Pictured above: Yash Israni, mentor at the Linux Foundation LFX Mentorship 2026.*
 
