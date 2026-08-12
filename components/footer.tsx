@@ -158,14 +158,19 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a 
-                  href="https://www.youtube.com/@devweekends" 
-                  target="_blank" 
+                <a
+                  href="https://www.youtube.com/@devweekends"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="text-background/70 hover:text-background transition-colors"
                 >
                   YouTube Channel
                 </a>
+              </li>
+              <li>
+                <Link href="/brand" className="text-background/70 hover:text-background transition-colors">
+                  Brand Kit
+                </Link>
               </li>
             </ul>
           </div>

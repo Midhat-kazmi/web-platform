@@ -69,5 +69,3 @@ jobs:
           subjectPatternError: |
             The subject "{subject}" doesn't match the expected format.
             Please use a descriptive subject line.
-
-

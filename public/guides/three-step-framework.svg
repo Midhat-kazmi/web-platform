@@ -1,0 +1,40 @@
+<svg width="800" height="320" viewBox="0 0 800 320" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The three-step success framework: DSA, Technical Expertise, and University Courses">
+  <rect x="1" y="1" width="798" height="318" rx="20" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="48" y="56" font-family="ui-sans-serif, system-ui, sans-serif" font-size="20" font-weight="700" fill="#334155">The 3-Step Success Framework</text>
+
+  <!-- Step 1 -->
+  <g>
+    <rect x="48" y="92" width="220" height="150" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+    <circle cx="84" cy="132" r="20" fill="#DCFCE7"/>
+    <text x="84" y="139" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="18" font-weight="700" fill="#16A34A">1</text>
+    <text x="120" y="138" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="700" fill="#334155">DSA</text>
+    <text x="72" y="184" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#64748B">Problem-solving</text>
+    <text x="72" y="206" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#64748B">&amp; coding rounds</text>
+  </g>
+
+  <!-- Step 2 -->
+  <g>
+    <rect x="290" y="92" width="220" height="150" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+    <circle cx="326" cy="132" r="20" fill="#DCFCE7"/>
+    <text x="326" y="139" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="18" font-weight="700" fill="#16A34A">2</text>
+    <text x="362" y="138" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="700" fill="#334155">Tech Skills</text>
+    <text x="314" y="184" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#64748B">Projects, GSoC,</text>
+    <text x="314" y="206" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#64748B">hackathons</text>
+  </g>
+
+  <!-- Step 3 -->
+  <g>
+    <rect x="532" y="92" width="220" height="150" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+    <circle cx="568" cy="132" r="20" fill="#DCFCE7"/>
+    <text x="568" y="139" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="18" font-weight="700" fill="#16A34A">3</text>
+    <text x="604" y="138" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="700" fill="#334155">Theory</text>
+    <text x="556" y="184" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#64748B">University courses</text>
+    <text x="556" y="206" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#64748B">&amp; fundamentals</text>
+  </g>
+
+  <!-- connectors -->
+  <path d="M268 167 h22" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M510 167 h22" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round"/>
+
+  <text x="48" y="290" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#94A3B8">Build all three in parallel. Each one strengthens your story to recruiters.</text>
+</svg>

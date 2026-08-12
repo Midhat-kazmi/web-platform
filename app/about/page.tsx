@@ -11,6 +11,49 @@ interface CoreTeamMember {
   image: string;
   role: string;
   linkedin: string;
+  order?: number;
+}
+
+// Members hidden from the "Meet the People Behind" section (matched by
+// exact, trimmed, lower-cased name). The records still live in the DB.
+const HIDDEN_MEMBERS = new Set(["muhammad ali", "muhammad faraz"]);
+
+// Orders the core team for the "Meet the People Behind" section:
+// Founder -> Moeez -> Abdul Moiz -> Chiefs/Officers -> Heads ->
+// Senior Leads -> Program/Specialty Leads (GSOC, DevOps, etc.) ->
+// generic Technical Leads -> Mentors -> Managers -> everyone else.
+// Pinned people are matched by name; everyone else falls into a role tier.
+function rankMember(m: CoreTeamMember): number {
+  const name = (m.name || "").trim().toLowerCase();
+  const role = (m.role || "").toLowerCase();
+
+  if (name === "zeeshan adil" || role === "founder") return 0;
+  if (name.includes("moeez")) return 1;
+  if (name === "abdul moiz") return 2;
+
+  if (role.includes("chief") || role.includes("officer")) return 10;
+  if (role.includes("head")) return 20;
+  if ((role.includes("sr.") || role.includes("senior")) && role.includes("lead")) return 30;
+  // Specialty / program leads (GSOC, DevOps, Research, etc.) sit above
+  // generic technical leads.
+  if (role.includes("lead") && role.includes("technical")) return 45;
+  if (role.includes("lead")) return 40;
+  if (role.includes("mentor")) return 50;
+  if (role.includes("manager")) return 60;
+  return 70;
+}
+
+// Members with an admin-assigned order (> 0) come first, in that order.
+// Anyone without an explicit order falls back to the role hierarchy, so the
+// section stays sensible until orders are assigned in the admin dashboard.
+function compareMembers(a: CoreTeamMember, b: CoreTeamMember): number {
+  const oa = a.order && a.order > 0 ? a.order : null;
+  const ob = b.order && b.order > 0 ? b.order : null;
+
+  if (oa !== null && ob !== null) return oa - ob;
+  if (oa !== null) return -1;
+  if (ob !== null) return 1;
+  return rankMember(a) - rankMember(b);
 }
 
 export default function AboutPage() {
@@ -20,7 +63,14 @@ export default function AboutPage() {
   useEffect(() => {
     fetch('/api/core-team')
       .then(res => res.json())
-      .then(data => setCoreTeam(Array.isArray(data) ? data : []))
+      .then(data => {
+        const list: CoreTeamMember[] = Array.isArray(data) ? data : [];
+        setCoreTeam(
+          list
+            .filter((m) => !HIDDEN_MEMBERS.has((m.name || "").trim().toLowerCase()))
+            .sort(compareMembers)
+        );
+      })
       .finally(() => setLoadingCore(false));
   }, []);
 

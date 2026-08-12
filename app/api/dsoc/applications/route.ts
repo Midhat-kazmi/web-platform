@@ -18,6 +18,33 @@ async function getMenteeFromToken(request: NextRequest) {
   }
 }
 
+function getDeadlineEnd(dateValue: string | Date) {
+  if (dateValue instanceof Date) {
+    // Treat stored date-only values as UTC calendar dates so we don't cut off early in local time zones.
+    return new Date(
+      dateValue.getUTCFullYear(),
+      dateValue.getUTCMonth(),
+      dateValue.getUTCDate(),
+      23,
+      59,
+      59,
+      999
+    );
+  }
+
+  if (typeof dateValue !== 'string') {
+    return new Date(dateValue as unknown as string);
+  }
+
+  const [year, month, day] = dateValue.slice(0, 10).split('-').map(Number);
+
+  if (!year || !month || !day) {
+    return new Date(dateValue);
+  }
+
+  return new Date(year, month - 1, day, 23, 59, 59, 999);
+}
+
 // Helper to get mentor from token
 async function getMentorFromToken(request: NextRequest) {
   const token = request.cookies.get('dsoc-mentor-token')?.value;
@@ -43,7 +70,14 @@ export async function GET(request: NextRequest) {
     const mentorOnly = searchParams.get('mentor') === 'true';
     const menteeOnly = searchParams.get('my') === 'true';
     const menteeId = menteeOnly ? await getMenteeFromToken(request) : null;
-    
+
+    if (menteeOnly && !menteeId) {
+      return NextResponse.json(
+        { success: false, error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
     const query: any = {};
 
     if (mentorOnly) {
@@ -59,7 +93,7 @@ export async function GET(request: NextRequest) {
         .select('_id')
         .lean();
 
-      const mentorProjectIds = mentorProjects.map((project) => project._id.toString());
+      const mentorProjectIds = mentorProjects.map((project) => String(project._id));
 
       if (projectId) {
         if (!mentorProjectIds.includes(projectId)) {
@@ -111,6 +145,14 @@ export async function POST(request: NextRequest) {
     
     const body = await request.json();
     const { projectId, ...applicationData } = body;
+
+    // Drop empty-string optional fields so mongoose doesn't try to cast them
+    // (empty string into a Date field throws CastError).
+    Object.keys(applicationData).forEach((key) => {
+      if (applicationData[key] === '' || applicationData[key] === null) {
+        delete applicationData[key];
+      }
+    });
     
     // Check if project exists and is open
     const project = await DSOCProject.findById(projectId);
@@ -129,7 +171,7 @@ export async function POST(request: NextRequest) {
       );
     }
     
-    if (new Date() > new Date(project.applicationDeadline)) {
+    if (new Date() > getDeadlineEnd(project.applicationDeadline)) {
       return NextResponse.json(
         { success: false, error: 'Application deadline has passed' },
         { status: 400 }

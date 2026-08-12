@@ -1,0 +1,45 @@
+<svg width="1000" height="560" viewBox="0 0 1000 560" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Top countries outside Pakistan by selected fellows">
+  <defs>
+    <radialGradient id="glowC" cx="50%" cy="0%" r="80%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.05"/>
+      <stop offset="55%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect x="1" y="1" width="998" height="558" rx="18" fill="#0D0D0D" stroke="#2E2E2E" stroke-width="2"/>
+  <rect x="1" y="1" width="998" height="558" rx="18" fill="url(#glowC)"/>
+  <text x="48" y="58" font-family="'Helvetica Neue', Arial, sans-serif" font-size="32" font-weight="800" letter-spacing="-0.5" fill="#FFFFFF">Reaching 30 countries</text>
+  <text x="48" y="92" font-family="'Helvetica Neue', Arial, sans-serif" font-size="19" fill="#B8B8B8">Top countries outside Pakistan, by selected fellows</text>
+
+  <g font-family="'Helvetica Neue', Arial, sans-serif">
+    <!-- label (left) + value (right) on one line, full-width bar beneath -->
+    <text x="48" y="156" font-size="24" font-weight="600" fill="#F5F5F5">India</text>
+    <text x="952" y="156" font-size="24" font-weight="800" fill="#FFFFFF" text-anchor="end">117</text>
+    <rect x="48" y="170" width="904" height="18" rx="5" fill="#222222"/>
+    <rect x="48" y="170" width="904" height="18" rx="5" fill="#F5F5F5"/>
+
+    <text x="48" y="228" font-size="24" font-weight="600" fill="#F5F5F5">Nepal</text>
+    <text x="952" y="228" font-size="24" font-weight="800" fill="#FFFFFF" text-anchor="end">11</text>
+    <rect x="48" y="242" width="904" height="18" rx="5" fill="#222222"/>
+    <rect x="48" y="242" width="85" height="18" rx="5" fill="#C8C8C8"/>
+
+    <text x="48" y="300" font-size="24" font-weight="600" fill="#F5F5F5">USA</text>
+    <text x="952" y="300" font-size="24" font-weight="800" fill="#FFFFFF" text-anchor="end">8</text>
+    <rect x="48" y="314" width="904" height="18" rx="5" fill="#222222"/>
+    <rect x="48" y="314" width="62" height="18" rx="5" fill="#AEAEAE"/>
+
+    <text x="48" y="372" font-size="24" font-weight="600" fill="#F5F5F5">UK</text>
+    <text x="952" y="372" font-size="24" font-weight="800" fill="#FFFFFF" text-anchor="end">6</text>
+    <rect x="48" y="386" width="904" height="18" rx="5" fill="#222222"/>
+    <rect x="48" y="386" width="46" height="18" rx="5" fill="#969696"/>
+
+    <text x="48" y="444" font-size="24" font-weight="600" fill="#F5F5F5">Nigeria</text>
+    <text x="952" y="444" font-size="24" font-weight="800" fill="#FFFFFF" text-anchor="end">5</text>
+    <rect x="48" y="458" width="904" height="18" rx="5" fill="#222222"/>
+    <rect x="48" y="458" width="39" height="18" rx="5" fill="#868686"/>
+
+    <text x="48" y="516" font-size="24" font-weight="600" fill="#F5F5F5">Egypt</text>
+    <text x="952" y="516" font-size="24" font-weight="800" fill="#FFFFFF" text-anchor="end">4</text>
+    <rect x="48" y="530" width="904" height="18" rx="5" fill="#222222"/>
+    <rect x="48" y="530" width="31" height="18" rx="5" fill="#787878"/>
+  </g>
+</svg>

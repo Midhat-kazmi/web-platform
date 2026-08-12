@@ -1,0 +1,28 @@
+<svg width="1000" height="440" viewBox="0 0 1000 440" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="From over 3,000 applicants to 1,072 selected, about 36 percent">
+  <defs>
+    <radialGradient id="glowS" cx="50%" cy="0%" r="90%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.05"/>
+      <stop offset="60%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect x="1" y="1" width="998" height="438" rx="18" fill="#0D0D0D" stroke="#2E2E2E" stroke-width="2"/>
+  <rect x="1" y="1" width="998" height="438" rx="18" fill="url(#glowS)"/>
+  <text x="48" y="76" font-family="'Helvetica Neue', Arial, sans-serif" font-size="32" font-weight="800" letter-spacing="-0.5" fill="#FFFFFF">From 3,000+ to 1,072</text>
+
+  <!-- applied -->
+  <text x="48" y="140" font-family="'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="600" letter-spacing="3" fill="#C8C8C8">APPLIED</text>
+  <rect x="48" y="152" width="620" height="46" rx="8" fill="#333333"/>
+  <text x="66" y="184" font-family="'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="800" fill="#EDEDED">3,000+</text>
+
+  <!-- selected -->
+  <text x="48" y="254" font-family="'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="600" letter-spacing="3" fill="#FFFFFF">SELECTED</text>
+  <rect x="48" y="266" width="222" height="46" rx="8" fill="#F5F5F5"/>
+  <text x="66" y="298" font-family="'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="800" fill="#0A0A0A">1,072</text>
+
+  <!-- callout -->
+  <text x="700" y="252" font-family="'Helvetica Neue', Arial, sans-serif" font-size="100" font-weight="800" letter-spacing="-2" fill="#FFFFFF">36%</text>
+  <text x="704" y="294" font-family="'Helvetica Neue', Arial, sans-serif" font-size="20" letter-spacing="2" fill="#C8C8C8">SELECTED</text>
+
+  <line x1="48" y1="372" x2="952" y2="372" stroke="#2A2A2A" stroke-width="1.5"/>
+  <text x="48" y="410" font-family="'Helvetica Neue', Arial, sans-serif" font-size="20" fill="#B8B8B8">Roughly 1 in 3 applicants made it into the cohort.</text>
+</svg>

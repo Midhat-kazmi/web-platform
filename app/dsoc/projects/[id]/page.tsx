@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
-import { 
+import {
   ArrowLeft,
-  Clock, 
-  Users, 
+  Clock,
+  Users,
   Calendar,
   Github,
   ExternalLink,
@@ -16,9 +16,18 @@ import {
   BookOpen,
   Target,
   Code2,
-  MessageCircle
+  MessageCircle,
+  Star,
+  ImageIcon,
+  X
 } from "lucide-react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Keyboard } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import "../../styles.css";
+import "./gallery.css";
 import DSOCNavbar from "../../components/DSOCNavbar";
 
 interface Mentor {
@@ -40,7 +49,9 @@ interface Project {
   longDescription?: string;
   organization: string;
   repositoryUrl: string;
+  repositoryUrls?: string[];
   websiteUrl?: string;
+  timelineUrl?: string;
   difficulty: 'beginner' | 'intermediate' | 'advanced';
   duration: string;
   technologies: string[];
@@ -57,6 +68,8 @@ interface Project {
   milestones: { title: string; description: string; dueDate: string; completed: boolean }[];
   discordChannelId?: string;
   season: string;
+  featuredImage?: string;
+  gallery?: string[];
 }
 
 // Sample projects for fallback when API is unavailable
@@ -294,6 +307,26 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [isMentee, setIsMentee] = useState<boolean | null>(null);
+  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+
+  const getRepoLabel = (url: string) => {
+    try {
+      const path = new URL(url).pathname;
+      const parts = path.split('/').filter(Boolean);
+      if (parts.length >= 2) {
+        return parts.slice(-2).join('/');
+      }
+      return 'Repository';
+    } catch {
+      return 'Repository';
+    }
+  };
+
+  const repoUrls = project
+    ? Array.isArray(project.repositoryUrls) && project.repositoryUrls.length > 0
+      ? project.repositoryUrls
+      : (project.repositoryUrl ? [project.repositoryUrl] : [])
+    : [];
 
   useEffect(() => {
     fetchProject();
@@ -367,7 +400,29 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
     });
   };
 
-  const isDeadlinePassed = project ? new Date() > new Date(project.applicationDeadline) : false;
+  const getDeadlineEnd = (dateValue: string | Date) => {
+    if (dateValue instanceof Date) {
+      return new Date(
+        dateValue.getUTCFullYear(),
+        dateValue.getUTCMonth(),
+        dateValue.getUTCDate(),
+        23,
+        59,
+        59,
+        999
+      );
+    }
+
+    const [year, month, day] = dateValue.slice(0, 10).split('-').map(Number);
+
+    if (!year || !month || !day) {
+      return new Date(dateValue);
+    }
+
+    return new Date(year, month - 1, day, 23, 59, 59, 999);
+  };
+
+  const isDeadlinePassed = project ? new Date() > getDeadlineEnd(project.applicationDeadline) : false;
   const spotsRemaining = project ? project.maxMentees - (project.selectedMentees?.length || 0) : 0;
   const canApply = project ? project.status === 'open' && !isDeadlinePassed && spotsRemaining > 0 : false;
 
@@ -407,6 +462,30 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
   return (
     <div className="min-h-screen bg-background">
       <DSOCNavbar />
+      {lightboxImage && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setLightboxImage(null)}
+          className="fixed inset-0 z-[200] bg-black/80 flex items-center justify-center p-4 cursor-zoom-out"
+        >
+          <button
+            type="button"
+            onClick={() => setLightboxImage(null)}
+            aria-label="Close image"
+            className="absolute top-4 right-4 w-10 h-10 bg-white text-[var(--dsoc-dark)] border-4 border-[var(--dsoc-dark)] flex items-center justify-center"
+          >
+            <X className="w-5 h-5" />
+          </button>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={lightboxImage}
+            alt="Project image"
+            className="max-h-[90vh] max-w-[90vw] object-contain border-4 border-white"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
       {/* Header */}
       <section className={`pt-24 pb-12 ${getDifficultyColor(project.difficulty)}`}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -439,16 +518,30 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
               </p>
             </div>
             
-            <div className="flex gap-3">
-              <a 
-                href={project.repositoryUrl} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="neo-brutal-btn bg-[var(--dsoc-dark)] text-white"
-              >
-                <Github className="w-5 h-5 mr-2" />
-                Repository
-              </a>
+            <div className="flex flex-wrap gap-3">
+              {repoUrls.map((url, i) => (
+                <a 
+                  key={i}
+                  href={url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="neo-brutal-btn bg-[var(--dsoc-dark)] text-white"
+                >
+                  <Github className="w-5 h-5 mr-2" />
+                  {getRepoLabel(url)}
+                </a>
+              ))}
+              {project.timelineUrl && (
+                <a 
+                  href={project.timelineUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="neo-brutal-btn bg-[var(--dsoc-secondary)] text-white"
+                >
+                  <Calendar className="w-5 h-5 mr-2" />
+                  Timeline
+                </a>
+              )}
               {project.websiteUrl && (
                 <a 
                   href={project.websiteUrl} 
@@ -485,6 +578,47 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
                   ))}
                 </div>
               </div>
+
+              {/* Gallery */}
+              {Array.isArray(project.gallery) && project.gallery.length > 0 && (
+                <div className="neo-brutal-card p-6">
+                  <h2 className="text-xl font-black mb-4 flex items-center gap-2">
+                    <ImageIcon className="w-6 h-6 text-[var(--dsoc-primary)]" />
+                    Gallery
+                  </h2>
+                  <div className="dsoc-gallery-slider border-4 border-[var(--dsoc-dark)] bg-[var(--dsoc-light)]">
+                    <Swiper
+                      modules={[Navigation, Pagination, Keyboard]}
+                      navigation
+                      pagination={{ clickable: true }}
+                      keyboard={{ enabled: true }}
+                      loop={project.gallery.length > 1}
+                      spaceBetween={0}
+                      slidesPerView={1}
+                      className="w-full"
+                    >
+                      {project.gallery.map((url, i) => (
+                        <SwiperSlide key={url + i}>
+                          <button
+                            type="button"
+                            onClick={() => setLightboxImage(url)}
+                            className="block w-full bg-transparent border-0 p-0 cursor-zoom-in"
+                            aria-label={`Open gallery image ${i + 1}`}
+                          >
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src={url}
+                              alt={`${project.title} image ${i + 1}`}
+                              className="w-full h-64 sm:h-80 md:h-96 object-cover"
+                              loading={i === 0 ? 'eager' : 'lazy'}
+                            />
+                          </button>
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                  </div>
+                </div>
+              )}
 
               {/* Long Description */}
               {project.longDescription && (
@@ -710,9 +844,61 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
                 </p>
               </div>
 
+              {/* Star Card */}
+              <div className="neo-brutal-card p-6 border-4 border-[var(--dsoc-dark)]">
+                <div className="flex items-center gap-2 mb-3">
+                  <Star className="w-6 h-6 fill-current text-[var(--dsoc-dark)] animate-pulse" />
+                  <h3 className="text-lg font-black">Support This Project</h3>
+                </div>
+                <p className="text-sm opacity-90 mb-4 leading-relaxed font-bold">
+                  Love this project? Show your support by starring the repository on GitHub! It helps increase visibility, motivates the mentors, and grows our open-source community. ⭐
+                </p>
+                <div className="space-y-3">
+                  {repoUrls.map((url, i) => (
+                    <a
+                      key={i}
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="neo-brutal-btn bg-white text-[var(--dsoc-dark)] hover:bg-yellow-50 w-full flex items-center justify-center gap-2 border-4 border-[var(--dsoc-dark)]"
+                    >
+                      <Github className="w-4 h-4 text-[var(--dsoc-dark)]" />
+                      Star {getRepoLabel(url)}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {project.timelineUrl && (
+                <div className="neo-brutal-card p-6">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <h3 className="text-lg font-black flex items-center gap-2">
+                        <Calendar className="w-5 h-5" />
+                        Project Timeline
+                      </h3>
+                      <p className="text-sm mt-2 opacity-90">
+                        See the full schedule, milestones, and key dates before you apply.
+                      </p>
+                    </div>
+                    <span className="inline-flex items-center px-2 py-1 text-xs font-black bg-white text-[var(--dsoc-secondary)] border-2 border-[var(--dsoc-dark)]">
+                      New
+                    </span>
+                  </div>
+                  <a
+                    href={project.timelineUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="neo-brutal-btn bg-white text-[var(--dsoc-secondary)] w-full mt-4"
+                  >
+                    View Timeline
+                  </a>
+                </div>
+              )}
+
               {/* Discord Card */}
-              <div className="neo-brutal-card p-6 dsoc-discord-card">
-                <div className="text-[var(--dsoc-dark)] dark:text-[var(--dsoc-light)]">
+              <div className="neo-brutal-card p-6">
+                
                   <MessageCircle className="w-8 h-8 mb-3" />
                   <h3 className="font-bold text-lg mb-2">Have Questions?</h3>
                   <p className="text-sm opacity-90 mb-4">
@@ -726,7 +912,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
                   >
                     Join Discord
                   </a>
-                </div>
+                
               </div>
 
               {/* Tags */}

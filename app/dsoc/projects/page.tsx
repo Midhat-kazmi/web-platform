@@ -24,6 +24,7 @@ interface Project {
   description: string;
   organization: string;
   repositoryUrl: string;
+  repositoryUrls?: string[];
   websiteUrl?: string;
   difficulty: 'beginner' | 'intermediate' | 'advanced';
   duration: string;
@@ -231,6 +232,23 @@ export default function ProjectsPage() {
     }
   };
 
+  const getRepoName = (url: string) => {
+    try {
+      const parts = new URL(url).pathname.split('/').filter(Boolean);
+      const last = parts[parts.length - 1] || 'Repository';
+      return last.replace(/\.git$/, '');
+    } catch {
+      return 'Repository';
+    }
+  };
+
+  const getProjectRepoUrls = (project: Project): string[] => {
+    if (Array.isArray(project.repositoryUrls) && project.repositoryUrls.length > 0) {
+      return project.repositoryUrls;
+    }
+    return project.repositoryUrl ? [project.repositoryUrl] : [];
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* DSOC Navigation */}
@@ -261,7 +279,8 @@ export default function ProjectsPage() {
                 placeholder="Search projects, technologies, organizations..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="neo-brutal-input pl-12"
+                className="neo-brutal-input"
+                style={{ paddingLeft: '3rem' }}
               />
             </div>
             <button type="submit" className="neo-brutal-btn neo-brutal-btn-primary">
@@ -490,28 +509,65 @@ export default function ProjectsPage() {
                         )}
                         
                         {/* GitHub and Wiki Links */}
-                        <div className="mt-4 pt-4 border-t-2 border-[var(--dsoc-dark)]/20 flex gap-4">
-                          {project.repositoryUrl && (
-                            <button 
-                              type="button"
-                              onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.open(project.repositoryUrl, '_blank'); }}
-                              className="inline-flex items-center gap-1.5 text-sm font-bold text-[var(--dsoc-dark)] hover:text-[var(--dsoc-primary)] transition-colors"
-                            >
-                              <Github className="w-4 h-4" />
-                              GitHub
-                            </button>
-                          )}
-                          {project.wikiUrl && (
-                            <button 
-                              type="button"
-                              onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.open(project.wikiUrl, '_blank'); }}
-                              className="inline-flex items-center gap-1.5 text-sm font-bold text-[var(--dsoc-purple)] hover:text-[var(--dsoc-primary)] transition-colors"
-                            >
-                              <BookOpen className="w-4 h-4" />
-                              Wiki
-                            </button>
-                          )}
-                        </div>
+                        {(() => {
+                          const repoUrls = getProjectRepoUrls(project);
+                          const hasRepos = repoUrls.length > 0;
+                          if (!hasRepos && !project.wikiUrl) return null;
+
+                          return (
+                            <div className="mt-4 pt-4 border-t-2 border-[var(--dsoc-dark)]/20 flex flex-wrap items-center gap-x-4 gap-y-3">
+                              {hasRepos && (
+                                repoUrls.length === 1 ? (
+                                  <button
+                                    type="button"
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      e.stopPropagation();
+                                      window.open(repoUrls[0], '_blank');
+                                    }}
+                                    className="inline-flex items-center gap-1.5 text-sm font-bold text-[var(--dsoc-dark)] hover:text-[var(--dsoc-primary)] transition-colors"
+                                  >
+                                    <Github className="w-4 h-4" />
+                                    GitHub
+                                  </button>
+                                ) : (
+                                  <div className="flex flex-wrap items-center gap-2">
+                                    <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                                      <Github className="w-4 h-4 text-[var(--dsoc-dark)]" />
+                                      Repos
+                                    </span>
+                                    {repoUrls.map((url, i) => (
+                                      <button
+                                        key={i}
+                                        type="button"
+                                        title={url}
+                                        onClick={(e) => {
+                                          e.preventDefault();
+                                          e.stopPropagation();
+                                          window.open(url, '_blank');
+                                        }}
+                                        className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold bg-[var(--dsoc-dark)] text-white border-2 border-[var(--dsoc-dark)] shadow-[2px_2px_0_0_var(--dsoc-dark)] hover:bg-[var(--dsoc-primary)] hover:text-[var(--dsoc-dark)] hover:-translate-x-[1px] hover:-translate-y-[1px] hover:shadow-[3px_3px_0_0_var(--dsoc-dark)] active:translate-x-0 active:translate-y-0 active:shadow-[1px_1px_0_0_var(--dsoc-dark)] transition-all"
+                                      >
+                                        <Github className="w-3 h-3" />
+                                        {getRepoName(url)}
+                                      </button>
+                                    ))}
+                                  </div>
+                                )
+                              )}
+                              {project.wikiUrl && (
+                                <button
+                                  type="button"
+                                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.open(project.wikiUrl, '_blank'); }}
+                                  className="inline-flex items-center gap-1.5 text-sm font-bold text-[var(--dsoc-purple)] hover:text-[var(--dsoc-primary)] transition-colors"
+                                >
+                                  <BookOpen className="w-4 h-4" />
+                                  Wiki
+                                </button>
+                              )}
+                            </div>
+                          );
+                        })()}
                       </div>
                     </div>
                   </Link>

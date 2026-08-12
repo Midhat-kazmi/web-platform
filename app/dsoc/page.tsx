@@ -43,6 +43,7 @@ interface Project {
   featuredImage?: string;
   imageUrl?: string;
   repositoryUrl?: string;
+  repositoryUrls?: string[];
   wikiUrl?: string;
 }
 
@@ -239,7 +240,7 @@ export default function DSOCPage() {
             <div className="inline-block mb-8">
               <div className="neo-brutal-badge bg-[var(--dsoc-primary)] text-white px-6 py-2 text-base font-bold">
                 <Zap className="w-5 h-5 mr-2" />
-                DSOC 2026 — Applications Open March 2026
+                DSOC 2026 — Applications Open May 2026
               </div>
             </div>
             
@@ -574,10 +575,15 @@ export default function DSOCPage() {
                           {project.duration}
                         </div>
                         <div className="flex gap-2">
-                          {project.repositoryUrl && (
+                          {(project.repositoryUrl || (project.repositoryUrls && project.repositoryUrls.length > 0)) && (
                             <button 
                               type="button"
-                              onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.open(project.repositoryUrl, '_blank'); }}
+                              onClick={(e) => { 
+                                e.preventDefault(); 
+                                e.stopPropagation(); 
+                                const targetUrl = project.repositoryUrl || (project.repositoryUrls && project.repositoryUrls[0]);
+                                if (targetUrl) window.open(targetUrl, '_blank'); 
+                              }}
                               className="inline-flex items-center gap-1 text-sm font-bold text-[var(--dsoc-dark)] hover:text-[var(--dsoc-primary)] transition-colors"
                             >
                               <Github className="w-4 h-4" />

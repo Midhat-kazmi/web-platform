@@ -1,0 +1,35 @@
+name: Sync Fork & Deploy
+
+# Runs when code is pushed to main on devweekends/web-platform
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  sync-fork:
+    name: Sync to deployment fork
+    runs-on: ubuntu-latest
+    # Only run on the upstream repo, not on forks
+    if: github.repository == 'devweekends/web-platform'
+
+    steps:
+      - name: Checkout upstream repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          # Don't leave the default GITHUB_TOKEN auth header configured,
+          # otherwise it overrides the PAT below when pushing to the fork.
+          persist-credentials: false
+
+      - name: Push to fork
+        run: |
+          # Vercel's Hobby plan only deploys commits whose author is the
+          # account owner (m-junaidd). Upstream commits keep their original
+          # authors, so re-author the tip commit as m-junaidd before pushing,
+          # otherwise Vercel skips the deployment.
+          git config user.name "m-junaidd"
+          git config user.email "176620033+m-junaidd@users.noreply.github.com"
+          git commit --amend --no-edit --reset-author
+          git remote add fork https://x-access-token:${{ secrets.FORK_SYNC_TOKEN }}@github.com/m-junaidd/web-platform.git
+          git push fork HEAD:main --force

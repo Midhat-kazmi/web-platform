@@ -1,0 +1,756 @@
+<div id="deck"
+    style="position:relative;width:100%;aspect-ratio:16/9;background:#070707;border-radius:12px;overflow:hidden;font-family:'Inter',system-ui,sans-serif;color:#f5f5f5;-webkit-font-smoothing:antialiased;">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        .sl {
+            position: absolute;
+            inset: 0;
+            padding: 5% 6%;
+            display: none;
+            flex-direction: column;
+            background: #070707;
+            background-image: radial-gradient(130% 80% at 50% -20%, rgba(255, 255, 255, .055), transparent 55%);
+            overflow: hidden
+        }
+
+        .sl.on {
+            display: flex;
+            animation: up .4s ease both
+        }
+
+        @keyframes up {
+            from {
+                opacity: 0;
+                transform: translateY(10px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .wmk {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: .045;
+            pointer-events: none;
+            font-family: 'Anton', sans-serif;
+            font-size: min(8vw, 54px);
+            text-transform: uppercase;
+            white-space: nowrap;
+            color: #fff;
+            letter-spacing: .02em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: .95
+        }
+
+        .wmk span {
+            font-size: .42em;
+            letter-spacing: .25em;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif
+        }
+
+        .sl>*:not(.wmk) {
+            position: relative;
+            z-index: 1
+        }
+
+        .tb {
+            display: flex;
+            align-items: center;
+            gap: 1.2em;
+            margin-bottom: auto
+        }
+
+        .tb .hr {
+            flex: 1;
+            height: 1px;
+            background: #262626
+        }
+
+        .tk {
+            letter-spacing: .26em;
+            text-transform: uppercase;
+            font-weight: 600;
+            font-size: min(1.4vw, 11px);
+            color: #f5f5f5
+        }
+
+        .tk.dm {
+            color: #5a5a5a
+        }
+
+        .pl {
+            display: inline-flex;
+            align-items: center;
+            gap: .5em;
+            border: 1px solid #262626;
+            border-radius: 999px;
+            padding: .5em 1em;
+            font-size: min(1.2vw, 10px);
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: #f5f5f5;
+            white-space: nowrap
+        }
+
+        .pl.so {
+            background: #f5f5f5;
+            color: #0a0a0a;
+            border-color: #f5f5f5
+        }
+
+        .dt {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #f5f5f5
+        }
+
+        .pl.so .dt {
+            background: #0a0a0a
+        }
+
+        .dp {
+            font-family: 'Anton', sans-serif;
+            font-weight: 400;
+            line-height: .92;
+            letter-spacing: .005em;
+            text-transform: uppercase
+        }
+
+        .gh {
+            color: #343434
+        }
+
+        .ld {
+            color: #8c8c8c;
+            font-size: min(2.2vw, 18px);
+            line-height: 1.55;
+            font-weight: 400;
+            max-width: 46ch
+        }
+
+        .ld b {
+            color: #f5f5f5;
+            font-weight: 600
+        }
+
+        .ld.nt {
+            color: #5a5a5a;
+            font-size: min(1.6vw, 13px)
+        }
+
+        .ft {
+            margin-top: auto;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 1em;
+            padding-top: 2%
+        }
+
+        .ft .ur {
+            font-size: min(1.4vw, 12px);
+            letter-spacing: .04em;
+            color: #f5f5f5;
+            font-weight: 600
+        }
+
+        .ft .ur small {
+            display: block;
+            color: #5a5a5a;
+            font-weight: 400;
+            margin-top: .3em
+        }
+
+        .ft .pg {
+            font-size: min(1.3vw, 11px);
+            color: #5a5a5a;
+            letter-spacing: .18em;
+            font-weight: 600
+        }
+
+        .cv .dp,
+        .dv .dp {
+            font-size: min(12vw, 80px)
+        }
+
+        .mb {
+            margin: auto 0
+        }
+
+        .hk {
+            margin-bottom: 1.2%
+        }
+
+        .ht {
+            font-size: min(7vw, 52px);
+            margin-bottom: 2%
+        }
+
+        .ht.sm {
+            font-size: min(5.5vw, 42px)
+        }
+
+        .rw {
+            display: flex;
+            flex-direction: column;
+            gap: .45em;
+            margin-top: .4%
+        }
+
+        .ri {
+            display: flex;
+            align-items: baseline;
+            gap: 1em;
+            border-top: 1px solid #1a1a1a;
+            padding: .6em 0 .1em
+        }
+
+        .ri .rn {
+            font-family: 'Anton', sans-serif;
+            color: #5a5a5a;
+            font-size: min(2.4vw, 20px);
+            min-width: 2em
+        }
+
+        .ri .rtt {
+            font-weight: 600;
+            font-size: min(2vw, 17px);
+            color: #f5f5f5
+        }
+
+        .ri .rdd {
+            color: #8c8c8c;
+            font-size: min(1.6vw, 14px);
+            line-height: 1.4
+        }
+
+        .ri .rtx {
+            display: flex;
+            flex-direction: column;
+            gap: .15em
+        }
+
+        .tw {
+            display: grid;
+            grid-template-columns: 1fr 1.05fr;
+            gap: 5%;
+            flex: 1;
+            align-items: center
+        }
+
+        .tw .lf {
+            display: flex;
+            flex-direction: column;
+            justify-content: center
+        }
+
+        .g3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: .7em;
+            margin-top: .5%
+        }
+
+        .gc {
+            border: 1px solid #262626;
+            border-radius: 12px;
+            padding: 1.2em 1.1em;
+            background: #0d0d0d;
+            display: flex;
+            flex-direction: column
+        }
+
+        .gc.fe {
+            background: #f5f5f5;
+            color: #0a0a0a;
+            border-color: #f5f5f5
+        }
+
+        .gc .gn {
+            font-family: 'Anton', sans-serif;
+            font-size: min(3.5vw, 30px);
+            color: #343434;
+            line-height: 1
+        }
+
+        .gc.fe .gn {
+            color: #cfcfcf
+        }
+
+        .gc .gt {
+            font-weight: 700;
+            font-size: min(1.9vw, 16px);
+            margin-top: .7em
+        }
+
+        .gc .gd {
+            color: #8c8c8c;
+            font-size: min(1.4vw, 13px);
+            line-height: 1.45;
+            margin-top: .4em
+        }
+
+        .gc.fe .gd {
+            color: #3a3a3a
+        }
+
+        .gc .gg {
+            margin-top: auto;
+            padding-top: .8em;
+            color: #5a5a5a;
+            font-size: min(1.2vw, 10px);
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            font-weight: 600
+        }
+
+        .gc.fe .gg {
+            color: #6a6a6a
+        }
+
+        .ib {
+            flex: 1;
+            border: 1px solid #262626;
+            border-radius: 12px;
+            background: #0d0d0d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: .5%
+        }
+
+        .ib span {
+            color: #5a5a5a;
+            font-size: min(1.5vw, 13px);
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            font-weight: 600
+        }
+
+        .qw {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center
+        }
+
+        .qt {
+            font-family: 'Anton', sans-serif;
+            font-size: min(5vw, 40px);
+            line-height: 1.02;
+            text-transform: uppercase;
+            max-width: 20ch
+        }
+
+        .qt .gh {
+            color: #343434
+        }
+
+        .qs {
+            color: #8c8c8c;
+            font-size: min(1.8vw, 15px);
+            line-height: 1.55;
+            max-width: 48ch;
+            margin-top: 2%
+        }
+
+        .cl .dp {
+            font-size: min(10vw, 72px)
+        }
+
+        .nv {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 50;
+            background: rgba(15, 15, 15, .85);
+            border: 1px solid #262626;
+            border-radius: 999px;
+            padding: 5px 7px
+        }
+
+        .nv button {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: transparent;
+            border: 1px solid #262626;
+            color: #f5f5f5;
+            cursor: pointer;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .nv button:hover {
+            background: #f5f5f5;
+            color: #0a0a0a
+        }
+
+        .nv .ct {
+            font-size: 10px;
+            letter-spacing: .14em;
+            color: #8c8c8c;
+            font-weight: 600;
+            min-width: 50px;
+            text-align: center
+        }
+    </style>
+
+    <section class="sl on cv" data-s="0">
+        <div class="wmk">Dev<span>{Weekends}</span></div>
+        <div class="tb"><span class="tk">Dev Weekends</span><span class="hr"></span><span class="pl"><span
+                    class="dt"></span>Fellowship 2026</span></div>
+        <div class="mb">
+            <div class="tk dm" style="margin-bottom:1.4%">Session Title · Week ##</div>
+            <h1 class="dp" style="font-size:min(12vw,80px)">Session<br><span class="gh">Title</span></h1>
+            <p class="ld" style="margin-top:2%">One sentence about what this session covers and what fellows walk away
+                with.</p>
+        </div>
+        <div class="ft">
+            <div class="ur">devweekends.com<small>resources.devweekends.com</small></div>
+            <div class="pg"></div>
+        </div>
+    </section>
+
+    <section class="sl" data-s="1">
+        <div class="wmk">Dev<span>{Weekends}</span></div>
+        <div class="tb"><span class="tk">Today</span><span class="hr"></span><span class="pl"><span
+                    class="dt"></span>Agenda</span></div>
+        <div class="tk dm hk">What we're covering</div>
+        <h2 class="dp ht sm">Today's <span class="gh">plan</span></h2>
+        <div class="rw">
+            <div class="ri"><span class="rn">01</span>
+                <div class="rtx"><span class="rtt">Topic One</span><span class="rdd">Short description of what this part
+                        covers.</span></div>
+            </div>
+            <div class="ri"><span class="rn">02</span>
+                <div class="rtx"><span class="rtt">Topic Two</span><span class="rdd">Short description of what this part
+                        covers.</span></div>
+            </div>
+            <div class="ri"><span class="rn">03</span>
+                <div class="rtx"><span class="rtt">Topic Three</span><span class="rdd">Short description of what this
+                        part covers.</span></div>
+            </div>
+            <div class="ri"><span class="rn">04</span>
+                <div class="rtx"><span class="rtt">Practice + Q&A</span><span class="rdd">Hands-on exercise and open
+                        questions.</span></div>
+            </div>
+        </div>
+        <div class="ft">
+            <div class="ur">devweekends.com</div>
+            <div class="pg"></div>
+        </div>
+    </section>
+
+    <section class="sl dv" data-s="2">
+        <div class="wmk">Dev<span>{Weekends}</span></div>
+        <div class="tb"><span class="tk">Part 01</span><span class="hr"></span><span class="pl so"><span
+                    class="dt"></span>Section Tag</span></div>
+        <div class="mb">
+            <div class="tk dm hk">What this section is about</div>
+            <h1 class="dp" style="font-size:min(12vw,80px)">Section<br><span class="gh">Heading</span></h1>
+            <p class="ld" style="margin-top:2%">One or two sentences on why this section matters and what to pay
+                attention to.</p>
+        </div>
+        <div class="ft">
+            <div class="ur">devweekends.com</div>
+            <div class="pg"></div>
+        </div>
+    </section>
+
+    <section class="sl" data-s="3">
+        <div class="wmk">Dev<span>{Weekends}</span></div>
+        <div class="tb"><span class="tk">Concept</span><span class="hr"></span><span class="pl"><span
+                    class="dt"></span>Core Idea</span></div>
+        <div class="tw">
+            <div class="lf">
+                <div class="tk dm hk">The problem it solves</div>
+                <h2 class="dp ht sm">Concept<br><span class="gh">Name</span></h2>
+                <p class="ld">Two to three sentences explaining the concept. Why does it exist? What problem does it
+                    solve?</p>
+            </div>
+            <div class="rw">
+                <div class="ri"><span class="rn">01</span>
+                    <div class="rtx"><span class="rtt">Key point</span><span class="rdd">Explanation in one
+                            sentence.</span></div>
+                </div>
+                <div class="ri"><span class="rn">02</span>
+                    <div class="rtx"><span class="rtt">Key point</span><span class="rdd">Explanation in one
+                            sentence.</span></div>
+                </div>
+                <div class="ri"><span class="rn">03</span>
+                    <div class="rtx"><span class="rtt">Key point</span><span class="rdd">Explanation in one
+                            sentence.</span></div>
+                </div>
+                <div class="ri"><span class="rn">04</span>
+                    <div class="rtx"><span class="rtt">Key point</span><span class="rdd">Explanation in one
+                            sentence.</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="ft">
+            <div class="ur">devweekends.com</div>
+            <div class="pg"></div>
+        </div>
+    </section>
+
+    <section class="sl" data-s="4">
+        <div class="wmk">Dev<span>{Weekends}</span></div>
+        <div class="tb"><span class="tk">Visual</span><span class="hr"></span><span class="pl"><span
+                    class="dt"></span>Diagram</span></div>
+        <div class="tk dm hk">How it looks</div>
+        <h2 class="dp ht sm">Visual<br><span class="gh">breakdown</span></h2>
+        <div class="ib"><span>Insert diagram, chart, or screenshot here</span></div>
+        <div class="ft">
+            <div class="ur">devweekends.com</div>
+            <div class="pg"></div>
+        </div>
+    </section>
+
+    <section class="sl" data-s="5">
+        <div class="wmk">Dev<span>{Weekends}</span></div>
+        <div class="tb"><span class="tk">Walkthrough</span><span class="hr"></span><span class="pl so"><span
+                    class="dt"></span>Step by Step</span></div>
+        <div class="tk dm hk">How it works</div>
+        <h2 class="dp ht sm">Step by<br><span class="gh">step</span></h2>
+        <div class="rw">
+            <div class="ri"><span class="rn">01</span>
+                <div class="rtx"><span class="rtt">Step one</span><span class="rdd">What happens here and why it
+                        matters.</span></div>
+            </div>
+            <div class="ri"><span class="rn">02</span>
+                <div class="rtx"><span class="rtt">Step two</span><span class="rdd">What happens here and why it
+                        matters.</span></div>
+            </div>
+            <div class="ri"><span class="rn">03</span>
+                <div class="rtx"><span class="rtt">Step three</span><span class="rdd">What happens here and why it
+                        matters.</span></div>
+            </div>
+            <div class="ri"><span class="rn">04</span>
+                <div class="rtx"><span class="rtt">Outcome</span><span class="rdd">What it produces or leads to.</span>
+                </div>
+            </div>
+        </div>
+        <div class="ft">
+            <div class="ur">devweekends.com</div>
+            <div class="pg"></div>
+        </div>
+    </section>
+
+    <section class="sl" data-s="6">
+        <div class="wmk">Dev<span>{Weekends}</span></div>
+        <div class="tb"><span class="tk">Summary</span><span class="hr"></span><span class="pl"><span
+                    class="dt"></span>Key Concepts</span></div>
+        <div class="tk dm hk">What to remember</div>
+        <h2 class="dp ht sm">The core<br><span class="gh">concepts</span></h2>
+        <div class="g3">
+            <div class="gc fe">
+                <div class="gn">01</div>
+                <div class="gt">Concept Name</div>
+                <div class="gd" style="color:#3a3a3a">Two sentences on why it matters.</div>
+                <div class="gg" style="color:#6a6a6a">Category</div>
+            </div>
+            <div class="gc">
+                <div class="gn">02</div>
+                <div class="gt">Concept Name</div>
+                <div class="gd">Two sentences on why it matters.</div>
+                <div class="gg">Category</div>
+            </div>
+            <div class="gc">
+                <div class="gn">03</div>
+                <div class="gt">Concept Name</div>
+                <div class="gd">Two sentences on why it matters.</div>
+                <div class="gg">Category</div>
+            </div>
+        </div>
+        <div class="ft">
+            <div class="ur">devweekends.com</div>
+            <div class="pg"></div>
+        </div>
+    </section>
+
+    <section class="sl" data-s="7">
+        <div class="wmk">Dev<span>{Weekends}</span></div>
+        <div class="tb"><span class="tk">Watch Out</span><span class="hr"></span><span class="pl"><span
+                    class="dt"></span>Common Mistakes</span></div>
+        <div class="tk dm hk">Where people go wrong</div>
+        <h2 class="dp ht sm">The common<br><span class="gh">mistakes</span></h2>
+        <div class="rw">
+            <div class="ri"><span class="rn">!</span>
+                <div class="rtx"><span class="rtt">Mistake or misconception</span><span class="rdd">Why it happens and
+                        what to do instead.</span></div>
+            </div>
+            <div class="ri"><span class="rn">!</span>
+                <div class="rtx"><span class="rtt">Mistake or misconception</span><span class="rdd">Why it happens and
+                        what to do instead.</span></div>
+            </div>
+            <div class="ri"><span class="rn">!</span>
+                <div class="rtx"><span class="rtt">Mistake or misconception</span><span class="rdd">Why it happens and
+                        what to do instead.</span></div>
+            </div>
+            <div class="ri"><span class="rn">!</span>
+                <div class="rtx"><span class="rtt">Mistake or misconception</span><span class="rdd">Why it happens and
+                        what to do instead.</span></div>
+            </div>
+        </div>
+        <div class="ft">
+            <div class="url">devweekends.com</div>
+            <div class="pg"></div>
+        </div>
+    </section>
+
+    <section class="sl dv" data-s="8">
+        <div class="wmk">Dev<span>{Weekends}</span></div>
+        <div class="tb"><span class="tk">Part 02</span><span class="hr"></span><span class="pl so"><span
+                    class="dt"></span>Live Exercise</span></div>
+        <div class="mb">
+            <div class="tk dm hk">Time to try it</div>
+            <h1 class="dp" style="font-size:min(12vw,80px)">Practice<br><span class="gh">time</span></h1>
+            <p class="ld" style="margin-top:2%">Brief instruction for the fellow. What they're about to do and how long
+                they have.</p>
+        </div>
+        <div class="ft">
+            <div class="ur">devweekends.com</div>
+            <div class="pg"></div>
+        </div>
+    </section>
+
+    <section class="sl" data-s="9">
+        <div class="wmk">Dev<span>{Weekends}</span></div>
+        <div class="tb"><span class="tk">Problem 01</span><span class="hr"></span><span class="pl"><span
+                    class="dt"></span>Try It · 20 min</span></div>
+        <div class="tw">
+            <div class="lf">
+                <div class="tk dm hk">Problem type · difficulty</div>
+                <h2 class="dp ht sm">Problem<br><span class="gh">title</span></h2>
+                <p class="ld">State the problem clearly. Be specific about input, expected output, or the goal.</p>
+                <p class="ld nt" style="margin-top:1%">Constraints, hints, or time limit.</p>
+            </div>
+            <div class="rw">
+                <div class="ri"><span class="rn">01</span>
+                    <div class="rtx"><span class="rtt">Requirement</span><span class="rdd">Clarification or
+                            example.</span></div>
+                </div>
+                <div class="ri"><span class="rn">02</span>
+                    <div class="rtx"><span class="rtt">Requirement</span><span class="rdd">Clarification or
+                            example.</span></div>
+                </div>
+                <div class="ri"><span class="rn">03</span>
+                    <div class="rtx"><span class="rtt">Expected output</span><span class="rdd">What success looks
+                            like.</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="ft">
+            <div class="ur">devweekends.com</div>
+            <div class="pg"></div>
+        </div>
+    </section>
+
+    <section class="sl" data-s="10">
+        <div class="wmk">Dev<span>{Weekends}</span></div>
+        <div class="tb"><span class="tk">Solution</span><span class="hr"></span><span class="pl"><span
+                    class="dt"></span>Breakdown</span></div>
+        <div class="tk dm hk">How to approach it</div>
+        <h2 class="dp ht sm">The solution<br><span class="gh">explained</span></h2>
+        <div class="ib"><span>Insert code screenshot or annotated solution here</span></div>
+        <div class="ft">
+            <div class="ur">devweekends.com</div>
+            <div class="pg"></div>
+        </div>
+    </section>
+
+    <section class="sl" data-s="11">
+        <div class="wmk">Dev<span>{Weekends}</span></div>
+        <div class="tb"><span class="tk">Key Idea</span><span class="hr"></span><span class="pl so"><span
+                    class="dt"></span>Remember This</span></div>
+        <div class="qw">
+            <div class="qt">The one thing<br><span class="gh">to remember</span><br>from today</div>
+            <p class="qs">Expand on this in two sentences. Tie it to something the fellow just practiced or will use in
+                the real world.</p>
+        </div>
+        <div class="ft">
+            <div class="ur">devweekends.com</div>
+            <div class="pg"></div>
+        </div>
+    </section>
+
+    <section class="sl" data-s="12">
+        <div class="wmk">Dev<span>{Weekends}</span></div>
+        <div class="tb"><span class="tk">After This Session</span><span class="hr"></span><span class="pl"><span
+                    class="dt"></span>Resources</span></div>
+        <div class="tk dm hk">Keep going</div>
+        <h2 class="dp ht sm">What to do<br><span class="gh">next</span></h2>
+        <div class="g3">
+            <div class="gc">
+                <div class="gt">Practice</div>
+                <div class="gd">Where to practice and what to focus on.</div>
+                <div class="gg">Platform or link</div>
+            </div>
+            <div class="gc fe">
+                <div class="gt">Read</div>
+                <div class="gd" style="color:#3a3a3a">One or two specific resources to go deeper.</div>
+                <div class="gg" style="color:#6a6a6a">Resource title</div>
+            </div>
+            <div class="gc">
+                <div class="gt">Next session</div>
+                <div class="gd">What the next session covers and what to prepare.</div>
+                <div class="gg">Coming up</div>
+            </div>
+        </div>
+        <div class="ft">
+            <div class="ur">resources.devweekends.com</div>
+            <div class="pg"></div>
+        </div>
+    </section>
+
+    <section class="sl dv cl" data-s="13">
+        <div class="wmk">Dev<span>{Weekends}</span></div>
+        <div class="tb"><span class="tk">Open Floor</span><span class="hr"></span><span class="pl so"><span
+                    class="dt"></span>Ask Anything</span></div>
+        <div class="mb">
+            <div class="tk dm hk">Your turn</div>
+            <h1 class="dp" style="font-size:min(10vw,72px)">Questions<span class="gh">?</span></h1>
+            <p class="ld" style="margin-top:2%">Recording will be up within 24 hours. Ask follow-ups on Discord anytime.
+            </p>
+        </div>
+        <div class="ft">
+            <div class="ur">discord.gg/devweekends</div>
+            <div class="pg"></div>
+        </div>
+    </section>
+
+    <div class="nv">
+        <button id="prv">&#8592;</button>
+        <span class="ct" id="ct">01 / 14</span>
+        <button id="nxt">&#8594;</button>
+    </div>
+</div>
+
+<script>
+    var sls = document.querySelectorAll('.sl'), ct = document.getElementById('ct'), tot = sls.length, cur = 0;
+    function pad(n) { return String(n).padStart(2, '0') }
+    sls.forEach(function (s, i) { var p = s.querySelector('.pg'); if (p) p.textContent = pad(i + 1) + ' / ' + pad(tot); });
+    function go(n) { cur = Math.max(0, Math.min(tot - 1, n)); sls.forEach(function (s, i) { if (i === cur) { s.classList.add('on'); s.style.display = 'flex' } else { s.classList.remove('on'); s.style.display = 'none' } }); ct.textContent = pad(cur + 1) + ' / ' + pad(tot); }
+    document.getElementById('nxt').onclick = function () { go(cur + 1) };
+    document.getElementById('prv').onclick = function () { go(cur - 1) };
+    document.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(cur + 1) } if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur - 1) } });
+    go(0);
+</script>

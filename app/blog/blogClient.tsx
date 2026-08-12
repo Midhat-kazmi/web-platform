@@ -63,12 +63,12 @@ export default function BlogClient({ posts }: { posts: Post[] }) {
   );
 
   return (
-    <div className="min-h-screen bg-white text-black">
+    <div className="min-h-screen bg-background text-foreground">
       <div className="max-w-4xl mx-auto px-6 py-24">
 
         {/* ================= HERO ================= */}
         <header className="mb-20 max-w-2xl">
-          <p className="uppercase text-xs tracking-[0.25em] text-gray-400 mb-6">
+          <p className="uppercase text-xs tracking-[0.25em] text-muted-foreground mb-6">
             Stay updated
           </p>
 
@@ -76,7 +76,7 @@ export default function BlogClient({ posts }: { posts: Post[] }) {
             News & Blog
           </h1>
 
-          <p className="text-gray-600 text-lg">
+          <p className="text-muted-foreground text-lg">
             Insights, updates, and deep dives into engineering,
             open source, and growth.
           </p>
@@ -85,7 +85,7 @@ export default function BlogClient({ posts }: { posts: Post[] }) {
         {/* ================= FEATURED ================= */}
         {featuredPosts.length > 0 && (
           <section className="mb-24">
-            <h2 className="text-sm uppercase tracking-widest text-gray-400 mb-10">
+            <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-10">
               Featured
             </h2>
 
@@ -121,7 +121,7 @@ export default function BlogClient({ posts }: { posts: Post[] }) {
                         className={`relative w-full aspect-[4/5] mb-5 overflow-hidden rounded-xl ${
                           post.imageFit === "contain"
                             ? "bg-neutral-950"
-                            : "bg-gray-100"
+                            : "bg-muted"
                         }`}
                       >
                         <Image
@@ -137,7 +137,7 @@ export default function BlogClient({ posts }: { posts: Post[] }) {
                       </div>
 
                       {/* META */}
-                      <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-gray-400 mb-3">
+                      <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground mb-3">
                         <span>{post.category}</span>
                         <span>•</span>
                         <span>{post.date}</span>
@@ -153,11 +153,11 @@ export default function BlogClient({ posts }: { posts: Post[] }) {
               </Swiper>
 
               {/* NAVIGATION ARROWS */}
-              <button className="custom-prev absolute top-1/2 -left-5 -translate-y-1/2 z-10 bg-white shadow-md rounded-full w-10 h-10 hidden md:flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+              <button className="custom-prev absolute top-1/2 -left-5 -translate-y-1/2 z-10 bg-background shadow-md rounded-full w-10 h-10 hidden md:flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
                 ‹
               </button>
 
-              <button className="custom-next absolute top-1/2 -right-5 -translate-y-1/2 z-10 bg-white shadow-md rounded-full w-10 h-10 hidden md:flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+              <button className="custom-next absolute top-1/2 -right-5 -translate-y-1/2 z-10 bg-background shadow-md rounded-full w-10 h-10 hidden md:flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
                 ›
               </button>
             </div>
@@ -165,7 +165,7 @@ export default function BlogClient({ posts }: { posts: Post[] }) {
         )}
 
         {/* ================= TABS ================= */}
-        <div className="flex gap-10 border-b border-gray-200 mb-16">
+        <div className="flex gap-10 border-b border-border mb-16">
           {[
             { key: "news", label: `News (${newsCount})` },
             { key: "blog", label: `Blog (${blogCount})` },
@@ -177,8 +177,8 @@ export default function BlogClient({ posts }: { posts: Post[] }) {
               }
               className={`pb-3 text-sm uppercase tracking-wide transition ${
                 activeTab === tab.key
-                  ? "border-b-2 border-black text-black"
-                  : "text-gray-400 hover:text-black"
+                  ? "border-b-2 border-foreground text-foreground"
+                  : "text-muted-foreground hover:text-foreground"
               }`}
             >
               {tab.label}
@@ -189,7 +189,7 @@ export default function BlogClient({ posts }: { posts: Post[] }) {
         {/* ================= POSTS ================= */}
         <div className="space-y-20">
           {filteredPosts.length === 0 ? (
-            <p className="text-gray-500">
+            <p className="text-muted-foreground">
               No posts in this category.
             </p>
           ) : (
@@ -204,7 +204,7 @@ export default function BlogClient({ posts }: { posts: Post[] }) {
                   className={`relative w-full mb-6 overflow-hidden rounded-xl ${
                     post.imageFit === "contain"
                       ? "aspect-[4/5] bg-neutral-950"
-                      : "aspect-[16/9] bg-gray-100"
+                      : "aspect-[16/9] bg-muted"
                   }`}
                 >
                   <Image
@@ -219,7 +219,7 @@ export default function BlogClient({ posts }: { posts: Post[] }) {
                 </div>
 
                 {/* META */}
-                <div className="flex items-center gap-3 text-xs uppercase tracking-widest text-gray-400 mb-4">
+                <div className="flex items-center gap-3 text-xs uppercase tracking-widest text-muted-foreground mb-4">
                   <span>{post.category}</span>
                   <span>•</span>
                   <span>{post.date}</span>
@@ -232,12 +232,12 @@ export default function BlogClient({ posts }: { posts: Post[] }) {
 
                 {/* DESCRIPTION */}
                 {post.description && (
-                  <p className="text-gray-700 leading-8 max-w-2xl mb-8 text-lg">
+                  <p className="text-foreground/80 leading-8 max-w-2xl mb-8 text-lg">
                     {post.description}
                   </p>
                 )}
 
-                <div className="mt-14 border-b border-gray-200" />
+                <div className="mt-14 border-b border-border" />
               </Link>
             ))
           )}
@@ -258,7 +258,7 @@ export default function BlogClient({ posts }: { posts: Post[] }) {
           width: 8px;
           height: 8px;
           opacity: 0.4;
-          background: #000;
+          background: hsl(var(--foreground));
         }
 
         .featured-swiper .swiper-pagination-bullet-active {

@@ -5,6 +5,7 @@ const coreTeamMemberSchema = new Schema({
   image: { type: String, required: true },
   role: { type: String, required: true },
   linkedin: { type: String, required: true },
+  order: { type: Number, default: 0 },
   lastModifiedBy: { type: String, default: 'Unknown' },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },

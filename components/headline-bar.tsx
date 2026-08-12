@@ -11,8 +11,8 @@ const messages = [
   },
   {
     label: 'Fellowship',
-    text: 'Fellowship 2026 is live. Apply now to join the 3-month mentorship program.',
-    href: '/fellowship',
+    text: 'Fellowship 2026 applications are now closed. See what comes next and how to stay involved.',
+    href: '/blog/fellowship-2026-next-steps',
   },
 ]
 

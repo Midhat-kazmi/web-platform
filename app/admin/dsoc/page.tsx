@@ -255,7 +255,8 @@ export default function AdminDSOCPage() {
                   placeholder="Search projects..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  className="neo-brutal-input pl-12"
+                  className="neo-brutal-input"
+                  style={{ paddingLeft: '3rem' }}
                 />
               </div>
               <Link href="/admin/dsoc/projects/new" className="neo-brutal-btn neo-brutal-btn-primary">

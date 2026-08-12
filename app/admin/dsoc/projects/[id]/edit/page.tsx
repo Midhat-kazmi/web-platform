@@ -4,16 +4,20 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
-import { 
+import {
   ArrowLeft,
   Save,
   Plus,
   Trash2,
   AlertCircle,
   CheckCircle2,
-  Users
+  ImagePlus,
+  Users,
+  X
 } from "lucide-react";
 import "../../../../../dsoc/styles.css";
+
+const GALLERY_MAX = 5;
 
 interface MentorOption {
   _id: string;
@@ -38,14 +42,17 @@ export default function EditProjectPage() {
   const [availableMentors, setAvailableMentors] = useState<MentorOption[]>([]);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string>('');
-  
+  const [galleryUploading, setGalleryUploading] = useState(false);
+  const [galleryError, setGalleryError] = useState('');
+
   const [formData, setFormData] = useState({
     title: '',
     description: '',
     longDescription: '',
     organization: '',
-    repositoryUrl: '',
+    repositoryUrls: [''],
     websiteUrl: '',
+    timelineUrl: '',
     difficulty: 'intermediate',
     duration: '3 months',
     technologies: '',
@@ -59,7 +66,8 @@ export default function EditProjectPage() {
     learningOutcomes: [''],
     season: '2026',
     status: 'draft',
-    featuredImage: ''
+    featuredImage: '',
+    gallery: [] as string[]
   });
 
   useEffect(() => {
@@ -102,8 +110,11 @@ export default function EditProjectPage() {
           description: project.description || '',
           longDescription: project.longDescription || '',
           organization: project.organization || '',
-          repositoryUrl: project.repositoryUrl || '',
+          repositoryUrls: Array.isArray(project.repositoryUrls) && project.repositoryUrls.length > 0
+            ? project.repositoryUrls
+            : (project.repositoryUrl ? [project.repositoryUrl] : ['']),
           websiteUrl: project.websiteUrl || '',
+          timelineUrl: project.timelineUrl || '',
           difficulty: project.difficulty || 'intermediate',
           duration: project.duration || '3 months',
           technologies: Array.isArray(project.technologies) ? project.technologies.join(', ') : '',
@@ -119,7 +130,8 @@ export default function EditProjectPage() {
           learningOutcomes: project.learningOutcomes && project.learningOutcomes.length > 0 ? project.learningOutcomes : [''],
           season: project.season || '2025',
           status: project.status || 'draft',
-          featuredImage: project.featuredImage || project.imageUrl || ''
+          featuredImage: project.featuredImage || project.imageUrl || '',
+          gallery: Array.isArray(project.gallery) ? project.gallery.filter(Boolean) : []
         });
       } else {
         setError(data.error || 'Failed to load project');
@@ -136,7 +148,7 @@ export default function EditProjectPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleArrayChange = (field: 'requirements' | 'learningOutcomes', index: number, value: string) => {
+  const handleArrayChange = (field: 'requirements' | 'learningOutcomes' | 'repositoryUrls', index: number, value: string) => {
     const updated = [...formData[field]];
     updated[index] = value;
     setFormData({ ...formData, [field]: updated });
@@ -155,11 +167,11 @@ export default function EditProjectPage() {
     });
   };
 
-  const addArrayItem = (field: 'requirements' | 'learningOutcomes') => {
+  const addArrayItem = (field: 'requirements' | 'learningOutcomes' | 'repositoryUrls') => {
     setFormData({ ...formData, [field]: [...formData[field], ''] });
   };
 
-  const removeArrayItem = (field: 'requirements' | 'learningOutcomes', index: number) => {
+  const removeArrayItem = (field: 'requirements' | 'learningOutcomes' | 'repositoryUrls', index: number) => {
     const updated = formData[field].filter((_, i) => i !== index);
     setFormData({ ...formData, [field]: updated });
   };
@@ -197,6 +209,49 @@ export default function EditProjectPage() {
     return uploadData.url as string;
   };
 
+  const handleGalleryAdd = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    if (files.length === 0) return;
+
+    setGalleryError('');
+
+    const remaining = GALLERY_MAX - formData.gallery.length;
+    if (remaining <= 0) {
+      setGalleryError(`Gallery is full. Remove an image to add a new one. Max ${GALLERY_MAX}.`);
+      e.target.value = '';
+      return;
+    }
+
+    const accepted = files.slice(0, remaining);
+    const dropped = files.length - accepted.length;
+
+    setGalleryUploading(true);
+
+    try {
+      const uploaded = await Promise.all(accepted.map(uploadImageToCloudinary));
+      setFormData((current) => ({
+        ...current,
+        gallery: [...current.gallery, ...uploaded].slice(0, GALLERY_MAX),
+      }));
+      if (dropped > 0) {
+        setGalleryError(`Only added ${accepted.length}; gallery is capped at ${GALLERY_MAX} images.`);
+      }
+    } catch (err) {
+      console.error('Gallery upload failed:', err);
+      setGalleryError(err instanceof Error ? err.message : 'Failed to upload one or more images');
+    } finally {
+      setGalleryUploading(false);
+      e.target.value = '';
+    }
+  };
+
+  const handleGalleryRemove = (index: number) => {
+    setFormData((current) => ({
+      ...current,
+      gallery: current.gallery.filter((_, i) => i !== index),
+    }));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -219,8 +274,9 @@ export default function EditProjectPage() {
           description: formData.description,
           longDescription: formData.longDescription,
           organization: formData.organization,
-          repositoryUrl: formData.repositoryUrl,
+          repositoryUrls: formData.repositoryUrls.filter(Boolean),
           websiteUrl: formData.websiteUrl,
+          timelineUrl: formData.timelineUrl,
           difficulty: formData.difficulty,
           duration: formData.duration,
           technologies: formData.technologies.split(',').map(s => s.trim()).filter(Boolean),
@@ -235,7 +291,8 @@ export default function EditProjectPage() {
           season: formData.season,
           status: formData.status,
           featuredImage,
-          imageUrl: featuredImage
+          imageUrl: featuredImage,
+          gallery: formData.gallery
         })
       });
 
@@ -372,36 +429,102 @@ export default function EditProjectPage() {
                     </div>
                   )}
                 </div>
+
+                <div>
+                  <label className="block font-bold text-sm mb-2 flex items-center gap-2">
+                    <ImagePlus className="w-4 h-4" />
+                    Additional Images (Gallery) — {formData.gallery.length}/{GALLERY_MAX}
+                  </label>
+                  <p className="text-xs text-muted-foreground mb-2">
+                    Optional. Shown on the project detail page as a slider. Up to {GALLERY_MAX} images.
+                  </p>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={handleGalleryAdd}
+                    disabled={galleryUploading || formData.gallery.length >= GALLERY_MAX}
+                    className="neo-brutal-input"
+                  />
+                  {galleryUploading && (
+                    <p className="mt-2 text-sm text-muted-foreground">Uploading...</p>
+                  )}
+                  {galleryError && (
+                    <p className="mt-2 text-sm text-[var(--dsoc-pink)] font-bold">{galleryError}</p>
+                  )}
+                  {formData.gallery.length > 0 && (
+                    <div className="mt-3 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                      {formData.gallery.map((url, index) => (
+                        <div key={url + index} className="relative group">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={url}
+                            alt={`Gallery image ${index + 1}`}
+                            className="w-full h-28 object-cover border-4 border-[var(--dsoc-dark)]"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => handleGalleryRemove(index)}
+                            aria-label="Remove image"
+                            className="absolute -top-2 -right-2 w-7 h-7 bg-[var(--dsoc-pink)] text-white border-4 border-[var(--dsoc-dark)] flex items-center justify-center"
+                          >
+                            <X className="w-3 h-3" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* Links */}
               <div className="space-y-4">
-                <h2 className="font-bold text-lg border-b-2 border-[var(--dsoc-dark)] pb-2">Links</h2>
-                
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block font-bold text-sm mb-2">Repository URL *</label>
-                    <input
-                      type="url"
-                      name="repositoryUrl"
-                      value={formData.repositoryUrl}
-                      onChange={handleChange}
-                      required
-                      className="neo-brutal-input"
-                      placeholder="https://github.com/org/repo"
-                    />
-                  </div>
-                  <div>
-                    <label className="block font-bold text-sm mb-2">Website URL</label>
-                    <input
-                      type="url"
-                      name="websiteUrl"
-                      value={formData.websiteUrl}
-                      onChange={handleChange}
-                      className="neo-brutal-input"
-                      placeholder="https://example.com"
-                    />
-                  </div>
+                <h2 className="font-bold text-lg border-b-2 border-[var(--dsoc-dark)] pb-2">Links & Repositories</h2>
+
+                <div className="space-y-3">
+                  <label className="block font-bold text-sm">Repository URLs * (At least one is required)</label>
+                  {formData.repositoryUrls.map((repoUrl, index) => (
+                    <div key={index} className="flex gap-2">
+                      <input
+                        type="url"
+                        value={repoUrl}
+                        onChange={(e) => handleArrayChange('repositoryUrls', index, e.target.value)}
+                        required={index === 0}
+                        className="neo-brutal-input flex-1"
+                        placeholder="https://github.com/org/repo"
+                      />
+                      {formData.repositoryUrls.length > 1 && (
+                        <button
+                          type="button"
+                          onClick={() => removeArrayItem('repositoryUrls', index)}
+                          className="p-3 bg-[var(--dsoc-pink)] text-white border-4 border-[var(--dsoc-dark)]"
+                        >
+                          <Trash2 className="w-5 h-5" />
+                        </button>
+                      )}
+                    </div>
+                  ))}
+
+                  <button
+                    type="button"
+                    onClick={() => addArrayItem('repositoryUrls')}
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--dsoc-success)] text-white font-bold border-4 border-[var(--dsoc-dark)] hover:translate-x-1 transition-transform text-sm"
+                  >
+                    <Plus className="w-4 h-4" />
+                    Add Repository URL
+                  </button>
+                </div>
+
+                <div>
+                  <label className="block font-bold text-sm mb-2">Website URL</label>
+                  <input
+                    type="url"
+                    name="websiteUrl"
+                    value={formData.websiteUrl}
+                    onChange={handleChange}
+                    className="neo-brutal-input"
+                    placeholder="https://example.com"
+                  />
                 </div>
               </div>
 
@@ -628,6 +751,18 @@ export default function EditProjectPage() {
                     required
                     className="neo-brutal-input"
                     placeholder="e.g., 2025, Summer 2025"
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-bold text-sm mb-2">Timeline Link</label>
+                  <input
+                    type="url"
+                    name="timelineUrl"
+                    value={formData.timelineUrl}
+                    onChange={handleChange}
+                    className="neo-brutal-input"
+                    placeholder="https://example.com/timeline"
                   />
                 </div>
               </div>

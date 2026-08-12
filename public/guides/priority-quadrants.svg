@@ -1,0 +1,35 @@
+<svg width="800" height="480" viewBox="0 0 800 480" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The Eisenhower priority matrix with four quadrants by urgency and importance">
+  <rect x="1" y="1" width="798" height="478" rx="20" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="48" y="52" font-family="ui-sans-serif, system-ui, sans-serif" font-size="20" font-weight="700" fill="#334155">Prioritise in quadrants</text>
+
+  <!-- axis labels -->
+  <text x="240" y="92" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="600" fill="#94A3B8">URGENT</text>
+  <text x="560" y="92" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="600" fill="#94A3B8">NOT URGENT</text>
+
+  <!-- Q1 Important & Urgent -->
+  <rect x="80" y="108" width="320" height="160" rx="14" fill="#F0FDF4" stroke="#BBF7D0" stroke-width="1.5"/>
+  <text x="100" y="140" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="700" fill="#16A34A">Q1 · Do now</text>
+  <text x="100" y="170" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#64748B">Skills you need for a job</text>
+  <text x="100" y="194" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#64748B">Training your mind</text>
+  <text x="100" y="218" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#64748B">Guided learning &amp; deen</text>
+
+  <!-- Q2 Important & Not Urgent -->
+  <rect x="416" y="108" width="320" height="160" rx="14" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+  <text x="436" y="140" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="700" fill="#334155">Q2 · Schedule</text>
+  <text x="436" y="170" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#64748B">Important but not urgent</text>
+  <text x="436" y="194" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#64748B">skills for later roles</text>
+
+  <!-- Q3 Not Important & Urgent -->
+  <rect x="80" y="284" width="320" height="150" rx="14" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+  <text x="100" y="316" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="700" fill="#334155">Q3 · Delegate / limit</text>
+  <text x="100" y="346" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#64748B">Attending a wedding</text>
+
+  <!-- Q4 Not Important & Not Urgent -->
+  <rect x="416" y="284" width="320" height="150" rx="14" fill="#FFFFFF" stroke="#FECACA" stroke-width="1.5"/>
+  <text x="436" y="316" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="700" fill="#DC2626">Q4 · Avoid</text>
+  <text x="436" y="346" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#64748B">Endless social media</text>
+  <text x="436" y="370" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#64748B">Binge-watching shows</text>
+
+  <text x="32" y="200" transform="rotate(-90 32 200)" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="600" fill="#94A3B8">IMPORTANT</text>
+  <text x="32" y="360" transform="rotate(-90 32 360)" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="600" fill="#94A3B8">NOT IMPORTANT</text>
+</svg>

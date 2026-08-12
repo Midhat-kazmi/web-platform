@@ -18,13 +18,15 @@ export default function Navbar() {
     { href: "/mindmaster", label: "MindMaster" },
     { href: "/careers", label: "Careers" },
     { href: "https://resources.devweekends.com", label: "Resources", external: true },
-    { href: "/blog", label: "News & Blog" }, 
+    { href: "/blog", label: "News & Blog" },
+    { href: "/guides", label: "Guides" },
 
   ];
 
   const communityOptions = [
     { href: "/projects", label: "Projects" },
     { href: "/testimonials", label: "Testimonials" },
+    { href: "/brand", label: "Brand Kit" },
   ];
 
   const applyOptions = [
@@ -55,7 +57,7 @@ export default function Navbar() {
               <button
                 onClick={() => setIsCommunityOpen(!isCommunityOpen)}
                 className={`text-sm font-medium transition-colors hover:text-primary flex items-center gap-1 ${
-                  isActive('/projects') || isActive('/testimonials')
+                  isActive('/projects') || isActive('/testimonials') || isActive('/brand')
                     ? "text-primary"
                     : "text-muted-foreground"
                 }`}
@@ -122,7 +124,7 @@ export default function Navbar() {
               href="https://discord.gg/Cy7Rgkf4Up"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden md:inline-flex items-center gap-2 px-4 py-2 border border-foreground/20 text-xs font-semibold uppercase tracking-[1px] hover:bg-foreground hover:text-background transition-all"
+              className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 border border-foreground/20 text-[0.7rem] font-semibold uppercase tracking-[1px] hover:bg-foreground hover:text-background transition-all"
             >
               Join Community
             </a>
@@ -131,7 +133,7 @@ export default function Navbar() {
             <div className="relative hidden md:block">
               <Button
                 onClick={() => setIsApplyOpen(!isApplyOpen)}
-                className="uppercase tracking-[1px] text-xs font-semibold flex items-center gap-1"
+                className="h-8 px-3 py-1.5 uppercase tracking-[1px] text-[0.7rem] font-semibold flex items-center gap-1"
               >
                 Apply Now
                 <ChevronDown className={`w-3 h-3 transition-transform ${isApplyOpen ? 'rotate-180' : ''}`} />

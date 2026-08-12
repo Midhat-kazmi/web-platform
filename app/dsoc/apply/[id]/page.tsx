@@ -863,6 +863,7 @@ export default function ApplyPage({ params }: { params: Promise<{ id: string }> 
                           <option value="UTC-05:00">UTC-05:00 (Eastern Time)</option>
                           <option value="UTC+00:00">UTC+00:00 (London)</option>
                           <option value="UTC+01:00">UTC+01:00 (Central Europe)</option>
+                          <option value="UTC+05:00">UTC+05:00 (Pakistan)</option>
                           <option value="UTC+05:30">UTC+05:30 (India)</option>
                           <option value="UTC+08:00">UTC+08:00 (Singapore/China)</option>
                           <option value="UTC+09:00">UTC+09:00 (Japan/Korea)</option>

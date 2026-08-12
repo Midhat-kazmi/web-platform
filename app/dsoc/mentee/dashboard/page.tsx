@@ -20,6 +20,9 @@ interface Application {
   _id: string;
   status: string;
   createdAt: string;
+  mentorNotes?: string;
+  score?: number;
+  reviewedAt?: string;
   project: {
     _id: string;
     title: string;
@@ -201,32 +204,63 @@ export default function MenteeDashboard() {
                 </Link>
               </div>
             ) : (
-              applications.map((app) => (
-                <div key={app._id} className="neo-brutal-card p-6">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        {getStatusIcon(app.status)}
-                        <span className={`neo-brutal-badge text-xs text-white ${getStatusColor(app.status)}`}>
-                          {app.status.replace('-', ' ')}
-                        </span>
+              applications.map((app) => {
+                const hasFeedback =
+                  (app.status === 'accepted' ||
+                    app.status === 'rejected' ||
+                    app.status === 'waitlisted' ||
+                    app.status === 'under-review') &&
+                  (app.mentorNotes || typeof app.score === 'number');
+
+                return (
+                  <div key={app._id} className="neo-brutal-card p-6">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-2">
+                          {getStatusIcon(app.status)}
+                          <span className={`neo-brutal-badge text-xs text-white ${getStatusColor(app.status)}`}>
+                            {app.status.replace('-', ' ')}
+                          </span>
+                          {typeof app.score === 'number' && (
+                            <span className="neo-brutal-badge text-xs bg-[var(--dsoc-purple)] text-white">
+                              Score: {app.score}/100
+                            </span>
+                          )}
+                        </div>
+                        <h3 className="text-xl font-bold">{app.project.title}</h3>
+                        <p className="text-muted-foreground">{app.project.organization}</p>
+                        <p className="text-sm text-muted-foreground mt-2">
+                          Applied on {new Date(app.createdAt).toLocaleDateString()}
+                          {app.reviewedAt && (
+                            <>
+                              {' • Reviewed '}
+                              {new Date(app.reviewedAt).toLocaleDateString()}
+                            </>
+                          )}
+                        </p>
                       </div>
-                      <h3 className="text-xl font-bold">{app.project.title}</h3>
-                      <p className="text-muted-foreground">{app.project.organization}</p>
-                      <p className="text-sm text-muted-foreground mt-2">
-                        Applied on {new Date(app.createdAt).toLocaleDateString()}
-                      </p>
+                      <Link
+                        href={`/dsoc/projects/${app.project._id}`}
+                        className="neo-brutal-btn neo-brutal-btn-secondary py-2 px-4 text-sm"
+                      >
+                        <ExternalLink className="w-4 h-4 mr-2" />
+                        View Project
+                      </Link>
                     </div>
-                    <Link 
-                      href={`/dsoc/projects/${app.project._id}`}
-                      className="neo-brutal-btn neo-brutal-btn-secondary py-2 px-4 text-sm"
-                    >
-                      <ExternalLink className="w-4 h-4 mr-2" />
-                      View Project
-                    </Link>
+
+                    {hasFeedback && app.mentorNotes && (
+                      <div className="mt-4 p-4 bg-[var(--dsoc-light)] border-4 border-[var(--dsoc-dark)]">
+                        <div className="text-xs font-black uppercase tracking-wider text-muted-foreground mb-2">
+                          Mentor Feedback
+                        </div>
+                        <p className="text-sm whitespace-pre-wrap leading-relaxed">
+                          {app.mentorNotes}
+                        </p>
+                      </div>
+                    )}
                   </div>
-                </div>
-              ))
+                );
+              })
             )}
           </div>
         )}

@@ -1,0 +1,29 @@
+<svg width="800" height="420" viewBox="0 0 800 420" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A jagged but overall upward progress line, showing that average progress rises even when some days dip">
+  <rect x="1" y="1" width="798" height="418" rx="20" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="48" y="56" font-family="ui-sans-serif, system-ui, sans-serif" font-size="20" font-weight="700" fill="#334155">Progress is a graph, not a straight line</text>
+
+  <!-- axes -->
+  <line x1="80" y1="96" x2="80" y2="320" stroke="#CBD5E1" stroke-width="2"/>
+  <line x1="80" y1="320" x2="740" y2="320" stroke="#CBD5E1" stroke-width="2"/>
+
+  <!-- average trend line -->
+  <line x1="80" y1="300" x2="740" y2="140" stroke="#BBF7D0" stroke-width="3" stroke-dasharray="6 8"/>
+
+  <!-- jagged real progress -->
+  <polyline points="80,300 150,260 210,290 280,230 350,270 420,210 490,250 560,180 630,220 740,130"
+    fill="none" stroke="#22C55E" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- points -->
+  <g fill="#22C55E">
+    <circle cx="80" cy="300" r="5"/>
+    <circle cx="210" cy="290" r="5"/>
+    <circle cx="350" cy="270" r="5"/>
+    <circle cx="490" cy="250" r="5"/>
+    <circle cx="630" cy="220" r="5"/>
+    <circle cx="740" cy="130" r="6"/>
+  </g>
+
+  <text x="80" y="350" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#94A3B8">Week 1</text>
+  <text x="690" y="350" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#94A3B8">Week 8</text>
+  <text x="48" y="392" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#94A3B8">Some days are 10%, some are 80%. Aim for a 60%+ average per week and keep going.</text>
+</svg>

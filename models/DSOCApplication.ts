@@ -6,12 +6,19 @@ export interface IDSOCApplication extends Document {
   discordUsername: string;
   proposal: string;
   coverLetter?: string;
-  relevantExperience: string;
   whyThisProject: string;
-  availability: string;
-  expectedLearnings: string;
+  motivation?: string;
+  relevantExperience: string;
+  technicalSkills?: string;
+  githubProfile?: string;
   portfolioLinks: string[];
   previousContributions?: string;
+  timeline?: string;
+  expectedLearnings: string;
+  challenges?: string;
+  availability: string;
+  timezone?: string;
+  startDate?: Date;
   status: 'pending' | 'under-review' | 'accepted' | 'rejected' | 'waitlisted' | 'withdrawn';
   mentorNotes?: string;
   adminNotes?: string;
@@ -48,24 +55,26 @@ const DSOCApplicationSchema = new Schema<IDSOCApplication>(
       type: String,
       trim: true,
     },
-    relevantExperience: {
-      type: String,
-      required: [true, 'Relevant experience is required'],
-      trim: true,
-    },
     whyThisProject: {
       type: String,
       required: [true, 'Why this project answer is required'],
       trim: true,
     },
-    availability: {
+    motivation: {
       type: String,
-      required: [true, 'Availability is required'],
       trim: true,
     },
-    expectedLearnings: {
+    relevantExperience: {
       type: String,
-      required: [true, 'Expected learnings is required'],
+      required: [true, 'Relevant experience is required'],
+      trim: true,
+    },
+    technicalSkills: {
+      type: String,
+      trim: true,
+    },
+    githubProfile: {
+      type: String,
       trim: true,
     },
     portfolioLinks: [{
@@ -75,6 +84,31 @@ const DSOCApplicationSchema = new Schema<IDSOCApplication>(
     previousContributions: {
       type: String,
       trim: true,
+    },
+    timeline: {
+      type: String,
+      trim: true,
+    },
+    expectedLearnings: {
+      type: String,
+      required: [true, 'Expected learnings is required'],
+      trim: true,
+    },
+    challenges: {
+      type: String,
+      trim: true,
+    },
+    availability: {
+      type: String,
+      required: [true, 'Availability is required'],
+      trim: true,
+    },
+    timezone: {
+      type: String,
+      trim: true,
+    },
+    startDate: {
+      type: Date,
     },
     status: {
       type: String,

@@ -1,0 +1,58 @@
+.dsoc-gallery-slider .swiper {
+  position: relative;
+}
+
+.dsoc-gallery-slider .swiper-button-prev,
+.dsoc-gallery-slider .swiper-button-next {
+  color: var(--dsoc-dark);
+  background: #fff;
+  border: 4px solid var(--dsoc-dark);
+  width: 44px;
+  height: 44px;
+  border-radius: 0;
+  box-shadow: 4px 4px 0 var(--dsoc-dark);
+  transition: transform 0.1s ease;
+}
+
+.dsoc-gallery-slider .swiper-button-prev:hover,
+.dsoc-gallery-slider .swiper-button-next:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--dsoc-dark);
+}
+
+.dsoc-gallery-slider .swiper-button-prev::after,
+.dsoc-gallery-slider .swiper-button-next::after {
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.dsoc-gallery-slider .swiper-pagination {
+  position: relative;
+  bottom: auto;
+  padding: 10px 0 8px;
+  background: var(--dsoc-dark);
+}
+
+.dsoc-gallery-slider .swiper-pagination-bullet {
+  background: #fff;
+  opacity: 0.5;
+  width: 10px;
+  height: 10px;
+}
+
+.dsoc-gallery-slider .swiper-pagination-bullet-active {
+  background: var(--dsoc-accent);
+  opacity: 1;
+}
+
+@media (max-width: 640px) {
+  .dsoc-gallery-slider .swiper-button-prev,
+  .dsoc-gallery-slider .swiper-button-next {
+    width: 36px;
+    height: 36px;
+  }
+  .dsoc-gallery-slider .swiper-button-prev::after,
+  .dsoc-gallery-slider .swiper-button-next::after {
+    font-size: 14px;
+  }
+}

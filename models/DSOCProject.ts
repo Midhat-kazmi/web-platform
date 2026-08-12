@@ -5,8 +5,9 @@ export interface IDSOCProject extends Document {
   description: string;
   longDescription?: string;
   organization: string;
-  repositoryUrl: string;
+  repositoryUrls: string[];
   websiteUrl?: string;
+  timelineUrl?: string;
   difficulty: 'beginner' | 'intermediate' | 'advanced';
   duration: string; // e.g., "3 months", "6 weeks"
   technologies: string[];
@@ -29,6 +30,7 @@ export interface IDSOCProject extends Document {
   discordChannelId?: string;
   discordRoleId?: string;
   featuredImage?: string;
+  gallery: string[];
   isActive: boolean;
   season: string; // e.g., "2025", "Summer 2025"
   createdAt: Date;
@@ -56,12 +58,16 @@ const DSOCProjectSchema = new Schema<IDSOCProject>(
       required: [true, 'Organization name is required'],
       trim: true,
     },
-    repositoryUrl: {
+    repositoryUrls: [{
       type: String,
       required: [true, 'Repository URL is required'],
       trim: true,
-    },
+    }],
     websiteUrl: {
+      type: String,
+      trim: true,
+    },
+    timelineUrl: {
       type: String,
       trim: true,
     },
@@ -137,6 +143,10 @@ const DSOCProjectSchema = new Schema<IDSOCProject>(
     featuredImage: {
       type: String,
       trim: true,
+    },
+    gallery: {
+      type: [String],
+      default: [],
     },
     isActive: {
       type: Boolean,

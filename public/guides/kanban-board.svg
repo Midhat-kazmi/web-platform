@@ -1,0 +1,48 @@
+<svg width="800" height="420" viewBox="0 0 800 420" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A Trello-style task board with To Do, Doing, and Done columns">
+  <rect x="1" y="1" width="798" height="418" rx="20" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2"/>
+
+  <!-- Column: To Do -->
+  <g>
+    <text x="60" y="64" font-family="ui-sans-serif, system-ui, sans-serif" font-size="18" font-weight="700" fill="#334155">To Do</text>
+    <rect x="48" y="84" width="200" height="56" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+    <rect x="64" y="104" width="120" height="8" rx="4" fill="#CBD5E1"/>
+    <rect x="64" y="120" width="80" height="8" rx="4" fill="#E2E8F0"/>
+    <rect x="48" y="156" width="200" height="56" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+    <rect x="64" y="176" width="140" height="8" rx="4" fill="#CBD5E1"/>
+    <rect x="64" y="192" width="64" height="8" rx="4" fill="#E2E8F0"/>
+    <rect x="48" y="228" width="200" height="56" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+    <rect x="64" y="248" width="100" height="8" rx="4" fill="#CBD5E1"/>
+    <rect x="64" y="264" width="120" height="8" rx="4" fill="#E2E8F0"/>
+  </g>
+
+  <!-- Column: Doing -->
+  <g>
+    <text x="300" y="64" font-family="ui-sans-serif, system-ui, sans-serif" font-size="18" font-weight="700" fill="#334155">Doing</text>
+    <rect x="288" y="84" width="200" height="56" rx="10" fill="#FFFFFF" stroke="#22C55E" stroke-width="1.5"/>
+    <rect x="304" y="104" width="120" height="8" rx="4" fill="#86EFAC"/>
+    <rect x="304" y="120" width="90" height="8" rx="4" fill="#DCFCE7"/>
+    <rect x="288" y="156" width="200" height="56" rx="10" fill="#FFFFFF" stroke="#22C55E" stroke-width="1.5"/>
+    <rect x="304" y="176" width="100" height="8" rx="4" fill="#86EFAC"/>
+    <rect x="304" y="192" width="130" height="8" rx="4" fill="#DCFCE7"/>
+  </g>
+
+  <!-- Column: Done -->
+  <g>
+    <text x="540" y="64" font-family="ui-sans-serif, system-ui, sans-serif" font-size="18" font-weight="700" fill="#22C55E">Done</text>
+    <rect x="528" y="84" width="200" height="56" rx="10" fill="#F0FDF4" stroke="#BBF7D0" stroke-width="1.5"/>
+    <circle cx="548" cy="112" r="9" fill="#22C55E"/>
+    <path d="M544 112 l3 3 l6 -6" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="568" y="108" width="120" height="8" rx="4" fill="#86EFAC"/>
+    <rect x="528" y="156" width="200" height="56" rx="10" fill="#F0FDF4" stroke="#BBF7D0" stroke-width="1.5"/>
+    <circle cx="548" cy="184" r="9" fill="#22C55E"/>
+    <path d="M544 184 l3 3 l6 -6" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="568" y="180" width="100" height="8" rx="4" fill="#86EFAC"/>
+    <rect x="528" y="228" width="200" height="56" rx="10" fill="#F0FDF4" stroke="#BBF7D0" stroke-width="1.5"/>
+    <circle cx="548" cy="256" r="9" fill="#22C55E"/>
+    <path d="M544 256 l3 3 l6 -6" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="568" y="252" width="130" height="8" rx="4" fill="#86EFAC"/>
+  </g>
+
+  <line x1="48" y1="324" x2="752" y2="324" stroke="#E2E8F0" stroke-width="1.5"/>
+  <text x="48" y="360" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#94A3B8">Weekday and weekend tasks, broken into small steps you can actually finish.</text>
+</svg>
